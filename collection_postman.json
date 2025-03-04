@@ -1,0 +1,307 @@
+{
+    "info": {
+        "_postman_id": "YOUR_COLLECTION_ID",
+        "name": "API Recettes, et ingrédients avec Deno",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "recettes",
+            "item": [
+                {
+                    "name": "Récupérer toutes les recettes",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "http://localhost:8000/recettes",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8000",
+                            "path": [
+                                "recettes"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Récupérer une recette par ID",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "http://localhost:8000/recettes/{{recetteId}}",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8000",
+                            "path": [
+                                "recette",
+                                "{{recetteId}}"
+                            ],
+                            "variable": [
+                                {
+                                    "key": "recetteId",
+                                    "value": "1",
+                                    "description": "ID de la recette à récupérer"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Créer une nouvelle recette",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"titre\": \"Nouveau Film\",\n    \"synopsis\": \"Je suis le nouveau film\",\n    \"realisateur\": \"Realisateur\",\n    \"dateDeSortie\": \"2024-01-01\", \n    \"duree\": \"1h59\",\n    \"acteurs\": []}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "http://localhost:8000/films",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8000",
+                            "path": [
+                                "films"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Mettre à jour un film",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"id\": {{filmId}},\n    \"titre\": \"Titre mis à jour\",\n    \"synopsis\": \"Fiml mis à jour\",\n    \"realisateur\": \"Realisateur mis à jour\",\n    \"dateDeSortie\": \"2025-01-01\", \n    \"duree\": \"2h47\",\n    \"acteurs\": []}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "http://localhost:8000/films/{{filmId}}",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8000",
+                            "path": [
+                                "films",
+                                "{{filmId}}"
+                            ],
+                            "variable": [
+                                {
+                                    "key": "filmId",
+                                    "value": "1",
+                                    "description": "ID du film à mettre à jour"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Supprimer un film",
+                    "request": {
+                        "method": "DELETE",
+                        "url": {
+                            "raw": "http://localhost:8000/films/{{filmId}}",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8000",
+                            "path": [
+                                "films",
+                                "{{filmId}}"
+                            ],
+                            "variable": [
+                                {
+                                    "key": "filmId",
+                                    "value": "1",
+                                    "description": "ID du livre à supprimer"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Acteurs",
+            "item": [
+                {
+                    "name": "Récupérer tous les acteurs",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "http://localhost:8000/acteurs",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8000",
+                            "path": [
+                                "acteurs"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Récupérer un acteur par ID",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "http://localhost:8000/acteurs/{{acteurId}}",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8000",
+                            "path": [
+                                "acteurs",
+                                "{{acteurId}}"
+                            ],
+                            "variable": [
+                                {
+                                    "key": "acteurId",
+                                    "value": "1",
+                                    "description": "ID de l'acteur à récupérer"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Créer un nouvel acteur",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"nom\": \"Nouveau Nom\",\n    \"prenom\": \"Nouveau prenom\",\n    \"age\": \"30\",\n    \"dateDeNaissance\": \"1995-03-02\", \n    \"nationalite\": \"français\" }",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "http://localhost:8000/acteurs",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8000",
+                            "path": [
+                                "acteurs"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Mettre à jour un acteur",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"nom\": \"Nom mis a jour\",\n    \"prenom\": \"Prenom mis a jour\",\n    \"age\": \"31\",\n    \"dateDeNaissance\": \"1995-03-02\", \n    \"nationalite\": \"français\" }",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "http://localhost:8000/acteurs/{{acteurId}}",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8000",
+                            "path": [
+                                "acteurs",
+                                "{{acteurId}}"
+                            ],
+                            "variable": [
+                                {
+                                    "key": "acteurId",
+                                    "value": "1",
+                                    "description": "ID de l'acteur à mettre à jour"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Supprimer un acteur",
+                    "request": {
+                        "method": "DELETE",
+                        "url": {
+                            "raw": "http://localhost:8000/acteurs/{{acteurId}}",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "8000",
+                            "path": [
+                                "acteurs",
+                                "{{acteurId}}"
+                            ],
+                            "variable": [
+                                {
+                                    "key": "acteurId",
+                                    "value": "1",
+                                    "description": "ID de l'acteur à supprimer"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        }
+    ]
+}
