@@ -1,6 +1,4 @@
-import { Router, Context, RouterContext } from '../deps.ts';
-import { NotFoundException } from '../utils/exceptions.ts';
-
+import { Router, Context, RouterContext, NotFoundException } from '../deps.ts';
 import * as ingredientService from '../services/ingredient.service.ts';
 import {
     IngredientDto,

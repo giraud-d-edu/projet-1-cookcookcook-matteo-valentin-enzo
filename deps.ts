@@ -5,3 +5,5 @@ export type { RouterContext } from 'https://deno.land/x/oak@v11.1.0/mod.ts';
 
 export { MongoClient, Database, Collection } from 'https://deno.land/x/mongo@v0.34.0/mod.ts';
 export { ObjectId } from 'https://deno.land/x/mongo@v0.34.0/mod.ts';
+
+export { NotFoundException } from './utils/exceptions.ts';

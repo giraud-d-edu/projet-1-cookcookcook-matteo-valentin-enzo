@@ -1,6 +1,6 @@
 import { MongoClient, Database } from '../deps.ts';
-import { IngredientDBO } from './dbos/ingredient.dbo.ts';
-import { RecetteDBO } from './dbos/recette.dbo.ts';
+import { IngredientDbo } from './dbos/ingredient.dbo.ts';
+import { RecetteDbo } from './dbos/recette.dbo.ts';
 
 const MONGO_URI = Deno.env.get('MONGO_URI') || 'mongodb://127.0.0.1:27017';
 const DB_NAME = Deno.env.get('DB_NAME') || 'project-1-cook-mongodb';
@@ -28,12 +28,12 @@ export function getIngredientsCollection() {
     if (!db) {
         throw new Error("La base de données n'est pas connectée. Appelez connectDB() d'abord.");
     }
-    return db.collection<IngredientDBO>('ingredients');
+    return db.collection<IngredientDbo>('ingredients');
 }
 
 export function getRecettesCollection() {
     if (!db) {
         throw new Error("La base de données n'est pas connectée. Appelez connectDB() d'abord.");
     }
-    return db.collection<RecetteDBO>('recettes');
+    return db.collection<RecetteDbo>('recettes');
 }

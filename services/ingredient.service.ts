@@ -1,5 +1,5 @@
 import * as ingredientRepository from '../repositories/ingredient.repository.ts';
-import { NotFoundException } from '../utils/exceptions.ts';
+import { NotFoundException } from '../deps.ts';
 import { Ingredient, IngredientCandidate } from './models/ingredient.model.ts';
 
 export const getAllIngredientsService = async (): Promise<Ingredient[]> => {

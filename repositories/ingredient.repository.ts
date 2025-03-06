@@ -1,7 +1,6 @@
 import { Ingredient, IngredientCandidate } from '../services/models/ingredient.model.ts';
 import { getIngredientsCollection } from './mongo.ts';
-import { ObjectId } from 'https://deno.land/x/mongo@v0.34.0/mod.ts';
-import { NotFoundException } from '../utils/exceptions.ts';
+import { ObjectId, NotFoundException } from '../deps.ts';
 import { fromIngredientDboToIngredient } from './dbos/ingredient.dbo.ts';
 
 export const getAllIngredients = async (): Promise<Ingredient[]> => {
