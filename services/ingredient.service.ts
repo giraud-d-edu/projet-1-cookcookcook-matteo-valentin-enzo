@@ -2,11 +2,11 @@ import * as ingredientRepository from '../repositories/ingredient.repository.ts'
 import { NotFoundException } from '../deps.ts';
 import { Ingredient, IngredientCandidate } from './models/ingredient.model.ts';
 
-export const getAllIngredientsService = async (): Promise<Ingredient[] | null> => {
+export const getAllIngredientsService = async (): Promise<Ingredient[]> => {
     return await ingredientRepository.getAllIngredients();
 };
 
-export const getIngredientByIdService = async (id: string): Promise<Ingredient | null> => {
+export const getIngredientByIdService = async (id: string): Promise<Ingredient> => {
     return await ingredientRepository.getIngredientById(id);
 };
 
@@ -15,10 +15,6 @@ export const getIngredientByNomService = async (nom: string): Promise<Ingredient
 };
 
 export const createIngredientService = async (ingredientCandidate: IngredientCandidate): Promise<Ingredient> => {
-    return await ingredientRepository.createIngredient(ingredientCandidate);
-};
-
-export const createIngredientService = async (ingredientCandidate: IngredientCandidate): Promise<Ingredient | null> => {
     return await ingredientRepository.createIngredient(ingredientCandidate);
 };
 

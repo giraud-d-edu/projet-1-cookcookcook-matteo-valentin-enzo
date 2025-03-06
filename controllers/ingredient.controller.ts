@@ -69,7 +69,7 @@ async function getIngredientByNomController(ctx: RouterContext<'/ingredients/nom
     }
 
     try {
-        ctx.response.body = fromIngredientToDto(await ingredientService.getIngredientByNom(nomParams));
+        ctx.response.body = fromIngredientToDto(await ingredientService.getIngredientByNomService(nomParams));
     } catch (error) {
         if (error instanceof NotFoundException) {
             ctx.response.status = 404;

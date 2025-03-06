@@ -39,7 +39,7 @@ export const createIngredient = async (ingredientCandidate: IngredientCandidate)
     return await getIngredientById(insertId.toString());
 };
 
-export const updateIngredient = async (updatedIngredientData: Ingredient): Promise<Ingredient | null> => {
+export const updateIngredient = async (updatedIngredientData: Ingredient): Promise<Ingredient> => {
     const ingredientsCollection = getIngredientsCollection();
     const objectId = new ObjectId(updatedIngredientData.id);
     await ingredientsCollection.updateOne(
