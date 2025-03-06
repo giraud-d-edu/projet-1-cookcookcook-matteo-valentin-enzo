@@ -12,7 +12,7 @@ export const getRecetteByIdService = async (id: string): Promise<Recette> => {
 
 export const getRecetteByNomService = async (nom: string): Promise<Recette> => {
     return await recetteRepository.getRecetteByNom(nom);
-}
+};
 
 export const createRecetteService = async (recetteCandidate: RecetteCandidate): Promise<Recette> => {
     return await recetteRepository.createRecette(recetteCandidate);

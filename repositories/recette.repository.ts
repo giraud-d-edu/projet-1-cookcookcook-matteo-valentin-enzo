@@ -22,20 +22,20 @@ export const getRecetteById = async (id: string): Promise<Recette> => {
 export const getRecetteByNom = async (nom: string): Promise<Recette> => {
     const ingredientsCollection = getRecettesCollection();
     const dbo = await ingredientsCollection.findOne({ nom: { $regex: new RegExp(`^${nom}$`, 'i') } });
-    if(!dbo) {
-        throw new NotFoundException("Ingredient not found");
+    if (!dbo) {
+        throw new NotFoundException('Ingredient not found');
     }
     return fromRecetteDboToRecette(dbo);
-}
+};
 
-export const getRecetteByCategorie = async (categorie: "entrée" | "plat" | "dessert" | "autre"): Promise<Recette> => {
+export const getRecetteByCategorie = async (categorie: 'entrée' | 'plat' | 'dessert' | 'autre'): Promise<Recette> => {
     const ingredientsCollection = getRecettesCollection();
     const dbo = await ingredientsCollection.findOne({ categorie: categorie });
-    if(!dbo) {
-        throw new NotFoundException("Ingredient not found");
+    if (!dbo) {
+        throw new NotFoundException('Ingredient not found');
     }
     return fromRecetteDboToRecette(dbo);
-}
+};
 
 export const createRecette = async (recetteCandidate: RecetteCandidate): Promise<Recette> => {
     const recettesCollection = getRecettesCollection();

@@ -12,14 +12,14 @@ export const getIngredientByIdService = async (id: string): Promise<Ingredient> 
 
 export const getIngredientByNomService = async (nom: string): Promise<Ingredient> => {
     return await ingredientRepository.getIngredientByNom(nom);
-}
+};
 
 export const createIngredientService = async (ingredientCandidate: IngredientCandidate): Promise<Ingredient> => {
     return await ingredientRepository.createIngredient(ingredientCandidate);
 };
 
 export const updateIngredientService = async (ingredient: Ingredient): Promise<Ingredient> => {
-    const idexist = getIngredientByIdService(ingredient.id);
+    const idexist = await getIngredientByIdService(ingredient.id);
     if (!idexist) {
         throw new NotFoundException('No id found for this ingredient');
     }
