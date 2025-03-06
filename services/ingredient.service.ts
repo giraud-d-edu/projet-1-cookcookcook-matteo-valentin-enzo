@@ -14,6 +14,10 @@ export const getIngredientByNomService = async (nom: string): Promise<Ingredient
     return await ingredientRepository.getIngredientByNom(nom);
 };
 
+export const createIngredientService = async (ingredientCandidate: IngredientCandidate): Promise<Ingredient> => {
+    return await ingredientRepository.createIngredient(ingredientCandidate);
+};
+
 export const createIngredientService = async (ingredientCandidate: IngredientCandidate): Promise<Ingredient | null> => {
     return await ingredientRepository.createIngredient(ingredientCandidate);
 };
