@@ -60,7 +60,6 @@ async function getIngredientByIdController(ctx: RouterContext<'/ingredients/:id'
 
 async function getIngredientByNomController(ctx: RouterContext<'/ingredients/nom/:nom'>) {
     const nomParams = ctx.params.nom;
-    console.log(nomParams)
     if (!nomParams) {
         ctx.response.status = 400;
         ctx.response.body = { error: 'Missing ingredient Nom' };
