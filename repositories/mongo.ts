@@ -2,7 +2,7 @@ import { MongoClient, Database } from '../deps.ts';
 import { IngredientDbo } from './dbos/ingredient.dbo.ts';
 import { RecetteDbo } from './dbos/recette.dbo.ts';
 
-const MONGO_URI = Deno.env.get('MONGO_URI') || 'mongodb://127.0.0.1:27017';
+const MONGO_URI = Deno.env.get('MONGO_URL') || 'mongodb://127.0.0.1:27017';
 const DB_NAME = Deno.env.get('DB_NAME') || 'project-1-cook-mongodb';
 
 let client: MongoClient | null = null;

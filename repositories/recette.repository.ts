@@ -1,14 +1,13 @@
 import { Recette, RecetteCandidate } from '../services/models/recette.model.ts';
 import { getRecettesCollection } from './mongo.ts';
-import { ObjectId } from 'https://deno.land/x/mongo@v0.34.0/mod.ts';
-import { NotFoundException } from '../utils/exceptions.ts';
-import { fromRecetteDboToRecette } from './dbos/recette.dbo.ts';
+import { ObjectId, NotFoundException } from '../deps.ts';
+import { RecetteDbo, fromRecetteDboToRecette } from './dbos/recette.dbo.ts';
 
 export const getAllRecettes = async (ingredients?: string[]): Promise<Recette[]> => {
     const recettesCollection = getRecettesCollection();
     const query = ingredients && ingredients.length > 0 ? { ingredients: { $all: ingredients } } : {};
     const dbos = await recettesCollection.find(query).toArray();
-    return dbos.map((dbo) => fromRecetteDboToRecette(dbo));
+    return dbos.map((dbo: RecetteDbo) => fromRecetteDboToRecette(dbo));
 };
 
 export const getRecetteById = async (id: string): Promise<Recette> => {
