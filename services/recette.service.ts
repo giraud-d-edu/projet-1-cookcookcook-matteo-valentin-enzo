@@ -7,7 +7,6 @@ export const getAllRecetttesService = async (): Promise<Recette[]> => {
 };
 
 export const getRecetteByIdService = async (id: string): Promise<Recette | null> => {
-export const getRecetteByIdService = async (id: string): Promise<Recette | null> => {
     return await recetteRepository.getRecetteById(id);
 };
 

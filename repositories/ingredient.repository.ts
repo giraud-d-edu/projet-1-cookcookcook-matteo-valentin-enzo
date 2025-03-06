@@ -33,11 +33,13 @@ export const getIngredientByNom = async (nom: string): Promise<Ingredient> => {
 
 export const createIngredient = async (ingredientCandidate: IngredientCandidate): Promise<Ingredient> => {
     const ingredientsCollection = getIngredientsCollection();
-    const insertId = await ingredientsCollection.insertOne({ ...ingredientCandidate });
+    const insertId = await ingredientsCollection.insertOne({
+        ...ingredientCandidate,
+    });
     return await getIngredientById(insertId.toString());
 };
 
-export const updateIngredient = async (updatedIngredientData: Ingredient): Promise<Ingredient> => {
+export const updateIngredient = async (updatedIngredientData: Ingredient): Promise<Ingredient | null> => {
     const ingredientsCollection = getIngredientsCollection();
     const objectId = new ObjectId(updatedIngredientData.id);
     await ingredientsCollection.updateOne(
