@@ -1,5 +1,5 @@
 import * as recetteRepository from "../repositorie/book.repository.ts";
-import { Recette, RecetteCandidate } from "./models/recette.model";
+import { Recette, RecetteCandidate } from "./models/recette.model.ts";
 import { NotFoundException } from "../utils/exceptions.ts";
 
 
@@ -18,7 +18,7 @@ export const createRecetteService = async (recetteCandidate: RecetteCandidate): 
 export const updateRecetteService = async (recette: Recette): Promise<Recette> => {
     const recetteId = await recetteRepository.getIfRecetteIdExists(recette.id);
     if (!recetteId) {
-        throw new NotFoundExecption("Recette not found");
+        throw new NotFoundException("Recette not found");
     }
     return await recetteRepository.updateRecette(recette);
 }
