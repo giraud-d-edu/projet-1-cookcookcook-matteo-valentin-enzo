@@ -19,9 +19,10 @@ router
     .delete('/ingredients/:id', deleteIngredientController);
 
 async function getAllIngredientsController(ctx: Context) {
-    ctx.response.body = (await ingredientService.getAllIngredientsService()).map((ingredient) =>
+    ctx.response.body = (await ingredientService.getAllIngredientsService()).map((ingredient) => 
         fromIngredientToDto(ingredient),
     );
+    // Gerer si ça renvoie un array vide
 }
 
 async function getIngredientByIdController(ctx: RouterContext<'/ingredients/:id'>) {
