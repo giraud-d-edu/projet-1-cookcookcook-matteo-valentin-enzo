@@ -32,11 +32,13 @@
                             "host": ["localhost"],
                             "port": "8000",
                             "path": ["ingredients", "{{ingredientId}}"],
-                            "variable": [{
-                                "key": "ingredientId",
-                                "value": "1",
-                                "description": "ID de l'ingrédient à récupérer"
-                            }]
+                            "variable": [
+                                {
+                                    "key": "ingredientId",
+                                    "value": "1",
+                                    "description": "ID de l'ingrédient à récupérer"
+                                }
+                            ]
                         }
                     },
                     "response": []
@@ -45,7 +47,7 @@
                     "name": "Créer un nouvel ingrédient",
                     "request": {
                         "method": "POST",
-                        "header": [{"key": "Content-Type", "value": "application/json"}],
+                        "header": [{ "key": "Content-Type", "value": "application/json" }],
                         "body": {
                             "mode": "raw",
                             "raw": "{\n    \"nom\": \"Nouveau Ingrédient\"\n}"
@@ -64,7 +66,7 @@
                     "name": "Mettre à jour un ingrédient",
                     "request": {
                         "method": "PUT",
-                        "header": [{"key": "Content-Type", "value": "application/json"}],
+                        "header": [{ "key": "Content-Type", "value": "application/json" }],
                         "body": {
                             "mode": "raw",
                             "raw": "{\n    \"nom\": \"Nouveau Ingrédient\"\n}",
@@ -80,11 +82,13 @@
                             "host": ["localhost"],
                             "port": "8000",
                             "path": ["ingredients", "{{ingredientId}}"],
-                            "variable": [{
-                                "key": "ingredientId",
-                                "value": "1",
-                                "description": "ID de l'ingrédient à supprimer"
-                            }]
+                            "variable": [
+                                {
+                                    "key": "ingredientId",
+                                    "value": "1",
+                                    "description": "ID de l'ingrédient à supprimer"
+                                }
+                            ]
                         }
                     }
                 },
@@ -98,11 +102,13 @@
                             "host": ["localhost"],
                             "port": "8000",
                             "path": ["ingredients", "{{ingredientId}}"],
-                            "variable": [{
-                                "key": "ingredientId",
-                                "value": "1",
-                                "description": "ID de l'ingrédient à supprimer"
-                            }]
+                            "variable": [
+                                {
+                                    "key": "ingredientId",
+                                    "value": "1",
+                                    "description": "ID de l'ingrédient à supprimer"
+                                }
+                            ]
                         }
                     },
                     "response": []
@@ -136,11 +142,13 @@
                             "host": ["localhost"],
                             "port": "8000",
                             "path": ["recettes", "{{recetteId}}"],
-                            "variable": [{
-                                "key": "recetteId",
-                                "value": "1",
-                                "description": "ID de la recette à récupérer"
-                            }]
+                            "variable": [
+                                {
+                                    "key": "recetteId",
+                                    "value": "1",
+                                    "description": "ID de la recette à récupérer"
+                                }
+                            ]
                         }
                     },
                     "response": []
@@ -149,7 +157,7 @@
                     "name": "Créer une nouvelle recette",
                     "request": {
                         "method": "POST",
-                        "header": [{"key": "Content-Type", "value": "application/json"}],
+                        "header": [{ "key": "Content-Type", "value": "application/json" }],
                         "body": {
                             "mode": "raw",
                             "raw": "{\n    \"nom\": \"Nouvelle Recette\",\n    \"description\": \"Description de la recette\",\n    \"instructions\": \"Instructions de préparation\",\n    \"categorie\": \"plat\",\n    \"tempsPreparation\": 30,\n    \"origine\": \"France\",\n    \"ingredients\": [{ \"id\": \"1\", \"nom\": \"Sel\" }]\n}"
@@ -168,7 +176,7 @@
                     "name": "Mettre à jour une recette",
                     "request": {
                         "method": "PUT",
-                        "header": [{"key": "Content-Type", "value": "application/json"}],
+                        "header": [{ "key": "Content-Type", "value": "application/json" }],
                         "body": {
                             "mode": "raw",
                             "raw": "{\n    \"nom\": \"Recette mise à jour\",\n    \"description\": \"Nouvelle description\",\n    \"instructions\": \"Nouvelles instructions\",\n    \"categorie\": \"plat\",\n    \"tempsPreparation\": 40,\n    \"origine\": \"Italie\",\n    \"ingredients\": [{ \"id\": \"1\", \"nom\": \"Poivre\" }]\n}"
@@ -179,11 +187,13 @@
                             "host": ["localhost"],
                             "port": "8000",
                             "path": ["recettes", "{{recetteId}}"],
-                            "variable": [{
-                                "key": "recetteId",
-                                "value": "1",
-                                "description": "ID de la recette à mettre à jour"
-                            }]
+                            "variable": [
+                                {
+                                    "key": "recetteId",
+                                    "value": "1",
+                                    "description": "ID de la recette à mettre à jour"
+                                }
+                            ]
                         }
                     },
                     "response": []
@@ -198,11 +208,13 @@
                             "host": ["localhost"],
                             "port": "8000",
                             "path": ["recettes", "{{recetteId}}"],
-                            "variable": [{
-                                "key": "recetteId",
-                                "value": "1",
-                                "description": "ID de la recette à supprimer"
-                            }]
+                            "variable": [
+                                {
+                                    "key": "recetteId",
+                                    "value": "1",
+                                    "description": "ID de la recette à supprimer"
+                                }
+                            ]
                         }
                     },
                     "response": []

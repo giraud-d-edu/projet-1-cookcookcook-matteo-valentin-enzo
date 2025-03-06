@@ -14,7 +14,7 @@ export interface RecetteCandidate {
     nom: string;
     description: string;
     instructions: string;
-    categorie: "entrée" | "plat" | "dessert" | "autre";
+    categorie: 'entrée' | 'plat' | 'dessert' | 'autre';
     tempsPreparation: number;
     origine: string;
     ingredients: IngredientCandidate[];

@@ -1,5 +1,5 @@
 import { Application } from './deps.ts';
-import Ingredientrouter from "./controllers/ingredient.controller.ts";
+import Ingredientrouter from './controllers/ingredient.controller.ts';
 
 const app = new Application();
 
