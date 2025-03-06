@@ -175,6 +175,27 @@
                     "response": []
                 },
                 {
+                    "name": "Récupérer une recette par son nom",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "http://localhost:8000/recettes/nom/{{nom}}",
+                            "protocol": "http",
+                            "host": ["localhost"],
+                            "port": "8000",
+                            "path": ["recettes", "nom", "{{nom}}"],
+                            "variable": [
+                                {
+                                    "key": "nom",
+                                    "value": "",
+                                    "description": "Nom de la recette à récupérer"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
                     "name": "Créer une nouvelle recette",
                     "request": {
                         "method": "POST",
