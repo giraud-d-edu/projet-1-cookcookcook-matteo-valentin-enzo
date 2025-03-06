@@ -10,7 +10,7 @@ export const getIngredientByIdService = async (id: string): Promise<Ingredient |
     return await ingredientRepository.getIngredientById(id);
 };
 
-export const getIngredientByNom = async (nom: string): Promise<Ingredient | null> => {
+export const getIngredientByNomService = async (nom: string): Promise<Ingredient> => {
     return await ingredientRepository.getIngredientByNom(nom);
 };
 
@@ -18,8 +18,8 @@ export const createIngredientService = async (ingredientCandidate: IngredientCan
     return await ingredientRepository.createIngredient(ingredientCandidate);
 };
 
-export const updateIngredientService = async (ingredient: Ingredient): Promise<Ingredient | null> => {
-    const idexist = getIngredientByIdService(ingredient.id);
+export const updateIngredientService = async (ingredient: Ingredient): Promise<Ingredient> => {
+    const idexist = await getIngredientByIdService(ingredient.id);
     if (!idexist) {
         throw new NotFoundException('No id found for this ingredient');
     }
