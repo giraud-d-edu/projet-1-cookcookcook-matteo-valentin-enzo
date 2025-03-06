@@ -14,6 +14,10 @@ export const getRecetteByNomService = async (nom: string): Promise<Recette> => {
     return await recetteRepository.getRecetteByNom(nom);
 };
 
+export const getRecetteByCategorie = async (categorie: 'entrée' | 'plat' | 'dessert' | 'autre'): Promise<Recette[]> => {
+    return await recetteRepository.getRecetteByCategorie(categorie);
+};
+
 export const createRecetteService = async (recetteCandidate: RecetteCandidate): Promise<Recette> => {
     return await recetteRepository.createRecette(recetteCandidate);
 };
