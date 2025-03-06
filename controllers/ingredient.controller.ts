@@ -1,4 +1,5 @@
 import { Router, Context, RouterContext } from '../deps.ts';
+import { NotFoundException } from "../utils/exceptions.ts";
 
 import * as ingredientService from '../services/ingredient.service.ts';
 import {
@@ -8,8 +9,7 @@ import {
     fromIngredientCandidateDtoToIngredientCandidate,
     fromDtoToIngredient
 } from './dtos/ingredient.dto.ts';
-//@ts-ignore
-import { NotFoundException } from "../utils/exceptions.ts";
+
 import { Ingredient } from "../services/models/ingredient.model.ts";
 
 const router = new Router();

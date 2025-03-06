@@ -1,4 +1,5 @@
 import * as ingredientRepository from "../repositories/ingredient.repository.ts";
+import { NotFoundException } from "../utils/exceptions.ts";
 import { Ingredient, IngredientCandidate } from "./models/ingredient.model.ts";
 
 export const getAllIngredientsService = async (): Promise<Ingredient[]> => {
@@ -14,7 +15,10 @@ export const createIngredientService = async (ingredientCandidate: IngredientCan
 };
 
 export const updateIngredientService = async (ingredient: Ingredient): Promise<Ingredient> => {
-    //todo
+    const idexist = getIngredientByIdService(ingredient.id) 
+    if (!idexist) {
+        throw new NotFoundException("No id found for this ingredient");
+    }
     return await ingredientRepository.updateIngredient(ingredient);
 
 };
