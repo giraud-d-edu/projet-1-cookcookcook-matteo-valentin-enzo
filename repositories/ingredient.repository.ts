@@ -6,6 +6,9 @@ import { fromIngredientDboToIngredient } from './dbos/ingredient.dbo.ts';
 export const getAllIngredients = async (): Promise<Ingredient[]> => {
     const ingredientsCollection = getIngredientsCollection();
     const dbos = await ingredientsCollection.find({}).toArray();
+    if (dbos.length === 0) {
+        throw new NotFoundException("No ingredients received")
+    }
     return dbos.map((dbo) => fromIngredientDboToIngredient(dbo));
 };
 

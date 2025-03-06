@@ -19,10 +19,20 @@ router
     .delete('/ingredients/:id', deleteIngredientController);
 
 async function getAllIngredientsController(ctx: Context) {
-    ctx.response.body = (await ingredientService.getAllIngredientsService()).map((ingredient) => 
-        fromIngredientToDto(ingredient),
-    );
-    // Gerer si ça renvoie un array vide
+    try {
+        ctx.response.body = (await ingredientService.getAllIngredientsService()).map((ingredient) =>
+            fromIngredientToDto(ingredient),
+        );
+    } catch (error) {
+        if (error instanceof NotFoundException) {
+            ctx.response.status = 404;
+            ctx.response.body = { error: 'Ingredients not found' };
+        } else {
+            console.error('Error getting ingredients:', error);
+            ctx.response.status = 500;
+            ctx.response.body = { error: 'Internal server error. No ingredients found' };
+        }
+    }
 }
 
 async function getIngredientByIdController(ctx: RouterContext<'/ingredients/:id'>) {

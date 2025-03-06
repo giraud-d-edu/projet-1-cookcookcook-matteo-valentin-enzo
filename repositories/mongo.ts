@@ -28,12 +28,18 @@ export function getIngredientsCollection() {
     if (!db) {
         throw new Error("La base de données n'est pas connectée. Appelez connectDB() d'abord.");
     }
+    if (!db.collection<IngredientDbo>('ingredients').find()) {
+        throw { status: 404 , message : "No database with this name existing"};
+    }
     return db.collection<IngredientDbo>('ingredients');
 }
 
 export function getRecettesCollection() {
     if (!db) {
         throw new Error("La base de données n'est pas connectée. Appelez connectDB() d'abord.");
+    }
+    if (!db.collection<RecetteDbo>('recettes').find()) {
+        throw { status: 404, message: "No database with this name existing" };
     }
     return db.collection<RecetteDbo>('recettes');
 }
