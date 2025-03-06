@@ -1,8 +1,13 @@
 import { Ingredient, IngredientCandidate } from '../../services/models/ingredient.model.ts';
-export interface IngredientDto {
-    id: string;
-    nom: string;
-}
+import { z } from '../../deps.ts';
+
+export const ingredientDtoSchema = z.object({
+    id: z.string(),
+    nom: z.string().min(3).max(50),
+});
+
+export type IngredientDto = z.infer<typeof ingredientDtoSchema>;
+
 export interface IngredientCandidateDto {
     nom: string;
 }
