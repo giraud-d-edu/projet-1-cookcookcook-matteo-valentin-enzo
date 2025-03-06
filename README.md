@@ -4,8 +4,8 @@
 
 ## Overview
 
-CookCookCook is a web application designed to manage and share recipes. It provides functionalities to add, view, and
-manage ingredients and recipes through a RESTful API.
+CookCookCook is a API to manage and share recipes. It provides functionalities to add, view, and manage ingredients and
+recipes through a RESTful API.
 
 ## Features
 
