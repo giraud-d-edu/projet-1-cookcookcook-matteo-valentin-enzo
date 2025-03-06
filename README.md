@@ -67,12 +67,12 @@ recipes through a RESTful API.
     -   `DELETE /ingredients/:id`: Delete an ingredient.
 
 -   **Recipes**:
-    -   `GET /recipes`: List all recipes.
-    -   `GET /recipes/nom/:nom`: Retrieve recipes by name.
-    -   `GET /recipes/categories/:categorie`: Retrieve recipes by category (e.g., entrée, plat, dessert, autre).
-    -   `POST /recipes`: Add a new recipe.
-    -   `PUT /recipes/:id`: Update a recipe.
-    -   `DELETE /recipes/:id`: Delete a recipe.
+    -   `GET /recettes`: List all recipes.
+    -   `GET /recettes/nom/:nom`: Retrieve recipes by name.
+    -   `GET /recettes/categories/:categorie`: Retrieve recipes by category (e.g., entrée, plat, dessert, autre).
+    -   `POST /recettes`: Add a new recipe.
+    -   `PUT /recettes/:id`: Update a recipe.
+    -   `DELETE /recettes/:id`: Delete a recipe.
 
 ## License
 
