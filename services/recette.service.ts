@@ -2,8 +2,8 @@ import * as recetteRepository from '../repositories/recette.repository.ts';
 import { Recette, RecetteCandidate } from './models/recette.model.ts';
 import { NotFoundException } from '../utils/exceptions.ts';
 
-export const getAllRecetttesService = async (): Promise<Recette[]> => {
-    return await recetteRepository.getAllRecettes();
+export const getAllRecetttesService = async (ingredients?: string[]): Promise<Recette[]> => {
+    return await recetteRepository.getAllRecettes(ingredients);
 };
 
 export const getRecetteByIdService = async (id: string): Promise<Recette> => {
