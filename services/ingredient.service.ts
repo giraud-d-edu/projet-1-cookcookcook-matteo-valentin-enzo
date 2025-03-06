@@ -1,4 +1,4 @@
-import * as IngredientRepository from "../repositories/ingredient.repository.ts";
+import * as ingredientRepository from "../repositories/ingredient.repository.ts";
 import { Ingredient, IngredientCandidate } from "./models/ingredient.model.ts";
 
 export const getAllIngredientsService = async (): Promise<Ingredient[]> => {
