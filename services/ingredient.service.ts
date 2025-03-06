@@ -10,6 +10,10 @@ export const getIngredientByIdService = async (id: string): Promise<Ingredient> 
     return await ingredientRepository.getIngredientById(id);
 };
 
+export const getIngredientByNom = async (nom: string): Promise<Ingredient> => {
+    return await ingredientRepository.getIngredientByNom(nom);
+}
+
 export const createIngredientService = async (ingredientCandidate: IngredientCandidate): Promise<Ingredient> => {
     return await ingredientRepository.createIngredient(ingredientCandidate);
 };

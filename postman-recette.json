@@ -44,6 +44,27 @@
                     "response": []
                 },
                 {
+                    "name": "Récupérer un ingrédient par nom",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "http://localhost:8000/ingredients/nom/{{nom}}",
+                            "protocol": "http",
+                            "host": ["localhost"],
+                            "port": "8000",
+                            "path": ["ingredients", "nom", "{{nom}}"],
+                            "variable": [
+                                {
+                                    "key": "nom",
+                                    "value": "",
+                                    "description": "Nom de l'ingrédient à récupérer"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
                     "name": "Créer un nouvel ingrédient",
                     "request": {
                         "method": "POST",

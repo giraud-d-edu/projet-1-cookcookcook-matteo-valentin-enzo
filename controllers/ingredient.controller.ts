@@ -14,6 +14,7 @@ const router = new Router();
 router
     .get('/ingredients', getAllIngredientsController)
     .get('/ingredients/:id', getIngredientByIdController)
+    .get('/ingredients/nom/:nom', getIngredientByNomController)
     .post('/ingredients', createIngredientController)
     .put('/ingredients', updateIngredientController)
     .delete('/ingredients/:id', deleteIngredientController);
@@ -45,6 +46,28 @@ async function getIngredientByIdController(ctx: RouterContext<'/ingredients/:id'
 
     try {
         ctx.response.body = fromIngredientToDto(await ingredientService.getIngredientByIdService(idParam));
+    } catch (error) {
+        if (error instanceof NotFoundException) {
+            ctx.response.status = 404;
+            ctx.response.body = { error: 'Ingredient not found' };
+        } else {
+            console.error('Error getting ingredient by ID:', error);
+            ctx.response.status = 500;
+            ctx.response.body = { error: 'Internal server error' };
+        }
+    }
+}
+
+async function getIngredientByNomController(ctx: RouterContext<'/ingredients/nom/:nom'>) {
+    const nomParams = ctx.params.nom;
+    if (!nomParams) {
+        ctx.response.status = 400;
+        ctx.response.body = { error: 'Missing ingredient Nom' };
+        return;
+    }
+
+    try {
+        ctx.response.body = fromIngredientToDto(await ingredientService.getIngredientByNom(nomParams));
     } catch (error) {
         if (error instanceof NotFoundException) {
             ctx.response.status = 404;

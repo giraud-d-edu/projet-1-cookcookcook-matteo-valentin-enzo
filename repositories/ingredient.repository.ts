@@ -1,7 +1,7 @@
 import { Ingredient, IngredientCandidate } from '../services/models/ingredient.model.ts';
 import { getIngredientsCollection } from './mongo.ts';
 import { ObjectId, NotFoundException } from '../deps.ts';
-import { fromIngredientDboToIngredient } from './dbos/ingredient.dbo.ts';
+import { IngredientDbo, fromIngredientDboToIngredient } from './dbos/ingredient.dbo.ts';
 
 export const getAllIngredients = async (): Promise<Ingredient[]> => {
     const ingredientsCollection = getIngredientsCollection();
@@ -9,7 +9,7 @@ export const getAllIngredients = async (): Promise<Ingredient[]> => {
     if (dbos.length === 0) {
         throw new NotFoundException("No ingredients received")
     }
-    return dbos.map((dbo) => fromIngredientDboToIngredient(dbo));
+    return dbos.map((dbo: IngredientDbo) => fromIngredientDboToIngredient(dbo));
 };
 
 export const getIngredientById = async (id: string): Promise<Ingredient> => {
@@ -21,6 +21,15 @@ export const getIngredientById = async (id: string): Promise<Ingredient> => {
     }
     return fromIngredientDboToIngredient(dbo);
 };
+
+export const getIngredientByNom = async (nom: string): Promise<Ingredient> => {
+    const ingredientsCollection = getIngredientsCollection();
+    const dbo = await ingredientsCollection.findOne({ nom: { $regex: `^${nom}$`, $options: "i" } });
+    if(!dbo) {
+        throw new NotFoundException("Ingredient not found");
+    }
+    return fromIngredientDboToIngredient(dbo);
+}
 
 export const createIngredient = async (ingredientCandidate: IngredientCandidate): Promise<Ingredient> => {
     const ingredientsCollection = getIngredientsCollection();
