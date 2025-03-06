@@ -9,7 +9,6 @@ import {
     fromIngredientCandidateDtoToIngredientCandidate,
     fromDtoToIngredient
 } from './dtos/ingredient.dto.ts';
-
 import { Ingredient } from "../services/models/ingredient.model.ts";
 
 const router = new Router();
