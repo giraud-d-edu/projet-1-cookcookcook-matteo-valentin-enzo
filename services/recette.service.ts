@@ -6,24 +6,16 @@ export const getAllRecetttesService = async (): Promise<Recette[]> => {
     return await recetteRepository.getAllRecettes();
 };
 
-export const getRecetteByIdService = async (id: string): Promise<Recette> => {
+export const getRecetteByIdService = async (id: string): Promise<Recette | null> => {
     return await recetteRepository.getRecetteById(id);
 };
 
-export const getRecetteByNomService = async (nom: string): Promise<Recette> => {
-    return await recetteRepository.getRecetteByNom(nom);
-};
-
-export const getRecetteByCategorie = async (categorie: 'entrée' | 'plat' | 'dessert' | 'autre'): Promise<Recette[]> => {
-    return await recetteRepository.getRecetteByCategorie(categorie);
-};
-
-export const createRecetteService = async (recetteCandidate: RecetteCandidate): Promise<Recette> => {
+export const createRecetteService = async (recetteCandidate: RecetteCandidate): Promise<Recette | null> => {
     return await recetteRepository.createRecette(recetteCandidate);
 };
 
-export const updateRecetteService = async (recette: Recette): Promise<Recette> => {
-    const recetteId = await getRecetteByIdService(recette.id);
+export const updateRecetteService = async (recette: Recette): Promise<Recette | null> => {
+    const recetteId = await recetteRepository.getRecetteById(recette.id);
     if (!recetteId) {
         throw new NotFoundException('Recette not found');
     }
