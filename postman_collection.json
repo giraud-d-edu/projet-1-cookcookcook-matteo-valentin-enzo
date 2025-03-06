@@ -196,6 +196,27 @@
                     "response": []
                 },
                 {
+                    "name": "Récupérer une recette par sa categorie",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "http://localhost:8000/recettes/categories/{{categorie}}",
+                            "protocol": "http",
+                            "host": ["localhost"],
+                            "port": "8000",
+                            "path": ["recettes", "categories", "{{categorie}}"],
+                            "variable": [
+                                {
+                                    "key": "categories",
+                                    "value": "",
+                                    "description": "Categorie de la recette à récupérer"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
                     "name": "Créer une nouvelle recette",
                     "request": {
                         "method": "POST",
