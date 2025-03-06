@@ -1,14 +1,14 @@
 import { ObjectId } from '../../deps.ts';
 import { Recette } from '../../services/models/recette.model.ts';
-
-export class RecetteDBO {
+import { IngredientDbo } from './ingredient.dbo.ts';
+export interface RecetteDBO {
     _id: ObjectId;
     nom: string;
     description: string;
-    ingredients: string[];
-    etapes: string[];
-    temps_preparation: number;
-    temps_cuisson: number;
+    categorie: 'entrée' | 'plat' | 'dessert' | 'autre';
+    tempsPreparation: number;
+    origine: string;
+    ingredients: IngredientDbo[];
 }
 
 export function fromRecetteDboToRecette(dbo: RecetteDBO): Recette {
@@ -21,6 +21,6 @@ export function fromRecetteDboToRecette(dbo: RecetteDBO): Recette {
 export function fromRecetteToRecetteDbo(recette: Recette): RecetteDBO {
     return {
         ...recette,
-        _id: new ObjectId(recette._id),
+        _id: new ObjectId(recette.id),
     };
 }
