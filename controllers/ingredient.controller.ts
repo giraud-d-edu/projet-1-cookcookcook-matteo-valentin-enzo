@@ -21,7 +21,7 @@ router
 async function getAllIngredientsController(ctx: Context) {
     ctx.response.body = (await ingredientService.getAllIngredientsService()).map((ingredient) =>
         fromIngredientToDto(ingredient),
-    ); // Retourne directement les Dtos du service
+    );
 }
 
 async function getIngredientByIdController(ctx: RouterContext<'/ingredients/:id'>) {
@@ -33,14 +33,12 @@ async function getIngredientByIdController(ctx: RouterContext<'/ingredients/:id'
     }
 
     try {
-        ctx.response.body = fromIngredientToDto(await ingredientService.getIngredientByIdService(idParam)); // Retourne directement le Dto du service
+        ctx.response.body = fromIngredientToDto(await ingredientService.getIngredientByIdService(idParam));
     } catch (error) {
         if (error instanceof NotFoundException) {
-            // Capturer NotFoundException
             ctx.response.status = 404;
             ctx.response.body = { error: 'Ingredient not found' };
         } else {
-            // Gérer les autres types d'erreurs si nécessaire (erreur serveur, etc.)
             console.error('Error getting ingredient by ID:', error);
             ctx.response.status = 500;
             ctx.response.body = { error: 'Internal server error' };
@@ -113,9 +111,9 @@ async function deleteIngredientController(ctx: RouterContext<'/ingredients/:id'>
     const success = await ingredientService.deleteIngredientService(idParam);
     if (success) {
         ctx.response.status = 204;
-        ctx.response.body = null; // 204 No Content pour la suppression réussie
+        ctx.response.body = null;
     } else {
-        ctx.response.status = 404; // 404 si deleteIngredientService retourne false (livre non trouvé)
+        ctx.response.status = 404;
         ctx.response.body = { error: 'Ingredient not found' };
     }
 }
