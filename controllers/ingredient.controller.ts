@@ -16,7 +16,7 @@ router
     .get('/ingredients/:id', getIngredientByIdController)
     .get('/ingredients/nom/:nom', getIngredientByNomController)
     .post('/ingredients', createIngredientController)
-    .put('/ingredients', updateIngredientController)
+    .put('/ingredients/:id', updateIngredientController)
     .delete('/ingredients/:id', deleteIngredientController);
 
 async function getAllIngredientsController(ctx: Context) {
@@ -67,7 +67,7 @@ async function getIngredientByNomController(ctx: RouterContext<'/ingredients/nom
     }
 
     try {
-        ctx.response.body = fromIngredientToDto(await ingredientService.getIngredientByNom(nomParams));
+        ctx.response.body = fromIngredientToDto(await ingredientService.getIngredientByNomService(nomParams));
     } catch (error) {
         if (error instanceof NotFoundException) {
             ctx.response.status = 404;

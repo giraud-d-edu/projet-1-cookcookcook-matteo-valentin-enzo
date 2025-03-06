@@ -15,16 +15,13 @@ const router = new Router();
 router
     .get('/recettes', getAllRecettesController)
     .get('/recettes/:id', getRecetteByIdController)
+    .get('/recettes/nom/:nom', getRecetteByNomController)
     .post('/recettes', createRecetteController)
-    .put('/recettes', updateRecetteController)
+    .put('/recettes/:id', updateRecetteController)
     .delete('/recettes/:id', deleteRecetteController);
 
 async function getAllRecettesController(ctx: Context) {
-    const ingredientsQuery = ctx.request.url.searchParams.get('ingredients');
-    const ingredients = ingredientsQuery ? ingredientsQuery.split(',') : undefined;
-    ctx.response.body = (await recetteService.getAllRecetttesService(ingredients)).map((recette) =>
-        fromRecetteToDto(recette),
-    );
+    ctx.response.body = (await recetteService.getAllRecetttesService()).map((recette) => fromRecetteToDto(recette));
 }
 
 async function getRecetteByIdController(ctx: RouterContext<'/recettes/:id'>) {
@@ -43,6 +40,28 @@ async function getRecetteByIdController(ctx: RouterContext<'/recettes/:id'>) {
             ctx.response.body = { error: 'Book not found' };
         } else {
             console.error('Error getting book by ID:', error);
+            ctx.response.status = 500;
+            ctx.response.body = { error: 'Internal server error' };
+        }
+    }
+}
+
+async function getRecetteByNomController(ctx: RouterContext<'/recettes/nom/:nom'>) {
+    const nomParams = ctx.params.nom;
+    if (!nomParams) {
+        ctx.response.status = 400;
+        ctx.response.body = { error: 'Missing ingredient Nom' };
+        return;
+    }
+
+    try {
+        ctx.response.body = fromRecetteToDto(await recetteService.getRecetteByNomService(nomParams));
+    } catch (error) {
+        if (error instanceof NotFoundException) {
+            ctx.response.status = 404;
+            ctx.response.body = { error: 'Ingredient not found' };
+        } else {
+            console.error('Error getting ingredient by ID:', error);
             ctx.response.status = 500;
             ctx.response.body = { error: 'Internal server error' };
         }
@@ -87,7 +106,7 @@ async function createRecetteController(ctx: Context) {
     }
 }
 
-async function updateRecetteController(ctx: Context) {
+async function updateRecetteController(ctx: RouterContext<'/recettes/:id'>) {
     if (!ctx.request.hasBody) {
         ctx.response.status = 400;
         ctx.response.body = { error: 'Request body is required' };
