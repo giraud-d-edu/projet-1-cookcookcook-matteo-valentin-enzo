@@ -1,5 +1,4 @@
-import { Ingredient } from './ingredient.model.ts';
-
+import { Ingredient, IngredientCandidate } from './ingredient.model.ts';
 export interface Recette {
     id: string;
     nom: string;
@@ -18,5 +17,5 @@ export interface RecetteCandidate {
     categorie: "entrée" | "plat" | "dessert" | "autre";
     tempsPreparation: number;
     origine: string;
-    ingredients: Ingredient[]; 
+    ingredients: IngredientCandidate[];
 }
