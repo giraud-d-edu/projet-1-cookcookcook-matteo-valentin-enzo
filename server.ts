@@ -1,5 +1,8 @@
 import { Application } from './deps.ts';
 import Ingredientrouter from './controllers/ingredient.controller.ts';
+import { connectDB } from './repositories/mongo.ts';
+
+await connectDB();
 
 const app = new Application();
 
