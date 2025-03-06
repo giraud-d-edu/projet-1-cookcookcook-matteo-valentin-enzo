@@ -42,13 +42,19 @@ recipes through a RESTful API.
 
 3. **Set up environment variables**: Copy `.env.exemple` to `.env` and fill in the necessary details.
 
-4. **Run the application**:
+4. **Create MongoDb enviroments on MongoDb local**:
+
+    - For datatabase, create with this name: `project-1-cook-mongodb`
+    - For recettes collection, create with this name: `recettes`
+    - For ingredients collection, create with this name: `ingredients`
+
+5. **Run the application**:
 
     ```bash
     deno run --allow-net --allow-read --allow-env server.ts
     ```
 
-5. **Access the application**: Open your browser and go to `http://localhost:8000`.
+6. **Access the application**: Open your browser and go to `http://localhost:8000`.
 
 ## API Endpoints
 

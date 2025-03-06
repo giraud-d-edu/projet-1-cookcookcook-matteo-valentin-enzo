@@ -6,6 +6,7 @@ import {
     fromIngredientToDto,
     IngredientCandidateDto,
     IngredientDto,
+    ingredientCandidateDtoSchema,
 } from './dtos/ingredient.dto.ts';
 import { Ingredient } from '../services/models/ingredient.model.ts';
 
@@ -98,6 +99,14 @@ async function createIngredientController(ctx: Context) {
             return;
         }
 
+        try {
+            ingredientCandidateDtoSchema.parse({ nom });
+        } catch {
+            ctx.response.status = 400;
+            ctx.response.body = { error: 'Your name is incorrect, must be between 3 and 50 characters long' };
+            return;
+        }
+
         const ingredientCandidateDto: IngredientCandidateDto = { nom };
         const ingredientCandidate = fromIngredientCandidateDtoToIngredientCandidate(ingredientCandidateDto);
         ctx.response.status = 201;
@@ -122,6 +131,14 @@ async function updateIngredientController(ctx: RouterContext<'/ingredients/:id'>
     if (!id || !nom) {
         ctx.response.status = 400;
         ctx.response.body = { error: 'Missing required fields for update (nom)' };
+        return;
+    }
+
+    try {
+        ingredientCandidateDtoSchema.parse({ nom });
+    } catch {
+        ctx.response.status = 400;
+        ctx.response.body = { error: 'Your name is incorrect, must be between 3 and 50 characters long' };
         return;
     }
 

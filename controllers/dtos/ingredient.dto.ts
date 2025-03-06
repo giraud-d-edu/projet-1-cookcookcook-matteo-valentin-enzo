@@ -8,6 +8,10 @@ export const ingredientDtoSchema = z.object({
 
 export type IngredientDto = z.infer<typeof ingredientDtoSchema>;
 
+export const ingredientCandidateDtoSchema = z.object({
+    nom: z.string().min(3).max(50),
+});
+
 export interface IngredientCandidateDto {
     nom: string;
 }

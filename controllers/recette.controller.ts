@@ -6,6 +6,7 @@ import {
     fromRecetteToDto,
     fromRecetteCandidateDtoToRecetteCandidate,
     fromDtoToRecette,
+    recetteCandidateDtoSchema,
 } from './dtos/recette.dto.ts';
 import { NotFoundException } from '../utils/exceptions.ts';
 import { Recette } from '../services/models/recette.model.ts';
@@ -112,6 +113,24 @@ async function createRecetteController(ctx: Context) {
             return;
         }
 
+        try {
+            recetteCandidateDtoSchema.parse({
+                nom,
+                description,
+                instructions,
+                categorie,
+                tempsPreparation,
+                origine,
+                ingredients,
+            });
+        } catch {
+            ctx.response.status = 400;
+            ctx.response.body = {
+                error: 'One of recette values is incorrect, does not respect the size or is not well written',
+            };
+            return;
+        }
+
         const recetteCandidateDto: RecetteCandidateDto = {
             nom,
             description,
@@ -145,6 +164,24 @@ async function updateRecetteController(ctx: RouterContext<'/recettes/:id'>) {
         ctx.response.status = 400;
         ctx.response.body = {
             error: 'Missing required fields for update (nom, description, instruction, categorie, tempsPreparation, origine, ingredients)',
+        };
+        return;
+    }
+
+    try {
+        recetteCandidateDtoSchema.parse({
+            nom,
+            description,
+            instructions,
+            categorie,
+            tempsPreparation,
+            origine,
+            ingredients,
+        });
+    } catch {
+        ctx.response.status = 400;
+        ctx.response.body = {
+            error: 'One of recette values is incorrect, does not respect the size or is not well written',
         };
         return;
     }

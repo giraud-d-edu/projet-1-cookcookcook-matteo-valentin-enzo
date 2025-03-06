@@ -1,4 +1,5 @@
-export { z } from 'https://deno.land/x/zod/mod.ts';
+export { z } from 'https://deno.land/x/zod@v3.24.2/mod.ts';
+export { ZodError } from 'https://deno.land/x/zod@v3.24.2/index.ts';
 
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 
