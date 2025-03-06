@@ -107,14 +107,15 @@ async function createIngredientController(ctx: Context) {
     }
 }
 
-async function updateIngredientController(ctx: Context) {
+async function updateIngredientController(ctx: RouterContext<'/ingredients/:id'>) {
     if (!ctx.request.hasBody) {
         ctx.response.status = 400;
         ctx.response.body = { error: 'Request body is required' };
         return;
     }
     const body = await ctx.request.body({ type: 'json' }).value;
-    const { id, nom } = body as IngredientDto;
+    const id = ctx.params.id;
+    const { nom } = body as IngredientDto;
 
     if (!id || !nom) {
         ctx.response.status = 400;
