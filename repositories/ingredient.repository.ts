@@ -24,7 +24,7 @@ export const getIngredientById = async (id: string): Promise<Ingredient> => {
 
 export const getIngredientByNom = async (nom: string): Promise<Ingredient> => {
     const ingredientsCollection = getIngredientsCollection();
-    const dbo = await ingredientsCollection.findOne({ nom: { $regex: `^${nom}$`, $options: "i" } });
+    const dbo = await ingredientsCollection.findOne({ nom: { $regex: new RegExp(`^${nom}$`, 'i') } });
     if(!dbo) {
         throw new NotFoundException("Ingredient not found");
     }

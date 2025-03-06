@@ -113,7 +113,8 @@ async function updateRecetteController(ctx: RouterContext<'/recettes/:id'>) {
         return;
     }
     const body = await ctx.request.body({ type: 'json' }).value;
-    const { id, nom, description, instructions, categorie, tempsPreparation, origine, ingredients } =
+    const id = ctx.params.id;
+    const { nom, description, instructions, categorie, tempsPreparation, origine, ingredients } =
         body as RecetteDto;
 
     if (!id || !nom || !description || !instructions || !categorie || !tempsPreparation || !origine || !ingredients) {
