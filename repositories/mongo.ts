@@ -29,7 +29,7 @@ export function getIngredientsCollection() {
         throw new Error("La base de données n'est pas connectée. Appelez connectDB() d'abord.");
     }
     if (!db.collection<IngredientDbo>('ingredients').find()) {
-        throw new Error('No database with this name existing');
+        throw { status: 500, message: 'No database with this name existing' };
     }
     return db.collection<IngredientDbo>('ingredients');
 }
@@ -39,7 +39,7 @@ export function getRecettesCollection() {
         throw new Error("La base de données n'est pas connectée. Appelez connectDB() d'abord.");
     }
     if (!db.collection<RecetteDbo>('recettes').find()) {
-        throw new Error('No database with this name existing');
+        throw { status: 500, message: 'No database with this name existing' };
     }
     return db.collection<RecetteDbo>('recettes');
 }

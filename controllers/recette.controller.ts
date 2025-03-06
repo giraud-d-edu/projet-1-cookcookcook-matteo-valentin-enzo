@@ -78,7 +78,7 @@ async function getRecetteByCategorieController(ctx: RouterContext<'/recettes/cat
     }
 
     try {
-        ctx.response.body = (await recetteService.getRecetteByCategorie(categorieParams)).map((recette) =>
+        ctx.response.body = (await recetteService.getRecetteByCategorieService(categorieParams)).map((recette) =>
             fromRecetteToDto(recette),
         );
     } catch (error) {

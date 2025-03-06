@@ -1,11 +1,11 @@
-import { Router, Context, RouterContext, NotFoundException } from '../deps.ts';
+import { Context, NotFoundException, Router, RouterContext } from '../deps.ts';
 import * as ingredientService from '../services/ingredient.service.ts';
 import {
-    IngredientDto,
-    IngredientCandidateDto,
-    fromIngredientToDto,
-    fromIngredientCandidateDtoToIngredientCandidate,
     fromDtoToIngredient,
+    fromIngredientCandidateDtoToIngredientCandidate,
+    fromIngredientToDto,
+    IngredientCandidateDto,
+    IngredientDto,
 } from './dtos/ingredient.dto.ts';
 import { Ingredient } from '../services/models/ingredient.model.ts';
 
@@ -31,7 +31,9 @@ async function getAllIngredientsController(ctx: Context) {
         } else {
             console.error('Error getting ingredients:', error);
             ctx.response.status = 500;
-            ctx.response.body = { error: 'Internal server error. No ingredients found' };
+            ctx.response.body = {
+                error: 'Internal server error. No ingredients found',
+            };
         }
     }
 }
@@ -128,7 +130,10 @@ async function updateIngredientController(ctx: RouterContext<'/ingredients/:id'>
     const updatedIngredientDto = fromIngredientToDto(await ingredientService.updateIngredientService(ingredient));
     if (updatedIngredientDto) {
         ctx.response.status = 200;
-        ctx.response.body = { message: 'Ingredient updated successfully', body: updatedIngredientDto };
+        ctx.response.body = {
+            message: 'Ingredient updated successfully',
+            body: updatedIngredientDto,
+        };
     } else {
         ctx.response.status = 404;
         ctx.response.body = { error: 'Ingredient not found' };
