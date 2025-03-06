@@ -20,7 +20,11 @@ router
     .delete('/recettes/:id', deleteRecetteController);
 
 async function getAllRecettesController(ctx: Context) {
-    ctx.response.body = (await recetteService.getAllRecetttesService()).map((recette) => fromRecetteToDto(recette));
+    const ingredientsQuery = ctx.request.url.searchParams.get('ingredients');
+    const ingredients = ingredientsQuery ? ingredientsQuery.split(',') : undefined;
+    ctx.response.body = (await recetteService.getAllRecetttesService(ingredients)).map((recette) =>
+        fromRecetteToDto(recette),
+    );
 }
 
 async function getRecetteByIdController(ctx: RouterContext<'/recettes/:id'>) {

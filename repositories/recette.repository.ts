@@ -4,9 +4,10 @@ import { ObjectId } from 'https://deno.land/x/mongo@v0.34.0/mod.ts';
 import { NotFoundException } from '../utils/exceptions.ts';
 import { fromRecetteDboToRecette } from './dbos/recette.dbo.ts';
 
-export const getAllRecettes = async (): Promise<Recette[]> => {
+export const getAllRecettes = async (ingredients?: string[]): Promise<Recette[]> => {
     const recettesCollection = getRecettesCollection();
-    const dbos = await recettesCollection.find({}).toArray();
+    const query = ingredients && ingredients.length > 0 ? { ingredients: { $all: ingredients } } : {};
+    const dbos = await recettesCollection.find(query).toArray();
     return dbos.map((dbo) => fromRecetteDboToRecette(dbo));
 };
 
