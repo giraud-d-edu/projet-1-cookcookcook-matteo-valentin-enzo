@@ -24,14 +24,14 @@ export async function connectDB(): Promise<Database> {
     }
 }
 
-export function getIngredientCollection() {
+export function getIngredientsCollection() {
     if (!db) {
         throw new Error("La base de données n'est pas connectée. Appelez connectDB() d'abord.");
     }
     return db.collection<IngredientDBO>('ingredients');
 }
 
-export function getRecetteCollection() {
+export function getRecettesCollection() {
     if (!db) {
         throw new Error("La base de données n'est pas connectée. Appelez connectDB() d'abord.");
     }

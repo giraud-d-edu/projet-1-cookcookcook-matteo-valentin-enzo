@@ -9,13 +9,13 @@ export interface IngredientDbo {
 export function fromIngredientDboToIngredient(dbo: IngredientDbo): Ingredient {
     return {
         ...dbo,
-        id: dbo._id.toString()
-    }
+        id: dbo._id.toString(),
+    };
 }
 
 export function fromIngredientToIngredientDbo(ingredient: Ingredient): IngredientDbo {
     return {
         ...ingredient,
-        _id: new ObjectId(ingredient.id)
-    }
+        _id: new ObjectId(ingredient.id),
+    };
 }
