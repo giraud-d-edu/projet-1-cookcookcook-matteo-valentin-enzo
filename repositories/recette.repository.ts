@@ -68,5 +68,6 @@ export const deleteRecette = async (id: string): Promise<boolean> => {
     const recettesCollection = getRecettesCollection();
     const objectId = new ObjectId(id);
     const deleteCount = await recettesCollection.deleteOne({ _id: objectId });
+    // TODO en lien avec le commentaire dans le service throw exception de type erreur technique (ou erreur classique) si pb ici
     return deleteCount > 0;
 };

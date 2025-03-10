@@ -1,6 +1,6 @@
-// Fichier ingredients.json
+// Fichier ingredients.json // LE JSON n'aime pas les commentaires, les supprimer et faire plusieurs fichiers
 [
-  { "id": "ing-001", "nom": "Farine" },
+  { "id": "ing-001", "nom": "Farine" }, // Ici il faut définir des _id de type objectId pas des id (et est ce qu'il faut mieux laisser mongo les générer directement ?)
   { "id": "ing-002", "nom": "Sucre" },
   { "id": "ing-003", "nom": "Sel" },
   { "id": "ing-004", "nom": "Poivre" },
@@ -55,7 +55,7 @@
 // Fichier recettes.json
 [
   {
-    "id": "rec-001",
+    "id": "rec-001", // Pareil ici
     "nom": "Quiche Lorraine",
     "description": "La quiche lorraine classique avec une pâte brisée maison, des lardons et une garniture à base d'œufs et de crème.",
     "instructions": "1. Préchauffer le four à 180°C.\n2. Étaler la pâte brisée dans un moule à tarte.\n3. Faire revenir les lardons à la poêle.\n4. Battre les œufs avec la crème fraîche, saler et poivrer.\n5. Répartir les lardons sur le fond de tarte.\n6. Verser le mélange œufs-crème.\n7. Enfourner pour 30-35 minutes.",
@@ -63,8 +63,8 @@
     "tempsPreparation": 45,
     "origine": "France",
     "ingredients": [
-      { "id": "ing-001", "nom": "Farine" },
-      { "id": "ing-005", "nom": "Beurre" },
+      { "id": "ing-001", "nom": "Farine" }, // Ici soit c'est embeded (l'object complet), soit c'est link (_id),
+      { "id": "ing-005", "nom": "Beurre" }, // Dans ce cas de figure il n'y a pas de lien avec la collection ingredients
       { "id": "ing-003", "nom": "Sel" },
       { "id": "ing-009", "nom": "Œufs" },
       { "id": "ing-008", "nom": "Crème fraîche" },

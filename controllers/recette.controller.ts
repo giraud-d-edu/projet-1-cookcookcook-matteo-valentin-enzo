@@ -13,6 +13,7 @@ import { Recette } from '../services/models/recette.model.ts';
 
 const router = new Router();
 
+// TODO Should have : Implémenter un middleware pour les catch pour faire comme vous avez fait le if instenceof else 500. Ca allègera votre code
 router
     .get('/recettes', getAllRecettesController)
     .get('/recettes/:id', getRecetteByIdController)
@@ -23,7 +24,7 @@ router
     .delete('/recettes/:id', deleteRecetteController);
 
 async function getAllRecettesController(ctx: Context) {
-    ctx.response.body = (await recetteService.getAllRecetttesService()).map((recette) => fromRecetteToDto(recette));
+    ctx.response.body = (await recetteService.getAllRecettesService()).map((recette) => fromRecetteToDto(recette));
 }
 
 async function getRecetteByIdController(ctx: RouterContext<'/recettes/:id'>) {
@@ -48,6 +49,8 @@ async function getRecetteByIdController(ctx: RouterContext<'/recettes/:id'>) {
     }
 }
 
+// TODO : Nice to have : Query Param
+// TODO : L'URL n'est pas RESTful, il faudrait plutôt faire /recettes?nom=nom car le nom n'est pas une sous entité de recette
 async function getRecetteByNomController(ctx: RouterContext<'/recettes/nom/:nom'>) {
     const nomParams = ctx.params.nom;
     if (!nomParams) {
@@ -105,6 +108,7 @@ async function createRecetteController(ctx: Context) {
         const { nom, description, instructions, categorie, tempsPreparation, origine, ingredients } =
             body as RecetteCandidateDto;
 
+        // TODO a supprimer car zod va également faire la vérification
         if (!nom || !description || !instructions || !categorie || !tempsPreparation || !origine || !ingredients) {
             ctx.response.status = 400;
             ctx.response.body = {
@@ -112,6 +116,20 @@ async function createRecetteController(ctx: Context) {
             };
             return;
         }
+
+        // TODO : Should have : utiliser le safeParse de zod pour avoir des erreurs pus précises. Vous faites déjà pas mal de vérification que zod peux vous faire via ce code
+        /*
+        const validationResult = recetteCandidateDtoSchema.safeParse(body);
+        if (!validationResult.success) {
+            ctx.response.status = 400;
+            ctx.response.body = {
+                error: "Invalid input",
+                details: validationResult.error.format(),
+            };
+            return;
+        }
+        const recetteCandidate = fromRecetteCandidateDtoToRecetteCandidate(validationResult.data);
+        */
 
         try {
             recetteCandidateDtoSchema.parse({

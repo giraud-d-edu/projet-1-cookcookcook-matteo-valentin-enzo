@@ -20,6 +20,7 @@ router
     .put('/ingredients/:id', updateIngredientController)
     .delete('/ingredients/:id', deleteIngredientController);
 
+// FIXME Ne pas générer de 404 si vide mais plutôt une 200 avec un array empty => https://apihandyman.io/empty-lists-http-status-code-200-vs-204-vs-404/ (faire comme pour le Get all recettes).
 async function getAllIngredientsController(ctx: Context) {
     try {
         ctx.response.body = (await ingredientService.getAllIngredientsService()).map((ingredient) =>

@@ -14,6 +14,13 @@ export interface RecetteDbo {
 }
 
 export function fromRecetteDboToRecette(dbo: RecetteDbo): Recette {
+    // TODO : ça hard copy aussi le champ _id vu qu'il n'y a pas de typage
+    /*
+    const recette = JSON.parse(JSON.stringify(dbo));
+    delete recette._id;
+    recette.id = dbo._id.toString();
+    return recette;
+     */
     return {
         ...dbo,
         id: dbo._id.toString(),

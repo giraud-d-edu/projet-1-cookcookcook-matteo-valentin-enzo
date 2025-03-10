@@ -40,6 +40,7 @@ recipes through a RESTful API.
 
 2. **Install Deno**: Follow the instructions on [deno.land](https://deno.land/#installation).
 
+FIXME: Bonne initiative mais ça ne marche pas (cf mongo.ts file)
 3. **Set up environment variables**: Copy `.env.exemple` to `.env` and fill in the necessary details.
 
 4. **Create MongoDb enviroments on MongoDb local**:
@@ -88,4 +89,4 @@ import this collection into Postman to quickly start making requests to your loc
 ### Sample Database
 
 A sample MongoDB database structure (`data-mongodb.json`) is provided to help you understand the data schema and get
-started with some initial data. You can import this file into your MongoDB instance using:
+started with some initial data. You can import this file into your MongoDB instance using: ??? TODO
