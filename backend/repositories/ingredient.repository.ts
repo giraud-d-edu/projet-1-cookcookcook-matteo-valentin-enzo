@@ -51,9 +51,13 @@ export const updateIngredient = async (updatedIngredientData: Ingredient): Promi
     return await getIngredientById(updatedIngredientData.id.toString());
 };
 
-export const deleteIngredient = async (id: string): Promise<boolean> => {
-    const ingredientsCollection = getIngredientsCollection();
-    const objectId = new ObjectId(id);
-    const deleteCount = await ingredientsCollection.deleteOne({ _id: objectId });
-    return deleteCount > 0;
+export const deleteIngredient = async (id: string): Promise<void> => {
+    console.log('idParam', id);
+    try {
+        const ingredientsCollection = getIngredientsCollection();
+        const objectId = new ObjectId(id);
+        await ingredientsCollection.deleteOne({ _id: objectId });
+    } catch (error) {
+        throw new NotFoundException('Ingredient not found'); // TODO: change to internal server error
+    }
 };

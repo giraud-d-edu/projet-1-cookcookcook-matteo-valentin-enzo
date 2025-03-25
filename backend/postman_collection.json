@@ -15,9 +15,13 @@
                         "url": {
                             "raw": "http://localhost:8000/ingredients",
                             "protocol": "http",
-                            "host": ["localhost"],
+                            "host": [
+                                "localhost"
+                            ],
                             "port": "8000",
-                            "path": ["ingredients"]
+                            "path": [
+                                "ingredients"
+                            ]
                         }
                     },
                     "response": []
@@ -29,9 +33,14 @@
                         "url": {
                             "raw": "http://localhost:8000/ingredients/{{ingredientId}}",
                             "protocol": "http",
-                            "host": ["localhost"],
+                            "host": [
+                                "localhost"
+                            ],
                             "port": "8000",
-                            "path": ["ingredients", "{{ingredientId}}"],
+                            "path": [
+                                "ingredients",
+                                "{{ingredientId}}"
+                            ],
                             "variable": [
                                 {
                                     "key": "ingredientId",
@@ -50,9 +59,15 @@
                         "url": {
                             "raw": "http://localhost:8000/ingredients/nom/{{nom}}",
                             "protocol": "http",
-                            "host": ["localhost"],
+                            "host": [
+                                "localhost"
+                            ],
                             "port": "8000",
-                            "path": ["ingredients", "nom", "{{nom}}"],
+                            "path": [
+                                "ingredients",
+                                "nom",
+                                "{{nom}}"
+                            ],
                             "variable": [
                                 {
                                     "key": "nom",
@@ -68,7 +83,12 @@
                     "name": "Créer un nouvel ingrédient",
                     "request": {
                         "method": "POST",
-                        "header": [{ "key": "Content-Type", "value": "application/json" }],
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
                         "body": {
                             "mode": "raw",
                             "raw": "{\n    \"nom\": \"Nouveau Ingrédient\"\n}"
@@ -76,9 +96,13 @@
                         "url": {
                             "raw": "http://localhost:8000/ingredients",
                             "protocol": "http",
-                            "host": ["localhost"],
+                            "host": [
+                                "localhost"
+                            ],
                             "port": "8000",
-                            "path": ["ingredients"]
+                            "path": [
+                                "ingredients"
+                            ]
                         }
                     },
                     "response": []
@@ -87,7 +111,12 @@
                     "name": "Mettre à jour un ingrédient",
                     "request": {
                         "method": "PUT",
-                        "header": [{ "key": "Content-Type", "value": "application/json" }],
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
                         "body": {
                             "mode": "raw",
                             "raw": "{\n    \"nom\": \"Nouveau Ingrédient\"\n}",
@@ -100,9 +129,14 @@
                         "url": {
                             "raw": "http://localhost:8000/ingredients/{{ingredientId}}",
                             "protocol": "http",
-                            "host": ["localhost"],
+                            "host": [
+                                "localhost"
+                            ],
                             "port": "8000",
-                            "path": ["ingredients", "{{ingredientId}}"],
+                            "path": [
+                                "ingredients",
+                                "{{ingredientId}}"
+                            ],
                             "variable": [
                                 {
                                     "key": "ingredientId",
@@ -120,9 +154,14 @@
                         "url": {
                             "raw": "http://localhost:8000/ingredients/{{ingredientId}}",
                             "protocol": "http",
-                            "host": ["localhost"],
+                            "host": [
+                                "localhost"
+                            ],
                             "port": "8000",
-                            "path": ["ingredients", "{{ingredientId}}"],
+                            "path": [
+                                "ingredients",
+                                "{{ingredientId}}"
+                            ],
                             "variable": [
                                 {
                                     "key": "ingredientId",
@@ -146,9 +185,13 @@
                         "url": {
                             "raw": "http://localhost:8000/recettes",
                             "protocol": "http",
-                            "host": ["localhost"],
+                            "host": [
+                                "localhost"
+                            ],
                             "port": "8000",
-                            "path": ["recettes"]
+                            "path": [
+                                "recettes"
+                            ]
                         }
                     },
                     "response": []
@@ -160,9 +203,14 @@
                         "url": {
                             "raw": "http://localhost:8000/recettes/{{recetteId}}",
                             "protocol": "http",
-                            "host": ["localhost"],
+                            "host": [
+                                "localhost"
+                            ],
                             "port": "8000",
-                            "path": ["recettes", "{{recetteId}}"],
+                            "path": [
+                                "recettes",
+                                "{{recetteId}}"
+                            ],
                             "variable": [
                                 {
                                     "key": "recetteId",
@@ -181,9 +229,15 @@
                         "url": {
                             "raw": "http://localhost:8000/recettes/nom/{{nom}}",
                             "protocol": "http",
-                            "host": ["localhost"],
+                            "host": [
+                                "localhost"
+                            ],
                             "port": "8000",
-                            "path": ["recettes", "nom", "{{nom}}"],
+                            "path": [
+                                "recettes",
+                                "nom",
+                                "{{nom}}"
+                            ],
                             "variable": [
                                 {
                                     "key": "nom",
@@ -202,9 +256,15 @@
                         "url": {
                             "raw": "http://localhost:8000/recettes/categories/{{categorie}}",
                             "protocol": "http",
-                            "host": ["localhost"],
+                            "host": [
+                                "localhost"
+                            ],
                             "port": "8000",
-                            "path": ["recettes", "categories", "{{categorie}}"],
+                            "path": [
+                                "recettes",
+                                "categories",
+                                "{{categorie}}"
+                            ],
                             "variable": [
                                 {
                                     "key": "categories",
@@ -220,17 +280,26 @@
                     "name": "Créer une nouvelle recette",
                     "request": {
                         "method": "POST",
-                        "header": [{ "key": "Content-Type", "value": "application/json" }],
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"nom\": \"Nouvelle Recette\",\n    \"description\": \"Description de la recette\",\n    \"instructions\": \"Instructions de préparation\",\n    \"categorie\": \"plat\",\n    \"tempsPreparation\": 30,\n    \"origine\": \"France\",\n    \"ingredients\": [{ \"id\": \"1\", \"nom\": \"Sel\" }]\n}"
+                            "raw": "{\n    \"nom\": \"Nouvelle Recette\",\n    \"description\": \"Description de la recette\",\n    \"instructions\": \"Instructions de préparation\",\n    \"categorie\": \"plat\",\n    \"tempsPreparation\": 30,\n    \"origine\": \"France\",\n    \"ingredients\": [{ \"nom\": \"Sel\" }]\n}"
                         },
                         "url": {
                             "raw": "http://localhost:8000/recettes",
                             "protocol": "http",
-                            "host": ["localhost"],
+                            "host": [
+                                "localhost"
+                            ],
                             "port": "8000",
-                            "path": ["recettes"]
+                            "path": [
+                                "recettes"
+                            ]
                         }
                     },
                     "response": []
@@ -239,17 +308,27 @@
                     "name": "Mettre à jour une recette",
                     "request": {
                         "method": "PUT",
-                        "header": [{ "key": "Content-Type", "value": "application/json" }],
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"nom\": \"Recette mise à jour\",\n    \"description\": \"Nouvelle description\",\n    \"instructions\": \"Nouvelles instructions\",\n    \"categorie\": \"plat\",\n    \"tempsPreparation\": 40,\n    \"origine\": \"Italie\",\n    \"ingredients\": [{ \"id\": \"1\", \"nom\": \"Poivre\" }]\n}"
+                            "raw": "{\n    \"nom\": \"Recette mise à jour\",\n    \"description\": \"Nouvelle description\",\n    \"instructions\": \"Nouvelles instructions\",\n    \"categorie\": \"plat\",\n    \"tempsPreparation\": 40,\n    \"origine\": \"Italie\",\n    \"ingredients\": [{ \"nom\": \"Poivre\" }]\n}"
                         },
                         "url": {
                             "raw": "http://localhost:8000/recettes/{{recetteId}}",
                             "protocol": "http",
-                            "host": ["localhost"],
+                            "host": [
+                                "localhost"
+                            ],
                             "port": "8000",
-                            "path": ["recettes", "{{recetteId}}"],
+                            "path": [
+                                "recettes",
+                                "{{recetteId}}"
+                            ],
                             "variable": [
                                 {
                                     "key": "recetteId",
@@ -268,9 +347,14 @@
                         "url": {
                             "raw": "http://localhost:8000/recettes/{{recetteId}}",
                             "protocol": "http",
-                            "host": ["localhost"],
+                            "host": [
+                                "localhost"
+                            ],
                             "port": "8000",
-                            "path": ["recettes", "{{recetteId}}"],
+                            "path": [
+                                "recettes",
+                                "{{recetteId}}"
+                            ],
                             "variable": [
                                 {
                                     "key": "recetteId",
