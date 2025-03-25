@@ -2,6 +2,7 @@
   export let nom = "nom de la recette";
   export let description = "Description par défaut";
   export let image = "";
+  export let tempsPreparation = "Temps de préparation inconnu";
 </script>
 
 <div class="card">
@@ -10,7 +11,8 @@
   {/if}
   <div class="content">
     <h2>{nom}</h2>
-    <p>{description}</p>
+    <p>{description.length > 95 ? description.slice(0, 95) + "..." : description}</p>
+    <p>{tempsPreparation}</p>
   </div>
 </div>
 

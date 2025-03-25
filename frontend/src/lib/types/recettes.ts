@@ -3,4 +3,5 @@ export interface Recette {
     nom: string;
     description: string;
     image: string;
+    tempsPreparation: number;
 }
