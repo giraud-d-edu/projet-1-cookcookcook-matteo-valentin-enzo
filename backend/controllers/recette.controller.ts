@@ -1,8 +1,6 @@
 import { Router, Context, RouterContext } from '../deps.ts';
 import * as recetteService from '../services/recette.service.ts';
 import {
-    RecetteDto,
-    RecetteCandidateDto,
     fromRecetteToDto,
     fromRecetteCandidateDtoToRecetteCandidate,
     fromDtoToRecette,
@@ -38,8 +36,8 @@ async function getRecetteByIdController(ctx: RouterContext<'/recettes/:id'>) {
         ctx.response.body = fromRecetteToDto(await recetteService.getRecetteByIdService(idParam));
     } catch (error) {
         if (error instanceof NotFoundException) {
-            ctx.response.status = 404;
-            ctx.response.body = { error: 'Recette not found' };
+            ctx.response.status = 200;
+            ctx.response.body = [];
         } else {
             console.error('Error getting book by ID:', error);
             ctx.response.status = 500;
@@ -60,8 +58,8 @@ async function getRecetteByNomController(ctx: RouterContext<'/recettes/nom/:nom'
         ctx.response.body = fromRecetteToDto(await recetteService.getRecetteByNomService(nomParams));
     } catch (error) {
         if (error instanceof NotFoundException) {
-            ctx.response.status = 404;
-            ctx.response.body = { error: 'Recette not found' };
+            ctx.response.status = 200;
+            ctx.response.body = [];
         } else {
             console.error('Error getting recette by ID:', error);
             ctx.response.status = 500;
@@ -96,51 +94,18 @@ async function getRecetteByCategorieController(ctx: RouterContext<'/recettes/cat
 
 async function createRecetteController(ctx: Context) {
     try {
-        if (!ctx.request.hasBody) {
-            ctx.response.status = 400;
-            ctx.response.body = { error: 'Request body is required' };
-            return;
-        }
         const body = await ctx.request.body({ type: 'json' }).value;
-        const { nom, description, instructions, categorie, tempsPreparation, origine, ingredients } =
-            body as RecetteCandidateDto;
 
-        if (!nom || !description || !instructions || !categorie || !tempsPreparation || !origine || !ingredients) {
+        const validationResult = recetteCandidateDtoSchema.safeParse(body);
+        if (!validationResult.success) {
             ctx.response.status = 400;
             ctx.response.body = {
-                error: 'Missing required fields (nom, description, instruction, categorie, tempsPreparation, origine, ingredients)',
+                error: 'Invalid input',
+                details: validationResult.error.format(),
             };
             return;
         }
-
-        try {
-            recetteCandidateDtoSchema.parse({
-                nom,
-                description,
-                instructions,
-                categorie,
-                tempsPreparation,
-                origine,
-                ingredients,
-            });
-        } catch {
-            ctx.response.status = 400;
-            ctx.response.body = {
-                error: 'One of recette values is incorrect, does not respect the size or is not well written',
-            };
-            return;
-        }
-
-        const recetteCandidateDto: RecetteCandidateDto = {
-            nom,
-            description,
-            instructions,
-            categorie,
-            tempsPreparation,
-            origine,
-            ingredients,
-        };
-        const recetteCandidate = fromRecetteCandidateDtoToRecetteCandidate(recetteCandidateDto);
+        const recetteCandidate = fromRecetteCandidateDtoToRecetteCandidate(validationResult.data);
         ctx.response.status = 201;
         ctx.response.body = fromRecetteToDto(await recetteService.createRecetteService(recetteCandidate));
     } catch (e) {
@@ -151,58 +116,25 @@ async function createRecetteController(ctx: Context) {
 }
 
 async function updateRecetteController(ctx: RouterContext<'/recettes/:id'>) {
-    if (!ctx.request.hasBody) {
-        ctx.response.status = 400;
-        ctx.response.body = { error: 'Request body is required' };
-        return;
-    }
-    const body = await ctx.request.body({ type: 'json' }).value;
-    const id = ctx.params.id;
-    const { nom, description, instructions, categorie, tempsPreparation, origine, ingredients } = body as RecetteDto;
-
-    if (!id || !nom || !description || !instructions || !categorie || !tempsPreparation || !origine || !ingredients) {
-        ctx.response.status = 400;
-        ctx.response.body = {
-            error: 'Missing required fields for update (nom, description, instruction, categorie, tempsPreparation, origine, ingredients)',
-        };
-        return;
-    }
-
     try {
-        recetteCandidateDtoSchema.parse({
-            nom,
-            description,
-            instructions,
-            categorie,
-            tempsPreparation,
-            origine,
-            ingredients,
-        });
-    } catch {
-        ctx.response.status = 400;
-        ctx.response.body = {
-            error: 'One of recette values is incorrect, does not respect the size or is not well written',
-        };
-        return;
-    }
+        const body = await ctx.request.body({ type: 'json' }).value;
 
-    const recetteDto: RecetteDto = {
-        id,
-        nom,
-        description,
-        instructions,
-        categorie,
-        tempsPreparation,
-        origine,
-        ingredients,
-    };
-    const recette: Recette = fromDtoToRecette(recetteDto);
-    try {
+        const validationResult = recetteCandidateDtoSchema.safeParse(body);
+        if (!validationResult.success) {
+            ctx.response.status = 400;
+            ctx.response.body = {
+                error: 'Invalid input',
+                details: validationResult.error.format(),
+            };
+        }
+
+        const recetteCandidate = fromRecetteCandidateDtoToRecetteCandidate(validationResult.data);
+        const recette: Recette = fromDtoToRecette(recetteCandidate);
+        ctx.response.status = 200;
         ctx.response.body = {
             message: 'Recette updated successfully',
             body: fromRecetteToDto(await recetteService.updateRecetteService(recette)),
         };
-        ctx.response.status = 200;
     } catch (error) {
         if (error instanceof NotFoundException) {
             ctx.response.status = 404;

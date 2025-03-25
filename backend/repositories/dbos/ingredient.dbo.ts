@@ -7,10 +7,10 @@ export interface IngredientDbo {
 }
 
 export function fromIngredientDboToIngredient(dbo: IngredientDbo): Ingredient {
-    return {
-        ...dbo,
-        id: dbo._id.toString(),
-    };
+    const ingredient = JSON.parse(JSON.stringify(dbo));
+    delete ingredient._id;
+    ingredient.id = dbo._id.toString();
+    return ingredient;
 }
 
 export function fromIngredientToIngredientDbo(ingredient: Ingredient): IngredientDbo {
