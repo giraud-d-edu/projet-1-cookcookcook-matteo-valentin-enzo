@@ -3,7 +3,8 @@
   "specifiers": {
     "jsr:@lucsoft/web-bson@0.4": "0.4.0",
     "jsr:@std/crypto@^1.0.3": "1.0.4",
-    "jsr:@std/encoding@^1.0.5": "1.0.7"
+    "jsr:@std/encoding@^1.0.5": "1.0.7",
+    "npm:@types/node@*": "22.12.0"
   },
   "jsr": {
     "@lucsoft/web-bson@0.4.0": {
@@ -14,6 +15,17 @@
     },
     "@std/encoding@1.0.7": {
       "integrity": "f631247c1698fef289f2de9e2a33d571e46133b38d042905e3eac3715030a82d"
+    }
+  },
+  "npm": {
+    "@types/node@22.12.0": {
+      "integrity": "sha512-Fll2FZ1riMjNmlmJOdAyY5pUbkftXslB5DgEzlIuNaiWhXd00FhWxVC/r4yV/4wBb9JfImTu+jiSvXTkJ7F/gA==",
+      "dependencies": [
+        "undici-types"
+      ]
+    },
+    "undici-types@6.20.0": {
+      "integrity": "sha512-Ny6QZ2Nju20vw1SRHe3d9jVu6gJ+4e3+MMpqu7pqE5HT6WsTSlce++GQmK5UXS8mzV8DSYHrQH+Xrf2jVcuKNg=="
     }
   },
   "remote": {
@@ -59,6 +71,8 @@
     "https://deno.land/x/cors@v1.2.2/oakCors.ts": "1348dc7673c61b85d2e80559a7b44f8e0246eaa6bcc6ec744fafe5d9b13b5c71",
     "https://deno.land/x/cors@v1.2.2/opineCors.ts": "fb5790115c26b7061d84b8d6c17d258a1e241bcab75b0bc3ca1fdb2e57bc5072",
     "https://deno.land/x/cors@v1.2.2/types.ts": "97546633ccc7f0df7a29bacba5d91dc6f61decdd1b65258300244dba905d34b8",
+    "https://deno.land/x/dotenv@v3.2.2/mod.ts": "077b48773de9205266a0b44c3c3a3c3083449ed64bb0b6cc461b95720678d38e",
+    "https://deno.land/x/dotenv@v3.2.2/util.ts": "693730877b13f8ead2b79b2aa31e2a0652862f7dc0c5f6d2f313f4d39c7b7670",
     "https://deno.land/x/mongo@v0.34.0/deps.ts": "c9ef5cc7fbe0d84c349590dca175abcf62988b1f87c2efda47e47d3f20fb741d",
     "https://deno.land/x/mongo@v0.34.0/mod.ts": "a1f5b1e6932d472d1fca02ebef025e4f964b0bca62b8ead77415ec49870cd7f2",
     "https://deno.land/x/mongo@v0.34.0/src/auth/base.ts": "84ae5dec934f9bedb4a941c7c0dbac5f138a836e2792463e5bd97fd8ab51501e",

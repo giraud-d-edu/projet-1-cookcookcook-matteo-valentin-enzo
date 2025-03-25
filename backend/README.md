@@ -44,7 +44,7 @@ recipes through a RESTful API.
 
 4. **Create MongoDb enviroments on MongoDb local**:
 
-    - For datatabase, create with this name: `project-1-cook-mongodb`
+    - For datatabase, create with this name: `cook-db`
     - For recettes collection, create with this name: `recettes`
     - For ingredients collection, create with this name: `ingredients`
 
