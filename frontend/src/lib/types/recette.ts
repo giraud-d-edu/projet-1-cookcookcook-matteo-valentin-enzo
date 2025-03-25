@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 export interface Recette {
 	id: string;
 	nom: string;
@@ -10,11 +11,20 @@ export interface Recette {
 	origine: string;
 }
 export interface RecetteAdd {
+=======
+import type { Ingredient } from './ingredients';
+
+export interface Recette {
+>>>>>>> origin
 	nom: string;
 	description: string;
 	instructions: string;
 	categorie: string;
 	tempsPreparation: number;
 	origine: string;
+<<<<<<< HEAD
 	ingredients: string[];
+=======
+	ingredients: Ingredient[];
+>>>>>>> origin
 }
