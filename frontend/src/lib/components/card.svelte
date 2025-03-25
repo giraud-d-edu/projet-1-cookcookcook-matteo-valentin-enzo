@@ -11,7 +11,7 @@
   {/if}
   <div class="content">
     <h2>{nom}</h2>
-    <p>{description.length > 95 ? description.slice(0, 95) + "..." : description}</p>
+    <p>{description.length > 85 ? description.slice(0, 85) + "..." : description}</p>
     <p>{tempsPreparation}</p>
   </div>
 </div>

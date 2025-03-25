@@ -10,7 +10,7 @@
       <a href="/" class:active={$page.url.pathname === '/'}>Accueil</a>
       <a href="/recettes" class:active={$page.url.pathname === '/recettes'}>Recettes</a>
       <a href="/categories" class:active={$page.url.pathname === '/categories'}>Catégories</a>
-      <a href="/favoris" class:active={$page.url.pathname === '/favoris'}>Favoris</a>
+      <a href="/recettes/add" class:active={$page.url.pathname === '/add'}>Ajouter une recette</a>
     </div>
 
     <div class="search-bar">
