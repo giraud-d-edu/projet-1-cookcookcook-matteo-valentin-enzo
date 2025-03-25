@@ -1,4 +1,4 @@
-import { IngredientDto, ingredientDtoSchema } from './ingredient.dto.ts';
+import { IngredientDto, ingredientDtoSchema, ingredientCandidateDtoSchema } from './ingredient.dto.ts';
 import { Recette, RecetteCandidate } from '../../services/models/recette.model.ts';
 import { z } from '../../deps.ts';
 
@@ -22,9 +22,10 @@ export const recetteCandidateDtoSchema = z.object({
     categorie: z.enum(['entrée', 'plat', 'dessert', 'autre']),
     tempsPreparation: z.number().positive(),
     origine: z.string().min(1).max(50),
-    ingredients: z.array(ingredientDtoSchema),
+    ingredients: z.array(ingredientCandidateDtoSchema),
 });
 
+export type RecetteDtoCandidate = z.infer<typeof recetteCandidateDtoSchema>;
 export interface RecetteCandidateDto {
     nom: string;
     description: string;

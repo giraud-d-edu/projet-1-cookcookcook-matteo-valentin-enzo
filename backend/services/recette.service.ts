@@ -2,7 +2,7 @@ import * as recetteRepository from '../repositories/recette.repository.ts';
 import { Recette, RecetteCandidate } from './models/recette.model.ts';
 import { NotFoundException } from '../utils/exceptions.ts';
 
-export const getAllRecetttesService = async (): Promise<Recette[]> => {
+export const getAllRecettesService = async (): Promise<Recette[]> => {
     return await recetteRepository.getAllRecettes();
 };
 
@@ -32,6 +32,10 @@ export const updateRecetteService = async (recette: Recette): Promise<Recette> =
     return await recetteRepository.updateRecette(recette);
 };
 
-export const deleteRecetteService = async (id: string): Promise<boolean> => {
+export const deleteRecetteService = async (id: string): Promise<void> => {
+    const recetteId = await recetteRepository.getRecetteById(id);
+    if (!recetteId) {
+        throw new NotFoundException('Recette not found');
+    }
     return await recetteRepository.deleteRecette(id);
 };

@@ -14,14 +14,44 @@ const router = new Router();
 router
     .get('/recettes', getAllRecettesController)
     .get('/recettes/:id', getRecetteByIdController)
-    .get('/recettes/nom/:nom', getRecetteByNomController)
-    .get('/recettes/categories/:categorie', getRecetteByCategorieController)
     .post('/recettes', createRecetteController)
     .put('/recettes/:id', updateRecetteController)
     .delete('/recettes/:id', deleteRecetteController);
 
 async function getAllRecettesController(ctx: Context) {
-    ctx.response.body = (await recetteService.getAllRecetttesService()).map((recette) => fromRecetteToDto(recette));
+    const nom = ctx.request.url.searchParams.get('nom');
+    const categorie = ctx.request.url.searchParams.get('categorie');
+    if (nom) {
+        try {
+            ctx.response.body = fromRecetteToDto(await recetteService.getRecetteByNomService(nom));
+        } catch (error) {
+            if (error instanceof NotFoundException) {
+                ctx.response.status = 200;
+                ctx.response.body = [];
+            } else {
+                console.error('Error getting recette by name:', error);
+                ctx.response.status = 500;
+                ctx.response.body = { error: 'Internal server error' };
+            }
+        }
+    } else if (categorie) {
+        try {
+            ctx.response.body = (await recetteService.getRecetteByCategorieService(categorie)).map((recette) =>
+                fromRecetteToDto(recette),
+            );
+        } catch (error) {
+            if (error instanceof NotFoundException) {
+                ctx.response.status = 200;
+                ctx.response.body = [];
+            } else {
+                console.error('Error getting recette by categorie:', error);
+                ctx.response.status = 500;
+                ctx.response.body = { error: 'Internal server error' };
+            }
+        }
+    } else {
+        ctx.response.body = (await recetteService.getAllRecettesService()).map((recette) => fromRecetteToDto(recette));
+    }
 }
 
 async function getRecetteByIdController(ctx: RouterContext<'/recettes/:id'>) {
@@ -40,52 +70,6 @@ async function getRecetteByIdController(ctx: RouterContext<'/recettes/:id'>) {
             ctx.response.body = [];
         } else {
             console.error('Error getting book by ID:', error);
-            ctx.response.status = 500;
-            ctx.response.body = { error: 'Internal server error' };
-        }
-    }
-}
-
-async function getRecetteByNomController(ctx: RouterContext<'/recettes/nom/:nom'>) {
-    const nomParams = ctx.params.nom;
-    if (!nomParams) {
-        ctx.response.status = 400;
-        ctx.response.body = { error: 'Missing recette Nom' };
-        return;
-    }
-
-    try {
-        ctx.response.body = fromRecetteToDto(await recetteService.getRecetteByNomService(nomParams));
-    } catch (error) {
-        if (error instanceof NotFoundException) {
-            ctx.response.status = 200;
-            ctx.response.body = [];
-        } else {
-            console.error('Error getting recette by ID:', error);
-            ctx.response.status = 500;
-            ctx.response.body = { error: 'Internal server error' };
-        }
-    }
-}
-
-async function getRecetteByCategorieController(ctx: RouterContext<'/recettes/categories/:categorie'>) {
-    const categorieParams = ctx.params.categorie as 'entrée' | 'plat' | 'dessert' | 'autre';
-    if (!categorieParams) {
-        ctx.response.status = 400;
-        ctx.response.body = { error: 'Missing recette Categorie' };
-        return;
-    }
-
-    try {
-        ctx.response.body = (await recetteService.getRecetteByCategorieService(categorieParams)).map((recette) =>
-            fromRecetteToDto(recette),
-        );
-    } catch (error) {
-        if (error instanceof NotFoundException) {
-            ctx.response.status = 404;
-            ctx.response.body = { error: 'Recette not found' };
-        } else {
-            console.error('Error getting recette by ID:', error);
             ctx.response.status = 500;
             ctx.response.body = { error: 'Internal server error' };
         }
@@ -118,6 +102,7 @@ async function createRecetteController(ctx: Context) {
 async function updateRecetteController(ctx: RouterContext<'/recettes/:id'>) {
     try {
         const body = await ctx.request.body({ type: 'json' }).value;
+        const id = ctx.params.id;
 
         const validationResult = recetteCandidateDtoSchema.safeParse(body);
         if (!validationResult.success) {
@@ -129,7 +114,7 @@ async function updateRecetteController(ctx: RouterContext<'/recettes/:id'>) {
         }
 
         const recetteCandidate = fromRecetteCandidateDtoToRecetteCandidate(validationResult.data);
-        const recette: Recette = fromDtoToRecette(recetteCandidate);
+        const recette: Recette = fromDtoToRecette({ ...recetteCandidate, id });
         ctx.response.status = 200;
         ctx.response.body = {
             message: 'Recette updated successfully',
@@ -155,13 +140,19 @@ async function deleteRecetteController(ctx: RouterContext<'/recettes/:id'>) {
         return;
     }
 
-    const success = await recetteService.deleteRecetteService(idParam);
-    if (success) {
+    try {
+        await recetteService.deleteRecetteService(idParam);
         ctx.response.status = 204;
         ctx.response.body = null;
-    } else {
-        ctx.response.status = 404;
-        ctx.response.body = { error: 'Recette not found' };
+    } catch (error) {
+        if (error instanceof NotFoundException) {
+            ctx.response.status = 404;
+            ctx.response.body = { error: 'Recette not found' };
+        } else {
+            console.error('Error deleting recette:', error);
+            ctx.response.status = 500;
+            ctx.response.body = { error: 'Internal server error' };
+        }
     }
 }
 

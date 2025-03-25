@@ -64,9 +64,12 @@ export const updateRecette = async (updatedRecetteData: Recette): Promise<Recett
     return await getRecetteById(updatedRecetteData.id.toString());
 };
 
-export const deleteRecette = async (id: string): Promise<boolean> => {
-    const recettesCollection = getRecettesCollection();
-    const objectId = new ObjectId(id);
-    const deleteCount = await recettesCollection.deleteOne({ _id: objectId });
-    return deleteCount > 0;
+export const deleteRecette = async (id: string): Promise<void> => {
+    try {
+        const recettesCollection = getRecettesCollection();
+        const objectId = new ObjectId(id);
+        await recettesCollection.deleteOne({ _id: objectId });
+    } catch (error) {
+        throw new NotFoundException('Recette not found'); // TODO: change to internal server error
+    }
 };
