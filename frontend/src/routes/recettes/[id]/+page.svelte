@@ -45,7 +45,7 @@
         <h2>Ingrédients</h2>
         <ul>
           {#each recette.ingredients as ingredient}
-            <li>{ingredient.nom}</li>
+            <li>{ingredient}</li>
           {/each}
         </ul>
       </div>

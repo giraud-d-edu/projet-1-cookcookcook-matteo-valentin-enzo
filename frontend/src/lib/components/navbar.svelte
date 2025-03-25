@@ -1,123 +1,105 @@
 <script lang="ts">
   import { page } from '$app/stores';
+  import SearchBar from './SearchBar.svelte';
 </script>
 
-<nav class="navbar">
-  <div class="nav-content">
+<nav>
+  <div class="nav-left">
     <a href="/" class="logo">CookCookCook</a>
-    
-    <div class="nav-links">
-      <a href="/" class:active={$page.url.pathname === '/'}>Accueil</a>
-      <a href="/recettes" class:active={$page.url.pathname === '/recettes'}>Recettes</a>
-      <a href="/categories" class:active={$page.url.pathname === '/categories'}>Catégories</a>
+  </div>
+  
+  <div class="nav-center">
+    <SearchBar />
+  </div>
+  
+  <div class="nav-right">
+    <ul>
+      <li class:active={$page.url.pathname === '/categories'}>
+        <a href="/categories">Catégories</a>
+      </li>
+      <li class:active={$page.url.pathname === '/recettes/add'}>
       <a href="/recettes/add" class:active={$page.url.pathname === '/add'}>Ajouter une recette</a>
-    </div>
-
-    <div class="search-bar">
-      <input type="text" placeholder="Rechercher une recette..." />
-      <button type="submit">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="11" cy="11" r="8"/>
-          <line x1="21" y1="21" x2="16.65" y2="16.65"/>
-        </svg>
-      </button>
-    </div>
+      </li>
+    </ul>
   </div>
 </nav>
 
 <style>
-  .navbar {
-    background-color: #ffffff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  nav {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
+    background: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 2rem;
     z-index: 1000;
+    height: 60px;
   }
 
-  .nav-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 1rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  .nav-left {
+    flex: 0 0 200px;
+  }
+
+  .nav-center {
+    flex: 0 0 400px;
+    margin: 0 2rem;
+  }
+
+  .nav-right {
+    flex: 0 0 auto;
   }
 
   .logo {
     font-size: 1.5rem;
     font-weight: bold;
-    color: #2c3e50;
     text-decoration: none;
+    color: #0891b2;
   }
 
-  .nav-links {
+  ul {
     display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
     gap: 2rem;
   }
 
-  .nav-links a {
-    color: #2c3e50;
+  li a {
     text-decoration: none;
+    color: #4b5563;
     font-weight: 500;
-    transition: color 0.3s ease;
+    transition: color 0.2s ease;
   }
 
-  .nav-links a:hover {
-    color: #3498db;
+  li a:hover {
+    color: #0891b2;
   }
 
-  .nav-links a.active {
-    color: #3498db;
-  }
-
-  .search-bar {
-    display: flex;
-    align-items: center;
-    background-color: #f5f5f5;
-    border-radius: 20px;
-    padding: 0.5rem;
-  }
-
-  .search-bar input {
-    border: none;
-    background: none;
-    padding: 0.25rem 0.5rem;
-    outline: none;
-    width: 200px;
-  }
-
-  .search-bar button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0.25rem;
-    color: #2c3e50;
-    display: flex;
-    align-items: center;
-  }
-
-  .search-bar button:hover {
-    color: #3498db;
+  .active a {
+    color: #0891b2;
+    font-weight: 600;
   }
 
   @media (max-width: 768px) {
-    .nav-content {
+    nav {
+      padding: 0.75rem 1rem;
+      height: auto;
       flex-direction: column;
       gap: 1rem;
     }
 
-    .nav-links {
+    .nav-left, .nav-center, .nav-right {
+      width: 100%;
+      margin: 0;
+    }
+
+    .nav-right ul {
+      justify-content: center;
       gap: 1rem;
-    }
-
-    .search-bar {
-      width: 100%;
-    }
-
-    .search-bar input {
-      width: 100%;
     }
   }
 </style>

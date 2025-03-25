@@ -1,7 +1,7 @@
 <script lang="ts">
   import Form from "$lib/components/form.svelte";
   import { recetteAdd } from "$lib/stores/recetteStore";
-  import type { RecetteAdd } from "$lib/types/recettes";
+  import type { RecetteAdd } from "$lib/types/recette";
 
   let recette: RecetteAdd = {
     nom: '',
