@@ -1,5 +1,5 @@
 <script>
-    import { ingredients } from "$lib/stores/useless";
+    import { ingredients } from "$lib/stores/ingredientStore";
 </script>
 
 <div>

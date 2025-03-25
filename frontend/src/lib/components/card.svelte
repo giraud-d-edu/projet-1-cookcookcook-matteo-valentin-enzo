@@ -1,22 +1,16 @@
 <script>
-  export let titre = "Titre par défaut";
+  export let nom = "nom de la recette";
   export let description = "Description par défaut";
   export let image = "";
 </script>
 
 <div class="card">
   {#if image}
-    <img src={image} alt={titre} />
+    <img src={image} alt={nom} />
   {/if}
   <div class="content">
-    <h2>{titre}</h2>
+    <h2>{nom}</h2>
     <p>{description}</p>
-    <div class="actions">
-      <slot name="actions">
-        <!-- Contenu par défaut si aucune action n'est fournie -->
-        <button>Voir plus</button>
-      </slot>
-    </div>
   </div>
 </div>
 
