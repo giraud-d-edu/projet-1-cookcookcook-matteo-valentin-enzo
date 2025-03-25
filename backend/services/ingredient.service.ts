@@ -26,6 +26,10 @@ export const updateIngredientService = async (ingredient: Ingredient): Promise<I
     return await ingredientRepository.updateIngredient(ingredient);
 };
 
-export const deleteIngredientService = async (id: string): Promise<boolean> => {
+export const deleteIngredientService = async (id: string): Promise<void> => {
+    const idexist = await getIngredientByIdService(id);
+    if (!idexist) {
+        throw new NotFoundException('No id found for this ingredient');
+    }
     return await ingredientRepository.deleteIngredient(id);
 };

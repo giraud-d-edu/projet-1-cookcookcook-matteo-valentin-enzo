@@ -1,202 +1,152 @@
 [
     {
-        "id": "ing-001",
         "nom": "Farine"
     },
     {
-        "id": "ing-002",
         "nom": "Sucre"
     },
     {
-        "id": "ing-003",
         "nom": "Sel"
     },
     {
-        "id": "ing-004",
         "nom": "Poivre"
     },
     {
-        "id": "ing-005",
         "nom": "Beurre"
     },
     {
-        "id": "ing-006",
         "nom": "Huile d'olive"
     },
     {
-        "id": "ing-007",
         "nom": "Lait"
     },
     {
-        "id": "ing-008",
         "nom": "Crème fraîche"
     },
     {
-        "id": "ing-009",
         "nom": "Œufs"
     },
     {
-        "id": "ing-010",
         "nom": "Tomates"
     },
     {
-        "id": "ing-011",
         "nom": "Oignons"
     },
     {
-        "id": "ing-012",
         "nom": "Ail"
     },
     {
-        "id": "ing-013",
         "nom": "Carottes"
     },
     {
-        "id": "ing-014",
         "nom": "Pommes de terre"
     },
     {
-        "id": "ing-015",
         "nom": "Courgettes"
     },
     {
-        "id": "ing-016",
         "nom": "Aubergines"
     },
     {
-        "id": "ing-017",
         "nom": "Poivrons"
     },
     {
-        "id": "ing-018",
         "nom": "Champignons"
     },
     {
-        "id": "ing-019",
         "nom": "Poulet"
     },
     {
-        "id": "ing-020",
         "nom": "Bœuf"
     },
     {
-        "id": "ing-021",
         "nom": "Porc"
     },
     {
-        "id": "ing-022",
         "nom": "Saumon"
     },
     {
-        "id": "ing-023",
         "nom": "Thon"
     },
     {
-        "id": "ing-024",
         "nom": "Crevettes"
     },
     {
-        "id": "ing-025",
         "nom": "Fromage râpé"
     },
     {
-        "id": "ing-026",
         "nom": "Emmental"
     },
     {
-        "id": "ing-027",
         "nom": "Comté"
     },
     {
-        "id": "ing-028",
         "nom": "Chèvre"
     },
     {
-        "id": "ing-029",
         "nom": "Roquefort"
     },
     {
-        "id": "ing-030",
         "nom": "Parmesan"
     },
     {
-        "id": "ing-031",
         "nom": "Pâtes"
     },
     {
-        "id": "ing-032",
         "nom": "Riz"
     },
     {
-        "id": "ing-033",
         "nom": "Lentilles"
     },
     {
-        "id": "ing-034",
         "nom": "Pois chiches"
     },
     {
-        "id": "ing-035",
         "nom": "Haricots rouges"
     },
     {
-        "id": "ing-036",
         "nom": "Pommes"
     },
     {
-        "id": "ing-037",
         "nom": "Poires"
     },
     {
-        "id": "ing-038",
         "nom": "Fraises"
     },
     {
-        "id": "ing-039",
         "nom": "Bananes"
     },
     {
-        "id": "ing-040",
         "nom": "Citrons"
     },
     {
-        "id": "ing-041",
         "nom": "Chocolat"
     },
     {
-        "id": "ing-042",
         "nom": "Vanille"
     },
     {
-        "id": "ing-043",
         "nom": "Cannelle"
     },
     {
-        "id": "ing-044",
         "nom": "Basilic"
     },
     {
-        "id": "ing-045",
         "nom": "Thym"
     },
     {
-        "id": "ing-046",
         "nom": "Romarin"
     },
     {
-        "id": "ing-047",
         "nom": "Persil"
     },
     {
-        "id": "ing-048",
         "nom": "Coriandre"
     },
     {
-        "id": "ing-049",
         "nom": "Levure chimique"
     },
     {
-        "id": "ing-050",
         "nom": "Levure de boulanger"
     }
 ]
