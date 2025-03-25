@@ -1,50 +1,44 @@
 <script>
-  import Card from '$lib/components/card.svelte';
-  
-  const produits = [
-    {
-      id: 1,
-      titre: "Produit 1",
-      description: "Description du produit 1",
-      image: "https://picsum.photos/300/200?random=1"
-    },
-    {
-      id: 2,
-      titre: "Produit 2",
-      description: "Description du produit 2",
-      image: "https://picsum.photos/300/200?random=2"
-    },
-    {
-      id: 3,
-      titre: "Produit 3",
-      description: "Description du produit 3",
-      image: "https://picsum.photos/300/200?random=3"
-    }
-  ];
+	import Card from '$lib/components/card.svelte';
+	import { recettes } from '$lib/stores/recetteStore';
+  import { timeToStringConverter } from '$lib/utils/timeConverter';
 </script>
 
-<h1>Nos produits</h1>
+<h1>Nos Recettes</h1>
 
 <div class="grid">
-  {#each produits as produit}
-    <Card 
-      titre={produit.titre} 
-      description={produit.description} 
-      image={produit.image}
-    >
-      <svelte:fragment slot="actions">
-        <a href={`/produit/${produit.id}`}>
-          <button>Voir détails</button>
-        </a>
-      </svelte:fragment>
-    </Card>
-  {/each}
+	{#each $recettes as recette}
+		<a href={`/recettes/${recette.id}`}>
+			<Card
+				nom={recette.nom}
+				description={recette.description}
+				image="https://picsum.photos/300/200/?random={recette.id}"
+        tempsPreparation={timeToStringConverter(recette.tempsPreparation)}
+			></Card>
+		</a>
+	{/each}
 </div>
 
 <style>
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1em;
+	.grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+		gap: 1em;
+	}
+  a{
+    text-decoration: none;
+    color: black;
+  }
+	a:link {
+		color: black;
+	}
+	a:hover {
+		color: gold;
+	}
+	a:visited {
+		display: none;
+	}
+  a:active {
+    color: red;
   }
 </style>
