@@ -1,8 +1,4 @@
-export interface Ingredient {
-	nom: string;
-	quantite: number;
-	unite: string;
-}
+import type { Ingredient } from './ingredients';
 
 export interface Recette {
 	nom: string;
