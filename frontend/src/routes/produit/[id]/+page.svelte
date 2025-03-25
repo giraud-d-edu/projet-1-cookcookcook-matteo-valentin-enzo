@@ -1,19 +1,18 @@
 <script lang="ts">
   import { page } from '$app/stores';
   import { onMount } from 'svelte';
-  import { loadRecette, type Recette } from './recetteStore';
-  import { retourPage } from './recetteStore';
+  import { recetteStore } from '$lib/stores/recetteStore';
+  import { retourPage } from '$lib/services/recetteService';
   import './styles.css';
 
   const id = $page.params.id;
-  let recette: Recette | null = null;
-  let error: string | null = null;
 
-  onMount(async () => {
-    const result = await loadRecette(id);
-    recette = result.recette;
-    error = result.error;
+  onMount(() => {
+    recetteStore.loadRecette(fetch, id);
+    return () => recetteStore.reset();
   });
+
+  $: ({ recette, error, loading } = $recetteStore);
 </script>
 
 <main>
@@ -21,7 +20,11 @@
     ← Retour
   </button>
 
-  {#if error}
+  {#if loading}
+    <div class="loading">
+      <p>Chargement de la recette...</p>
+    </div>
+  {:else if error}
     <div class="error">
       <p>{error}</p>
     </div>
@@ -63,10 +66,6 @@
           <p>{recette.instructions}</p>
         {/if}
       </div>
-    </div>
-  {:else}
-    <div class="loading">
-      <p>Chargement de la recette...</p>
     </div>
   {/if}
 </main>
