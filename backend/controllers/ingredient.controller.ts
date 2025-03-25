@@ -4,8 +4,6 @@ import {
     fromDtoToIngredient,
     fromIngredientCandidateDtoToIngredientCandidate,
     fromIngredientToDto,
-    IngredientCandidateDto,
-    IngredientDto,
     ingredientCandidateDtoSchema,
 } from './dtos/ingredient.dto.ts';
 import { Ingredient } from '../services/models/ingredient.model.ts';
@@ -27,8 +25,8 @@ async function getAllIngredientsController(ctx: Context) {
         );
     } catch (error) {
         if (error instanceof NotFoundException) {
-            ctx.response.status = 404;
-            ctx.response.body = { error: 'Ingredients not found' };
+            ctx.response.status = 200;
+            ctx.response.body = [];
         } else {
             console.error('Error getting ingredients:', error);
             ctx.response.status = 500;
@@ -51,8 +49,8 @@ async function getIngredientByIdController(ctx: RouterContext<'/ingredients/:id'
         ctx.response.body = fromIngredientToDto(await ingredientService.getIngredientByIdService(idParam));
     } catch (error) {
         if (error instanceof NotFoundException) {
-            ctx.response.status = 404;
-            ctx.response.body = { error: 'Ingredient not found' };
+            ctx.response.status = 200;
+            ctx.response.body = [];
         } else {
             console.error('Error getting ingredient by ID:', error);
             ctx.response.status = 500;
@@ -73,8 +71,8 @@ async function getIngredientByNomController(ctx: RouterContext<'/ingredients/nom
         ctx.response.body = fromIngredientToDto(await ingredientService.getIngredientByNomService(nomParams));
     } catch (error) {
         if (error instanceof NotFoundException) {
-            ctx.response.status = 404;
-            ctx.response.body = { error: 'Ingredient not found' };
+            ctx.response.status = 200;
+            ctx.response.body = [];
         } else {
             console.error('Error getting ingredient by ID:', error);
             ctx.response.status = 500;
@@ -85,30 +83,18 @@ async function getIngredientByNomController(ctx: RouterContext<'/ingredients/nom
 
 async function createIngredientController(ctx: Context) {
     try {
-        if (!ctx.request.hasBody) {
-            ctx.response.status = 400;
-            ctx.response.body = { error: 'Request body is required' };
-            return;
-        }
         const body = await ctx.request.body({ type: 'json' }).value;
-        const { nom } = body as IngredientCandidateDto;
 
-        if (!nom) {
+        const validationResult = ingredientCandidateDtoSchema.safeParse(body);
+        if (!validationResult.success) {
             ctx.response.status = 400;
-            ctx.response.body = { error: 'Missing required fields (nom)' };
+            ctx.response.body = {
+                error: "Invalid input",
+                details: validationResult.error.format(),
+            };
             return;
         }
-
-        try {
-            ingredientCandidateDtoSchema.parse({ nom });
-        } catch {
-            ctx.response.status = 400;
-            ctx.response.body = { error: 'Your name is incorrect, must be between 3 and 50 characters long' };
-            return;
-        }
-
-        const ingredientCandidateDto: IngredientCandidateDto = { nom };
-        const ingredientCandidate = fromIngredientCandidateDtoToIngredientCandidate(ingredientCandidateDto);
+        const ingredientCandidate = fromIngredientCandidateDtoToIngredientCandidate(validationResult.data);
         ctx.response.status = 201;
         ctx.response.body = fromIngredientToDto(await ingredientService.createIngredientService(ingredientCandidate));
     } catch (e) {
@@ -119,41 +105,35 @@ async function createIngredientController(ctx: Context) {
 }
 
 async function updateIngredientController(ctx: RouterContext<'/ingredients/:id'>) {
-    if (!ctx.request.hasBody) {
-        ctx.response.status = 400;
-        ctx.response.body = { error: 'Request body is required' };
-        return;
-    }
-    const body = await ctx.request.body({ type: 'json' }).value;
-    const id = ctx.params.id;
-    const { nom } = body as IngredientDto;
-
-    if (!id || !nom) {
-        ctx.response.status = 400;
-        ctx.response.body = { error: 'Missing required fields for update (nom)' };
-        return;
-    }
-
     try {
-        ingredientCandidateDtoSchema.parse({ nom });
-    } catch {
-        ctx.response.status = 400;
-        ctx.response.body = { error: 'Your name is incorrect, must be between 3 and 50 characters long' };
-        return;
-    }
+        const body = await ctx.request.body({ type: 'json' }).value;
 
-    const ingredientDto: IngredientDto = { id, nom };
-    const ingredient: Ingredient = fromDtoToIngredient(ingredientDto);
-    const updatedIngredientDto = fromIngredientToDto(await ingredientService.updateIngredientService(ingredient));
-    if (updatedIngredientDto) {
+        const validationResult = ingredientCandidateDtoSchema.safeParse(body);
+        if (!validationResult.success) {
+            ctx.response.status = 400;
+            ctx.response.body = {
+                error: "Invalid input",
+                details: validationResult.error.format(),
+            };
+            return;
+        }
+
+        const ingredientCandidate = fromIngredientCandidateDtoToIngredientCandidate(validationResult.data);
+        const ingredient: Ingredient = fromDtoToIngredient(ingredientCandidate);
         ctx.response.status = 200;
         ctx.response.body = {
             message: 'Ingredient updated successfully',
-            body: updatedIngredientDto,
+            body: fromIngredientToDto(await ingredientService.updateIngredientService(ingredient)),
         };
-    } else {
-        ctx.response.status = 404;
-        ctx.response.body = { error: 'Ingredient not found' };
+    } catch (error) {
+        if (error instanceof NotFoundException) {
+            ctx.response.status = 404;
+            ctx.response.body = { error: 'Ingredient not found' };
+        } else {
+            console.error('Error updating ingredient:', error);
+            ctx.response.status = 500;
+            ctx.response.body = { error: 'Internal server error' };
+        }
     }
 }
 

@@ -1,58 +1,3 @@
-// Fichier ingredients.json
-[
-  { "id": "ing-001", "nom": "Farine" },
-  { "id": "ing-002", "nom": "Sucre" },
-  { "id": "ing-003", "nom": "Sel" },
-  { "id": "ing-004", "nom": "Poivre" },
-  { "id": "ing-005", "nom": "Beurre" },
-  { "id": "ing-006", "nom": "Huile d'olive" },
-  { "id": "ing-007", "nom": "Lait" },
-  { "id": "ing-008", "nom": "Crème fraîche" },
-  { "id": "ing-009", "nom": "Œufs" },
-  { "id": "ing-010", "nom": "Tomates" },
-  { "id": "ing-011", "nom": "Oignons" },
-  { "id": "ing-012", "nom": "Ail" },
-  { "id": "ing-013", "nom": "Carottes" },
-  { "id": "ing-014", "nom": "Pommes de terre" },
-  { "id": "ing-015", "nom": "Courgettes" },
-  { "id": "ing-016", "nom": "Aubergines" },
-  { "id": "ing-017", "nom": "Poivrons" },
-  { "id": "ing-018", "nom": "Champignons" },
-  { "id": "ing-019", "nom": "Poulet" },
-  { "id": "ing-020", "nom": "Bœuf" },
-  { "id": "ing-021", "nom": "Porc" },
-  { "id": "ing-022", "nom": "Saumon" },
-  { "id": "ing-023", "nom": "Thon" },
-  { "id": "ing-024", "nom": "Crevettes" },
-  { "id": "ing-025", "nom": "Fromage râpé" },
-  { "id": "ing-026", "nom": "Emmental" },
-  { "id": "ing-027", "nom": "Comté" },
-  { "id": "ing-028", "nom": "Chèvre" },
-  { "id": "ing-029", "nom": "Roquefort" },
-  { "id": "ing-030", "nom": "Parmesan" },
-  { "id": "ing-031", "nom": "Pâtes" },
-  { "id": "ing-032", "nom": "Riz" },
-  { "id": "ing-033", "nom": "Lentilles" },
-  { "id": "ing-034", "nom": "Pois chiches" },
-  { "id": "ing-035", "nom": "Haricots rouges" },
-  { "id": "ing-036", "nom": "Pommes" },
-  { "id": "ing-037", "nom": "Poires" },
-  { "id": "ing-038", "nom": "Fraises" },
-  { "id": "ing-039", "nom": "Bananes" },
-  { "id": "ing-040", "nom": "Citrons" },
-  { "id": "ing-041", "nom": "Chocolat" },
-  { "id": "ing-042", "nom": "Vanille" },
-  { "id": "ing-043", "nom": "Cannelle" },
-  { "id": "ing-044", "nom": "Basilic" },
-  { "id": "ing-045", "nom": "Thym" },
-  { "id": "ing-046", "nom": "Romarin" },
-  { "id": "ing-047", "nom": "Persil" },
-  { "id": "ing-048", "nom": "Coriandre" },
-  { "id": "ing-049", "nom": "Levure chimique" },
-  { "id": "ing-050", "nom": "Levure de boulanger" }
-]
-
-// Fichier recettes.json
 [
   {
     "id": "rec-001",
@@ -63,13 +8,34 @@
     "tempsPreparation": 45,
     "origine": "France",
     "ingredients": [
-      { "id": "ing-001", "nom": "Farine" },
-      { "id": "ing-005", "nom": "Beurre" },
-      { "id": "ing-003", "nom": "Sel" },
-      { "id": "ing-009", "nom": "Œufs" },
-      { "id": "ing-008", "nom": "Crème fraîche" },
-      { "id": "ing-021", "nom": "Porc" },
-      { "id": "ing-004", "nom": "Poivre" }
+      {
+        "id": "ing-001",
+        "nom": "Farine"
+      },
+      {
+        "id": "ing-005",
+        "nom": "Beurre"
+      },
+      {
+        "id": "ing-003",
+        "nom": "Sel"
+      },
+      {
+        "id": "ing-009",
+        "nom": "Œufs"
+      },
+      {
+        "id": "ing-008",
+        "nom": "Crème fraîche"
+      },
+      {
+        "id": "ing-021",
+        "nom": "Porc"
+      },
+      {
+        "id": "ing-004",
+        "nom": "Poivre"
+      }
     ]
   },
   {
@@ -81,16 +47,46 @@
     "tempsPreparation": 60,
     "origine": "France",
     "ingredients": [
-      { "id": "ing-010", "nom": "Tomates" },
-      { "id": "ing-011", "nom": "Oignons" },
-      { "id": "ing-012", "nom": "Ail" },
-      { "id": "ing-015", "nom": "Courgettes" },
-      { "id": "ing-016", "nom": "Aubergines" },
-      { "id": "ing-017", "nom": "Poivrons" },
-      { "id": "ing-006", "nom": "Huile d'olive" },
-      { "id": "ing-003", "nom": "Sel" },
-      { "id": "ing-004", "nom": "Poivre" },
-      { "id": "ing-045", "nom": "Thym" }
+      {
+        "id": "ing-010",
+        "nom": "Tomates"
+      },
+      {
+        "id": "ing-011",
+        "nom": "Oignons"
+      },
+      {
+        "id": "ing-012",
+        "nom": "Ail"
+      },
+      {
+        "id": "ing-015",
+        "nom": "Courgettes"
+      },
+      {
+        "id": "ing-016",
+        "nom": "Aubergines"
+      },
+      {
+        "id": "ing-017",
+        "nom": "Poivrons"
+      },
+      {
+        "id": "ing-006",
+        "nom": "Huile d'olive"
+      },
+      {
+        "id": "ing-003",
+        "nom": "Sel"
+      },
+      {
+        "id": "ing-004",
+        "nom": "Poivre"
+      },
+      {
+        "id": "ing-045",
+        "nom": "Thym"
+      }
     ]
   },
   {
@@ -102,11 +98,26 @@
     "tempsPreparation": 50,
     "origine": "France",
     "ingredients": [
-      { "id": "ing-001", "nom": "Farine" },
-      { "id": "ing-005", "nom": "Beurre" },
-      { "id": "ing-002", "nom": "Sucre" },
-      { "id": "ing-036", "nom": "Pommes" },
-      { "id": "ing-043", "nom": "Cannelle" }
+      {
+        "id": "ing-001",
+        "nom": "Farine"
+      },
+      {
+        "id": "ing-005",
+        "nom": "Beurre"
+      },
+      {
+        "id": "ing-002",
+        "nom": "Sucre"
+      },
+      {
+        "id": "ing-036",
+        "nom": "Pommes"
+      },
+      {
+        "id": "ing-043",
+        "nom": "Cannelle"
+      }
     ]
   },
   {
@@ -118,14 +129,38 @@
     "tempsPreparation": 90,
     "origine": "France",
     "ingredients": [
-      { "id": "ing-014", "nom": "Pommes de terre" },
-      { "id": "ing-007", "nom": "Lait" },
-      { "id": "ing-008", "nom": "Crème fraîche" },
-      { "id": "ing-012", "nom": "Ail" },
-      { "id": "ing-003", "nom": "Sel" },
-      { "id": "ing-004", "nom": "Poivre" },
-      { "id": "ing-026", "nom": "Emmental" },
-      { "id": "ing-005", "nom": "Beurre" }
+      {
+        "id": "ing-014",
+        "nom": "Pommes de terre"
+      },
+      {
+        "id": "ing-007",
+        "nom": "Lait"
+      },
+      {
+        "id": "ing-008",
+        "nom": "Crème fraîche"
+      },
+      {
+        "id": "ing-012",
+        "nom": "Ail"
+      },
+      {
+        "id": "ing-003",
+        "nom": "Sel"
+      },
+      {
+        "id": "ing-004",
+        "nom": "Poivre"
+      },
+      {
+        "id": "ing-026",
+        "nom": "Emmental"
+      },
+      {
+        "id": "ing-005",
+        "nom": "Beurre"
+      }
     ]
   },
   {
@@ -137,12 +172,30 @@
     "tempsPreparation": 60,
     "origine": "France",
     "ingredients": [
-      { "id": "ing-011", "nom": "Oignons" },
-      { "id": "ing-005", "nom": "Beurre" },
-      { "id": "ing-001", "nom": "Farine" },
-      { "id": "ing-003", "nom": "Sel" },
-      { "id": "ing-004", "nom": "Poivre" },
-      { "id": "ing-027", "nom": "Comté" }
+      {
+        "id": "ing-011",
+        "nom": "Oignons"
+      },
+      {
+        "id": "ing-005",
+        "nom": "Beurre"
+      },
+      {
+        "id": "ing-001",
+        "nom": "Farine"
+      },
+      {
+        "id": "ing-003",
+        "nom": "Sel"
+      },
+      {
+        "id": "ing-004",
+        "nom": "Poivre"
+      },
+      {
+        "id": "ing-027",
+        "nom": "Comté"
+      }
     ]
   },
   {
@@ -154,10 +207,22 @@
     "tempsPreparation": 30,
     "origine": "France",
     "ingredients": [
-      { "id": "ing-041", "nom": "Chocolat" },
-      { "id": "ing-009", "nom": "Œufs" },
-      { "id": "ing-002", "nom": "Sucre" },
-      { "id": "ing-003", "nom": "Sel" }
+      {
+        "id": "ing-041",
+        "nom": "Chocolat"
+      },
+      {
+        "id": "ing-009",
+        "nom": "Œufs"
+      },
+      {
+        "id": "ing-002",
+        "nom": "Sucre"
+      },
+      {
+        "id": "ing-003",
+        "nom": "Sel"
+      }
     ]
   },
   {
@@ -169,13 +234,34 @@
     "tempsPreparation": 40,
     "origine": "France",
     "ingredients": [
-      { "id": "ing-010", "nom": "Tomates" },
-      { "id": "ing-009", "nom": "Œufs" },
-      { "id": "ing-014", "nom": "Pommes de terre" },
-      { "id": "ing-023", "nom": "Thon" },
-      { "id": "ing-006", "nom": "Huile d'olive" },
-      { "id": "ing-003", "nom": "Sel" },
-      { "id": "ing-004", "nom": "Poivre" }
+      {
+        "id": "ing-010",
+        "nom": "Tomates"
+      },
+      {
+        "id": "ing-009",
+        "nom": "Œufs"
+      },
+      {
+        "id": "ing-014",
+        "nom": "Pommes de terre"
+      },
+      {
+        "id": "ing-023",
+        "nom": "Thon"
+      },
+      {
+        "id": "ing-006",
+        "nom": "Huile d'olive"
+      },
+      {
+        "id": "ing-003",
+        "nom": "Sel"
+      },
+      {
+        "id": "ing-004",
+        "nom": "Poivre"
+      }
     ]
   },
   {
@@ -187,14 +273,38 @@
     "tempsPreparation": 180,
     "origine": "France",
     "ingredients": [
-      { "id": "ing-020", "nom": "Bœuf" },
-      { "id": "ing-021", "nom": "Porc" },
-      { "id": "ing-001", "nom": "Farine" },
-      { "id": "ing-011", "nom": "Oignons" },
-      { "id": "ing-013", "nom": "Carottes" },
-      { "id": "ing-018", "nom": "Champignons" },
-      { "id": "ing-003", "nom": "Sel" },
-      { "id": "ing-004", "nom": "Poivre" }
+      {
+        "id": "ing-020",
+        "nom": "Bœuf"
+      },
+      {
+        "id": "ing-021",
+        "nom": "Porc"
+      },
+      {
+        "id": "ing-001",
+        "nom": "Farine"
+      },
+      {
+        "id": "ing-011",
+        "nom": "Oignons"
+      },
+      {
+        "id": "ing-013",
+        "nom": "Carottes"
+      },
+      {
+        "id": "ing-018",
+        "nom": "Champignons"
+      },
+      {
+        "id": "ing-003",
+        "nom": "Sel"
+      },
+      {
+        "id": "ing-004",
+        "nom": "Poivre"
+      }
     ]
   },
   {
@@ -206,12 +316,30 @@
     "tempsPreparation": 90,
     "origine": "France",
     "ingredients": [
-      { "id": "ing-001", "nom": "Farine" },
-      { "id": "ing-009", "nom": "Œufs" },
-      { "id": "ing-007", "nom": "Lait" },
-      { "id": "ing-002", "nom": "Sucre" },
-      { "id": "ing-003", "nom": "Sel" },
-      { "id": "ing-005", "nom": "Beurre" }
+      {
+        "id": "ing-001",
+        "nom": "Farine"
+      },
+      {
+        "id": "ing-009",
+        "nom": "Œufs"
+      },
+      {
+        "id": "ing-007",
+        "nom": "Lait"
+      },
+      {
+        "id": "ing-002",
+        "nom": "Sucre"
+      },
+      {
+        "id": "ing-003",
+        "nom": "Sel"
+      },
+      {
+        "id": "ing-005",
+        "nom": "Beurre"
+      }
     ]
   },
   {
@@ -223,14 +351,38 @@
     "tempsPreparation": 40,
     "origine": "Italie",
     "ingredients": [
-      { "id": "ing-032", "nom": "Riz" },
-      { "id": "ing-018", "nom": "Champignons" },
-      { "id": "ing-011", "nom": "Oignons" },
-      { "id": "ing-006", "nom": "Huile d'olive" },
-      { "id": "ing-030", "nom": "Parmesan" },
-      { "id": "ing-005", "nom": "Beurre" },
-      { "id": "ing-003", "nom": "Sel" },
-      { "id": "ing-004", "nom": "Poivre" }
+      {
+        "id": "ing-032",
+        "nom": "Riz"
+      },
+      {
+        "id": "ing-018",
+        "nom": "Champignons"
+      },
+      {
+        "id": "ing-011",
+        "nom": "Oignons"
+      },
+      {
+        "id": "ing-006",
+        "nom": "Huile d'olive"
+      },
+      {
+        "id": "ing-030",
+        "nom": "Parmesan"
+      },
+      {
+        "id": "ing-005",
+        "nom": "Beurre"
+      },
+      {
+        "id": "ing-003",
+        "nom": "Sel"
+      },
+      {
+        "id": "ing-004",
+        "nom": "Poivre"
+      }
     ]
   },
   {
@@ -242,14 +394,38 @@
     "tempsPreparation": 45,
     "origine": "Liban",
     "ingredients": [
-      { "id": "ing-032", "nom": "Riz" },
-      { "id": "ing-010", "nom": "Tomates" },
-      { "id": "ing-011", "nom": "Oignons" },
-      { "id": "ing-040", "nom": "Citrons" },
-      { "id": "ing-006", "nom": "Huile d'olive" },
-      { "id": "ing-047", "nom": "Persil" },
-      { "id": "ing-003", "nom": "Sel" },
-      { "id": "ing-004", "nom": "Poivre" }
+      {
+        "id": "ing-032",
+        "nom": "Riz"
+      },
+      {
+        "id": "ing-010",
+        "nom": "Tomates"
+      },
+      {
+        "id": "ing-011",
+        "nom": "Oignons"
+      },
+      {
+        "id": "ing-040",
+        "nom": "Citrons"
+      },
+      {
+        "id": "ing-006",
+        "nom": "Huile d'olive"
+      },
+      {
+        "id": "ing-047",
+        "nom": "Persil"
+      },
+      {
+        "id": "ing-003",
+        "nom": "Sel"
+      },
+      {
+        "id": "ing-004",
+        "nom": "Poivre"
+      }
     ]
   },
   {
@@ -261,9 +437,18 @@
     "tempsPreparation": 30,
     "origine": "Italie",
     "ingredients": [
-      { "id": "ing-009", "nom": "Œufs" },
-      { "id": "ing-002", "nom": "Sucre" },
-      { "id": "ing-041", "nom": "Chocolat" }
+      {
+        "id": "ing-009",
+        "nom": "Œufs"
+      },
+      {
+        "id": "ing-002",
+        "nom": "Sucre"
+      },
+      {
+        "id": "ing-041",
+        "nom": "Chocolat"
+      }
     ]
   },
   {
@@ -275,15 +460,42 @@
     "tempsPreparation": 120,
     "origine": "Maghreb",
     "ingredients": [
-      { "id": "ing-032", "nom": "Riz" },
-      { "id": "ing-019", "nom": "Poulet" },
-      { "id": "ing-013", "nom": "Carottes" },
-      { "id": "ing-011", "nom": "Oignons" },
-      { "id": "ing-014", "nom": "Pommes de terre" },
-      { "id": "ing-015", "nom": "Courgettes" },
-      { "id": "ing-006", "nom": "Huile d'olive" },
-      { "id": "ing-003", "nom": "Sel" },
-      { "id": "ing-004", "nom": "Poivre" }
+      {
+        "id": "ing-032",
+        "nom": "Riz"
+      },
+      {
+        "id": "ing-019",
+        "nom": "Poulet"
+      },
+      {
+        "id": "ing-013",
+        "nom": "Carottes"
+      },
+      {
+        "id": "ing-011",
+        "nom": "Oignons"
+      },
+      {
+        "id": "ing-014",
+        "nom": "Pommes de terre"
+      },
+      {
+        "id": "ing-015",
+        "nom": "Courgettes"
+      },
+      {
+        "id": "ing-006",
+        "nom": "Huile d'olive"
+      },
+      {
+        "id": "ing-003",
+        "nom": "Sel"
+      },
+      {
+        "id": "ing-004",
+        "nom": "Poivre"
+      }
     ]
   },
   {
@@ -295,10 +507,22 @@
     "tempsPreparation": 60,
     "origine": "France",
     "ingredients": [
-      { "id": "ing-036", "nom": "Pommes" },
-      { "id": "ing-002", "nom": "Sucre" },
-      { "id": "ing-005", "nom": "Beurre" },
-      { "id": "ing-001", "nom": "Farine" }
+      {
+        "id": "ing-036",
+        "nom": "Pommes"
+      },
+      {
+        "id": "ing-002",
+        "nom": "Sucre"
+      },
+      {
+        "id": "ing-005",
+        "nom": "Beurre"
+      },
+      {
+        "id": "ing-001",
+        "nom": "Farine"
+      }
     ]
   },
   {
@@ -310,10 +534,22 @@
     "tempsPreparation": 20,
     "origine": "France",
     "ingredients": [
-      { "id": "ing-005", "nom": "Beurre" },
-      { "id": "ing-021", "nom": "Porc" },
-      { "id": "ing-026", "nom": "Emmental" },
-      { "id": "ing-008", "nom": "Crème fraîche" }
+      {
+        "id": "ing-005",
+        "nom": "Beurre"
+      },
+      {
+        "id": "ing-021",
+        "nom": "Porc"
+      },
+      {
+        "id": "ing-026",
+        "nom": "Emmental"
+      },
+      {
+        "id": "ing-008",
+        "nom": "Crème fraîche"
+      }
     ]
   }
 ]

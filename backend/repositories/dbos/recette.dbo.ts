@@ -14,10 +14,10 @@ export interface RecetteDbo {
 }
 
 export function fromRecetteDboToRecette(dbo: RecetteDbo): Recette {
-    return {
-        ...dbo,
-        id: dbo._id.toString(),
-    };
+    const recette = JSON.parse(JSON.stringify(dbo));
+    delete recette._id;
+    recette.id = dbo._id.toString();
+    return recette;
 }
 
 export function fromRecetteToRecetteDbo(recette: Recette): RecetteDbo {
