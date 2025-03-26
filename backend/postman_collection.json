@@ -57,22 +57,19 @@
                     "request": {
                         "method": "GET",
                         "url": {
-                            "raw": "http://localhost:8000/ingredients/nom/{{nom}}",
+                            "raw": "http://localhost:8000/ingredients?nom={{nom}}",
                             "protocol": "http",
                             "host": [
                                 "localhost"
                             ],
                             "port": "8000",
                             "path": [
-                                "ingredients",
-                                "nom",
-                                "{{nom}}"
+                                "ingredients"
                             ],
-                            "variable": [
+                            "query": [
                                 {
                                     "key": "nom",
-                                    "value": "",
-                                    "description": "Nom de l'ingrédient à récupérer"
+                                    "value": "{{nom}}"
                                 }
                             ]
                         }
@@ -227,22 +224,19 @@
                     "request": {
                         "method": "GET",
                         "url": {
-                            "raw": "http://localhost:8000/recettes/nom/{{nom}}",
+                            "raw": "http://localhost:8000/recettes?nom={{nom}}",
                             "protocol": "http",
                             "host": [
                                 "localhost"
                             ],
                             "port": "8000",
                             "path": [
-                                "recettes",
-                                "nom",
-                                "{{nom}}"
+                                "recettes"
                             ],
-                            "variable": [
+                            "query": [
                                 {
                                     "key": "nom",
-                                    "value": "",
-                                    "description": "Nom de la recette à récupérer"
+                                    "value": "{{nom}}"
                                 }
                             ]
                         }
@@ -254,22 +248,19 @@
                     "request": {
                         "method": "GET",
                         "url": {
-                            "raw": "http://localhost:8000/recettes/categories/{{categorie}}",
+                            "raw": "http://localhost:8000/recettes?categorie={{categorie}}",
                             "protocol": "http",
                             "host": [
                                 "localhost"
                             ],
                             "port": "8000",
                             "path": [
-                                "recettes",
-                                "categories",
-                                "{{categorie}}"
+                                "recettes"
                             ],
-                            "variable": [
+                            "query": [
                                 {
-                                    "key": "categories",
-                                    "value": "",
-                                    "description": "Categorie de la recette à récupérer"
+                                    "key": "categorie",
+                                    "value": "{{categorie}}"
                                 }
                             ]
                         }

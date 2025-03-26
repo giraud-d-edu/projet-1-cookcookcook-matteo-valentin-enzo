@@ -2,10 +2,11 @@ import { Application, oakCors } from './deps.ts';
 import Ingredientrouter from './controllers/ingredient.controller.ts';
 import RecetteRouter from './controllers/recette.controller.ts';
 import { connectDB } from './repositories/mongo.ts';
-
+import { errorMiddleware } from './middleware/errorMiddleware.ts';
 await connectDB();
 
 const app = new Application();
+app.use(errorMiddleware);
 app.use(
     oakCors({
         origin: ['http://127.0.0.1:5173', 'http://localhost:5173'],

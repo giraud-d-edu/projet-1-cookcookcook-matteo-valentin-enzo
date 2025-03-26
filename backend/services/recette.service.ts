@@ -1,6 +1,6 @@
 import * as recetteRepository from '../repositories/recette.repository.ts';
 import { Recette, RecetteCandidate } from './models/recette.model.ts';
-import { NotFoundException } from '../utils/exceptions.ts';
+import { NotFoundException, BadRequestException } from '../deps.ts';
 
 export const getAllRecettesService = async (): Promise<Recette[]> => {
     return await recetteRepository.getAllRecettes();
@@ -10,14 +10,20 @@ export const getRecetteByIdService = async (id: string): Promise<Recette> => {
     return await recetteRepository.getRecetteById(id);
 };
 
-export const getRecetteByNomService = async (nom: string): Promise<Recette> => {
+export const getRecetteByNomService = async (nom: string): Promise<Recette[]> => {
     return await recetteRepository.getRecetteByNom(nom);
 };
 
 export const getRecetteByCategorieService = async (
-    categorie: 'entrée' | 'plat' | 'dessert' | 'autre',
+    categorie: string,
 ): Promise<Recette[]> => {
-    return await recetteRepository.getRecetteByCategorie(categorie);
+    // TODO: Vérifier si on gère l'erreur de type NotFoundException (400) ou on retourne une liste vide (200)
+    const validCategories = ['entrée', 'plat', 'dessert', 'autre'] as const;
+    if (!validCategories.includes(categorie as any)) {
+        throw new BadRequestException(`Catégorie invalide. Les catégories valides sont : ${validCategories.join(', ')}`);
+    }
+    const categorieEnum = categorie as 'entrée' | 'plat' | 'dessert' | 'autre';
+    return await recetteRepository.getRecetteByCategorie(categorieEnum);
 };
 
 export const createRecetteService = async (recetteCandidate: RecetteCandidate): Promise<Recette> => {

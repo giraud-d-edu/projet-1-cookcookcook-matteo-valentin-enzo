@@ -1,6 +1,6 @@
 import { Recette, RecetteCandidate } from '../services/models/recette.model.ts';
 import { getRecettesCollection } from './mongo.ts';
-import { ObjectId, NotFoundException } from '../deps.ts';
+import { ObjectId, NotFoundException, InternalServerErrorException } from '../deps.ts';
 import { RecetteDbo, fromRecetteDboToRecette } from './dbos/recette.dbo.ts';
 
 export const getAllRecettes = async (): Promise<Recette[]> => {
@@ -14,18 +14,18 @@ export const getRecetteById = async (id: string): Promise<Recette> => {
     const objectId = new ObjectId(id);
     const dbo = await recettesCollection.findOne({ _id: objectId });
     if (!dbo) {
-        throw new NotFoundException('Recette not found');
+        throw new NotFoundException('Recette not found with this id: ' + id);
     }
     return fromRecetteDboToRecette(dbo);
 };
 
-export const getRecetteByNom = async (nom: string): Promise<Recette> => {
+export const getRecetteByNom = async (nom: string): Promise<Recette[]> => {
     const recettesCollection = getRecettesCollection();
-    const dbo = await recettesCollection.findOne({ nom: { $regex: new RegExp(`^${nom}$`, 'i') } });
+    const dbo = await recettesCollection.find({ nom: { $regex: new RegExp(nom.normalize('NFD').replace(/[\u0300-\u036f]/g, ''), 'i') } }).toArray();
     if (!dbo) {
-        throw new NotFoundException('Ingredient not found');
+        throw new NotFoundException('Ingredient not found with this nom: ' + nom);
     }
-    return fromRecetteDboToRecette(dbo);
+    return dbo.map((dbo: RecetteDbo) => fromRecetteDboToRecette(dbo));
 };
 
 export const getRecetteByCategorie = async (categorie: 'entrée' | 'plat' | 'dessert' | 'autre'): Promise<Recette[]> => {
@@ -33,9 +33,6 @@ export const getRecetteByCategorie = async (categorie: 'entrée' | 'plat' | 'des
     const dbos = await ingredientsCollection
         .find({ categorie: { $regex: new RegExp(`^${categorie}$`, 'i') } })
         .toArray();
-    if (!dbos || dbos.length === 0) {
-        throw new NotFoundException('Ingredient not found');
-    }
     return dbos.map((dbo: RecetteDbo) => fromRecetteDboToRecette(dbo));
 };
 
@@ -45,7 +42,7 @@ export const createRecette = async (recetteCandidate: RecetteCandidate): Promise
         ...recetteCandidate,
         ingredients: recetteCandidate.ingredients.map((candidate) => ({
             ...candidate,
-            id: new ObjectId().toString(),
+            // id: new ObjectId().toString(),
         })),
     });
 
@@ -70,6 +67,6 @@ export const deleteRecette = async (id: string): Promise<void> => {
         const objectId = new ObjectId(id);
         await recettesCollection.deleteOne({ _id: objectId });
     } catch (error) {
-        throw new NotFoundException('Recette not found'); // TODO: change to internal server error
+        throw new InternalServerErrorException('An error occurred while deleting the recette');
     }
 };

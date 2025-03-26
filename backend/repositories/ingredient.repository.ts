@@ -1,14 +1,11 @@
 import { Ingredient, IngredientCandidate } from '../services/models/ingredient.model.ts';
 import { getIngredientsCollection } from './mongo.ts';
-import { NotFoundException, ObjectId } from '../deps.ts';
+import { NotFoundException, ObjectId, InternalServerErrorException } from '../deps.ts';
 import { fromIngredientDboToIngredient, IngredientDbo } from './dbos/ingredient.dbo.ts';
 
 export const getAllIngredients = async (): Promise<Ingredient[]> => {
     const ingredientsCollection = getIngredientsCollection();
     const dbos = await ingredientsCollection.find({}).toArray();
-    if (dbos.length === 0) {
-        throw new NotFoundException('No ingredients received');
-    }
     return dbos.map((dbo: IngredientDbo) => fromIngredientDboToIngredient(dbo));
 };
 
@@ -52,12 +49,11 @@ export const updateIngredient = async (updatedIngredientData: Ingredient): Promi
 };
 
 export const deleteIngredient = async (id: string): Promise<void> => {
-    console.log('idParam', id);
     try {
         const ingredientsCollection = getIngredientsCollection();
         const objectId = new ObjectId(id);
         await ingredientsCollection.deleteOne({ _id: objectId });
     } catch (error) {
-        throw new NotFoundException('Ingredient not found'); // TODO: change to internal server error
+        throw new InternalServerErrorException('An error occurred while deleting the ingredient');
     }
 };
