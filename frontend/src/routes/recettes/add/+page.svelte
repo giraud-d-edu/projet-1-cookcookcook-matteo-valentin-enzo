@@ -1,9 +1,9 @@
 <script lang="ts">
     import Form from '$lib/components/Form.svelte';
-    import { recetteAdd } from '$lib/stores/recetteStore';
-    import type { RecetteAdd } from '$lib/types/recette';
+    import { addRecette } from '$lib/stores/recetteStore';
+    import type { CreateRecetteDto } from '$lib/types/recette';
 
-    let recette: RecetteAdd = {
+    let recette: CreateRecetteDto = {
         nom: '',
         description: '',
         ingredients: [],
@@ -19,7 +19,7 @@
         // recette.ingredients = ingredients.split(',').map((i: string) => i.trim());
         console.log('Recette envoyée:', recette);
         try {
-            const response = await recetteAdd(recette);
+            const response = await addRecette(recette);
             console.log('API Response:', response);
             window.location.href = '/';
         } catch (err) {
