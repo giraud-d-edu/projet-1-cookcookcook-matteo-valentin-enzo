@@ -5,7 +5,7 @@ export interface Recette {
     nom: string;
     description: string;
     image?: string;
-    ingredients: Ingredient[];
+    ingredients: [];
     instructions: string;
     tempsPreparation: number;
     categorie: string;
@@ -19,5 +19,5 @@ export interface CreateRecetteDto {
     categorie: string;
     tempsPreparation: number;
     origine: string;
-    ingredients: Ingredient[];
+    ingredients: { nom: string }[];
 }
