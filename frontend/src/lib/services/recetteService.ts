@@ -1,32 +1,32 @@
 import type { Recette, RecetteAdd } from '$lib/types/recette';
 import { error } from '@sveltejs/kit';
-
-const API_URL = 'http://localhost:8000';
-const DEFAULT_IMAGE = `https://picsum.photos/300/200?random=1`;
+import { config } from '$lib/config/config';
 
 export class RecetteService {
     // Obtenir l'URL de l'image par défaut
     static getDefaultImageUrl(): string {
-        return DEFAULT_IMAGE;
+        return config.DEFAULT_IMAGE;
     }
 
     // Récupérer une recette par son ID
     static async getRecette(fetch: typeof window.fetch, id: string): Promise<Recette> {
-        const response = await fetch(`${API_URL}/recettes/${id}`);
+        const response = await fetch(`${config.API_URL}/recettes/${id}`);
 
         if (!response.ok) {
             throw error(404, 'Recette non trouvée');
         }
 
         const recette = await response.json();
-        recette.image = recette.image || DEFAULT_IMAGE;
+        recette.image = recette.image || config.DEFAULT_IMAGE;
         return recette;
     }
 
     // Rechercher des recettes avec un terme de recherche optionnel
     static async getRecettes(fetch: typeof window.fetch, query: string = ''): Promise<Recette[]> {
         try {
-            const url = query ? `${API_URL}/recettes/search?q=${encodeURIComponent(query)}` : `${API_URL}/recettes`;
+            const url = query
+                ? `${config.API_URL}/recettes/search?q=${encodeURIComponent(query)}`
+                : `${config.API_URL}/recettes`;
 
             const response = await fetch(url);
             if (!response.ok) {
@@ -37,7 +37,7 @@ export class RecetteService {
             // Ajouter l'image par défaut aux recettes qui n'en ont pas
             return (Array.isArray(data) ? data : []).map((recette) => ({
                 ...recette,
-                image: recette.image || DEFAULT_IMAGE,
+                image: recette.image || config.DEFAULT_IMAGE,
             }));
         } catch (error) {
             console.error('Erreur lors de la récupération des recettes:', error);
@@ -47,7 +47,7 @@ export class RecetteService {
 
     // Supprimer une recette par son ID
     static async deleteRecette(fetch: typeof window.fetch, id: string): Promise<void> {
-        const response = await fetch(`${API_URL}/recettes/${id}`, {
+        const response = await fetch(`${config.API_URL}/recettes/${id}`, {
             method: 'DELETE',
         });
 
@@ -58,7 +58,7 @@ export class RecetteService {
 
     // Mettre à jour une recette
     static async updateRecette(fetch: typeof window.fetch, id: string, recette: Recette): Promise<void> {
-        const response = await fetch(`${API_URL}/recettes/${id}`, {
+        const response = await fetch(`${config.API_URL}/recettes/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -72,7 +72,7 @@ export class RecetteService {
     }
 
     static async addRecette(fetch: typeof window.fetch, recette: RecetteAdd): Promise<Response> {
-        const response = await fetch(`${API_URL}/recettes`, {
+        const response = await fetch(`${config.API_URL}/recettes`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
