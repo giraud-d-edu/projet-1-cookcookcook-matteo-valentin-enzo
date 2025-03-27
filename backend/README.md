@@ -71,36 +71,125 @@ Le serveur sera accessible à l'adresse : `http://localhost:8000`
 
 ## Base de Données
 
-### Collections MongoDB
+### Installation de MongoDB
 
--   `recettes` : Stockage des recettes
--   `ingredients` : Stockage des ingrédients
+1. Télécharger MongoDB Community Server
 
-### Import des données d'exemple
+    - Rendez-vous sur [le site officiel de MongoDB](https://www.mongodb.com/try/download/community)
+    - Cliquez sur "Download" pour la version correspondant à votre système d'exploitation
+    - Suivez les instructions d'installation par défaut
+
+2. Vérifier l'installation
 
 ```bash
-# Import des ingrédients
+# Dans un terminal, tapez :
+mongod --version
+```
+
+Si la commande affiche la version de MongoDB, l'installation est réussie.
+
+3. Démarrer MongoDB
+
+```bash
+# Sur macOS/Linux
+sudo systemctl start mongod
+
+# Sur Windows
+# MongoDB devrait démarrer automatiquement comme un service
+# Sinon, ouvrez les Services Windows et démarrez "MongoDB"
+```
+
+### Configuration de la Base de Données
+
+1. Créer la base de données
+
+```bash
+# Ouvrir un terminal MongoDB
+mongosh
+
+# Créer et utiliser la base de données
+use cook-db
+```
+
+2. Créer les collections
+
+```bash
+# Toujours dans mongosh
+db.createCollection("recettes")
+db.createCollection("ingredients")
+```
+
+### Import des Données d'Exemple
+
+1. Ouvrir un terminal dans le dossier `backend`
+
+2. Importer les ingrédients
+
+```bash
+# Sur macOS/Linux
 mongoimport --db cook-db --collection ingredients --file data-mongodb-ingredient.json --jsonArray
 
-# Import des recettes
-mongoimport --db cook-db --collection recettes --file data-mongodb-recettes.json --jsonArray
+# Sur Windows (PowerShell)
+& 'C:\Program Files\MongoDB\Tools\100\bin\mongoimport.exe' --db cook-db --collection ingredients --file data-mongodb-ingredient.json --jsonArray
 ```
+
+3. Importer les recettes
+
+```bash
+# Sur macOS/Linux
+mongoimport --db cook-db --collection recettes --file data-mongodb-recettes.json --jsonArray
+
+# Sur Windows (PowerShell)
+& 'C:\Program Files\MongoDB\Tools\100\bin\mongoimport.exe' --db cook-db --collection recettes --file data-mongodb-recettes.json --jsonArray
+```
+
+4. Vérifier l'import
+
+```bash
+# Dans mongosh
+use cook-db
+db.ingredients.count()  # Devrait afficher le nombre d'ingrédients
+db.recettes.count()    # Devrait afficher le nombre de recettes
+```
+
+### Problèmes Courants
+
+1. **MongoDB n'est pas reconnu comme commande**
+
+    - Assurez-vous que MongoDB est bien installé
+    - Ajoutez MongoDB au PATH système si nécessaire
+    - Sur Windows, réinstallez MongoDB en cochant "Add to PATH" pendant l'installation
+
+2. **Erreur de connexion**
+
+    - Vérifiez que MongoDB est bien démarré
+    - Vérifiez que le port 27017 est libre
+    - Vérifiez les permissions du dossier de données MongoDB
+
+3. **Erreur d'import**
+    - Vérifiez que vous êtes dans le bon dossier
+    - Vérifiez que les fichiers JSON existent et sont valides
+    - Sur Windows, utilisez le chemin complet vers mongoimport.exe
+
+Pour plus d'aide, consultez la [documentation officielle de MongoDB](https://docs.mongodb.com/manual/installation/).
 
 ## API Endpoints
 
 ### Ingrédients
 
 -   `POST /ingredients` : Création d'un ingrédient
+-   `GET /ingredients/:id` : Obtenir un ingrédient par ID
 -   `GET /ingredients` : Liste des ingrédients
--   `GET /ingredients/nom/:nom` : Recherche d'ingrédients par nom
+-   `GET /ingredients?nom={nom}` : Recherche d'ingrédients par nom
 -   `PUT /ingredients/:id` : Modification d'un ingrédient
 -   `DELETE /ingredients/:id` : Suppression d'un ingrédient
 
 ### Recettes
 
 -   `GET /recettes` : Liste des recettes
--   `GET /recettes/nom/:nom` : Recherche de recettes par nom
--   `GET /recettes/categories/:categorie` : Filtrage par catégorie (entrée, plat, dessert, autre)
+-   `GET /recettes/:id` : Obtenir une recette par ID
+-   `GET /recettes?nom={nom}` : Recherche de recettes par nom
+-   `GET /recettes?categories={categorie}` : Filtrage par catégorie (entrée, plat, dessert, autre)
 -   `POST /recettes` : Création d'une recette
 -   `PUT /recettes/:id` : Modification d'une recette
 -   `DELETE /recettes/:id` : Suppression d'une recette
