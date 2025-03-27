@@ -441,7 +441,7 @@
     line-height: 0;
 
     &:hover {
-        color: darken($error-color, 10%);
+        color: color.adjust($error-color, $lightness: -10%);
         transform: scale(1.1);
     }
 }
