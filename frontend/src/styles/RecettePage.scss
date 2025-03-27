@@ -219,6 +219,97 @@
     .error p {
         color: $error-color;
     }
+
+    .action-buttons {
+        display: flex;
+        gap: $spacing-md;
+    }
+
+    .bouton-modifier {
+        padding: $spacing-sm $spacing-lg;
+        background-color: $primary-color;
+        color: $background-color;
+        border: none;
+        border-radius: $border-radius-full;
+        cursor: pointer;
+        transition: $transition-fast;
+        font-weight: 500;
+        box-shadow: 0 2px 4px rgba($shadow-color, 0.1);
+
+        &:hover {
+            background-color: color.adjust($primary-color, $lightness: -10%);
+            transform: translateX(-2px);
+        }
+    }
+
+    .edit-form {
+        .edit-input {
+            width: 100%;
+            padding: $spacing-sm;
+            border: 1px solid $border-color;
+            border-radius: $border-radius;
+            margin-bottom: $spacing-md;
+            font-family: inherit;
+
+            &:focus {
+                outline: none;
+                border-color: $primary-color;
+                box-shadow: 0 0 0 2px rgba($primary-color, 0.1);
+            }
+
+            &.title {
+                font-size: 2rem;
+                font-weight: bold;
+            }
+
+            &.description {
+                min-height: 100px;
+                resize: vertical;
+            }
+
+            &.instructions {
+                min-height: 200px;
+                resize: vertical;
+            }
+        }
+    }
+
+    .edit-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: $spacing-md;
+        margin-top: $spacing-lg * 2;
+
+        button {
+            padding: $spacing-sm $spacing-lg;
+            border: none;
+            border-radius: $border-radius-full;
+            cursor: pointer;
+            transition: $transition-fast;
+            font-weight: 500;
+            box-shadow: 0 2px 4px rgba($shadow-color, 0.1);
+        }
+
+        .bouton-sauvegarder {
+            background-color: $success-color;
+            color: $background-color;
+
+            &:hover {
+                background-color: color.adjust($success-color, $lightness: -10%);
+                transform: translateX(2px);
+            }
+        }
+
+        .bouton-annuler {
+            background-color: $secondary-color;
+            color: $background-color;
+
+            &:hover {
+                background-color: color.adjust($secondary-color, $lightness: -10%);
+                transform: translateX(-2px);
+            }
+        }
+    }
 }
 
 @media (max-width: $breakpoint-md) {

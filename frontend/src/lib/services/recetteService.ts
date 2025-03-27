@@ -1,4 +1,4 @@
-import type { Recette } from '$lib/types/recette';
+import type { Recette, RecetteAdd } from '$lib/types/recette';
 import { error } from '@sveltejs/kit';
 
 const API_URL = 'http://localhost:8000';
@@ -55,9 +55,35 @@ export class RecetteService {
             throw new Error('Erreur lors de la suppression de la recette');
         }
     }
-}
 
-// Fonction utilitaire pour la navigation
-export function retourPage(): void {
-    history.back();
+    // Mettre à jour une recette
+    static async updateRecette(fetch: typeof window.fetch, id: string, recette: Recette): Promise<void> {
+        const response = await fetch(`${API_URL}/recettes/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(recette),
+        });
+
+        if (!response.ok) {
+            throw new Error('Erreur lors de la mise à jour de la recette');
+        }
+    }
+
+    static async addRecette(fetch: typeof window.fetch, recette: RecetteAdd): Promise<Response> {
+        const response = await fetch(`${API_URL}/recettes`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(recette),
+        });
+
+        if (!response.ok) {
+            throw new Error("Erreur lors de l'ajout de la recette");
+        }
+
+        return response;
+    }
 }
