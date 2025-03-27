@@ -1,4 +1,4 @@
-import type { Recette, RecetteAdd } from '$lib/types/recette';
+import type { Recette, CreateRecetteDto } from '$lib/types/recette';
 import { writable, derived } from 'svelte/store';
 import { RecetteService } from '$lib/services/recetteService';
 
@@ -20,7 +20,7 @@ function createRecetteStore() {
         loadRecette: async (fetch: typeof window.fetch, id: string) => {
             update((state) => ({ ...state, loading: true }));
             try {
-                const recette = await RecetteService.getRecette(fetch, id);
+                const recette = await RecetteService.getRecetteById(fetch, id);
                 set({ recette, error: null, loading: false });
             } catch (e) {
                 set({ recette: null, error: (e as Error).message, loading: false });
@@ -29,7 +29,7 @@ function createRecetteStore() {
         reset: () => set({ recette: null, error: null, loading: false }),
         deleteRecette: async (fetch: typeof window.fetch, id: string) => {
             try {
-                await RecetteService.deleteRecette(fetch, id);
+                await RecetteService.deleteRecetteById(fetch, id);
                 return true;
             } catch (e) {
                 set({ recette: null, error: (e as Error).message, loading: false });
@@ -54,7 +54,7 @@ export const recetteStore = createRecetteStore();
 export const recettes = writable<Recette[]>([]);
 export const searchQuery = writable<string>('');
 
-export async function recetteAdd(recette: RecetteAdd): Promise<boolean> {
+export async function addRecette(recette: CreateRecetteDto): Promise<boolean> {
     try {
         await RecetteService.addRecette(fetch, recette);
         await loadRecettes(fetch);
@@ -65,7 +65,7 @@ export async function recetteAdd(recette: RecetteAdd): Promise<boolean> {
 }
 
 export async function loadRecettes(fetch: typeof window.fetch) {
-    const data = await RecetteService.getRecettes(fetch);
+    const data = await RecetteService.searchRecettes(fetch);
     recettes.set(data);
 }
 

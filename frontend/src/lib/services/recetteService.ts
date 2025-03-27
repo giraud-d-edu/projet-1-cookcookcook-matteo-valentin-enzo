@@ -1,4 +1,4 @@
-import type { Recette, RecetteAdd } from '$lib/types/recette';
+import type { Recette, CreateRecetteDto } from '$lib/types/recette';
 import { error } from '@sveltejs/kit';
 import { config } from '$lib/config/config';
 
@@ -9,7 +9,7 @@ export class RecetteService {
     }
 
     // Récupérer une recette par son ID
-    static async getRecette(fetch: typeof window.fetch, id: string): Promise<Recette> {
+    static async getRecetteById(fetch: typeof window.fetch, id: string): Promise<Recette> {
         const response = await fetch(`${config.API_URL}/recettes/${id}`);
 
         if (!response.ok) {
@@ -22,7 +22,7 @@ export class RecetteService {
     }
 
     // Rechercher des recettes avec un terme de recherche optionnel
-    static async getRecettes(fetch: typeof window.fetch, query: string = ''): Promise<Recette[]> {
+    static async searchRecettes(fetch: typeof window.fetch, query: string = ''): Promise<Recette[]> {
         try {
             const url = query
                 ? `${config.API_URL}/recettes/search?q=${encodeURIComponent(query)}`
@@ -46,7 +46,7 @@ export class RecetteService {
     }
 
     // Supprimer une recette par son ID
-    static async deleteRecette(fetch: typeof window.fetch, id: string): Promise<void> {
+    static async deleteRecetteById(fetch: typeof window.fetch, id: string): Promise<void> {
         const response = await fetch(`${config.API_URL}/recettes/${id}`, {
             method: 'DELETE',
         });
@@ -71,7 +71,7 @@ export class RecetteService {
         }
     }
 
-    static async addRecette(fetch: typeof window.fetch, recette: RecetteAdd): Promise<Response> {
+    static async addRecette(fetch: typeof window.fetch, recette: CreateRecetteDto): Promise<Response> {
         const response = await fetch(`${config.API_URL}/recettes`, {
             method: 'POST',
             headers: {

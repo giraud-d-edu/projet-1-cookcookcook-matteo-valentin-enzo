@@ -26,8 +26,8 @@
 </div>
 
 <div>
-    <label for="cookingTime">Temps de préparation (min)</label>
-    <input type="number" id="cookingTime" bind:value={recette.tempsPreparation} required />
+    <label for="tempsPreparation">Temps de préparation (min)</label>
+    <input type="number" id="tempsPreparation" bind:value={recette.tempsPreparation} required />
 </div>
 
 <div>

@@ -2,7 +2,7 @@
     import { page } from '$app/stores';
     import { onMount } from 'svelte';
     import { recetteStore } from '$lib/stores/recetteStore';
-    import { retourPage } from '$lib/utils/navigation';
+    import { navigateBack } from '$lib/utils/navigation';
     import { goto } from '$app/navigation';
     import '../../../styles/RecettePage.scss';
 
@@ -48,7 +48,7 @@
 
 <main class="recette-page">
     <div class="header-actions">
-        <button class="bouton-retour" on:click={retourPage}> ← Retour </button>
+        <button class="bouton-retour" on:click={navigateBack}> ← Retour </button>
         {#if recette && !isEditing}
             <div class="action-buttons">
                 <button class="bouton-modifier" on:click={startEditing}> Modifier </button>

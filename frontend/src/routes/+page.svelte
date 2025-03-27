@@ -1,7 +1,7 @@
 <script>
     import Card from '$lib/components/Card.svelte';
     import { filteredRecettes } from '$lib/stores/recetteStore';
-    import { timeToStringConverter } from '$lib/utils/timeConverter';
+    import { convertTimeToString } from '$lib/utils/timeConverter';
     import '../styles/Page.scss';
 </script>
 
@@ -13,9 +13,9 @@
             <Card
                 nom={recette.nom}
                 description={recette.description}
-                image="https://picsum.photos/300/200/?random={recette.id}"
-                tempsPreparation={timeToStringConverter(recette.tempsPreparation)}
-            ></Card>
+                image={`https://picsum.photos/300/200/?random=${recette.id}`}
+                tempsPreparation={convertTimeToString(recette.tempsPreparation)}
+            />
         </a>
     {/each}
 </div>

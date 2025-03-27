@@ -1,3 +1,3 @@
-export function retourPage(): void {
+export function navigateBack(): void {
     history.back();
 }

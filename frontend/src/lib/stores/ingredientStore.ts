@@ -1,12 +1,12 @@
-import { getIngredients } from '$lib/services/ingredientService';
+import { IngredientService } from '$lib/services/ingredientService';
 import type { Ingredient } from '$lib/types/ingredient';
 import { writable, derived } from 'svelte/store';
 
 export const ingredients = writable<Ingredient[]>([]);
 export const ingredientSearchQuery = writable<string>('');
 
-export async function loadIngredients() {
-    const data = await getIngredients();
+export async function loadIngredients(fetch: typeof window.fetch) {
+    const data = await IngredientService.getIngredients(fetch);
     ingredients.set(data);
 }
 
@@ -20,5 +20,3 @@ export const filteredIngredients = derived(
         );
     },
 );
-
-loadIngredients();
