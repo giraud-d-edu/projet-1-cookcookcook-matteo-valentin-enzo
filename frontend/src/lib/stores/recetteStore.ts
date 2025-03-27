@@ -1,5 +1,5 @@
 import type { Recette, RecetteAdd } from '$lib/types/recette';
-import { writable } from 'svelte/store';
+import { writable, derived } from 'svelte/store';
 import { RecetteService } from '$lib/services/recetteService';
 
 interface RecetteState {
@@ -33,6 +33,7 @@ function createRecetteStore() {
 export const recetteStore = createRecetteStore();
 
 export const recettes = writable<Recette[]>([]);
+export const searchQuery = writable<string>('');
 
 export async function recetteAdd(recette: RecetteAdd): Promise<Response> {
     const response = await fetch('http://localhost:8000/recettes', {
@@ -54,3 +55,9 @@ export async function loadRecettes(fetch: typeof window.fetch) {
     const data = await RecetteService.getRecettes(fetch);
     recettes.set(data);
 }
+
+// Filtrer les recettes en fonction de la recherche
+export const filteredRecettes = derived([recettes, searchQuery], ([$recettes, $searchQuery]) => {
+    if (!$searchQuery) return $recettes;
+    return $recettes.filter((recette) => recette.nom.toLowerCase().includes($searchQuery.toLowerCase()));
+});

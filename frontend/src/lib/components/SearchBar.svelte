@@ -1,28 +1,37 @@
 <script lang="ts">
-    import { browser } from '$app/environment';
-    import { goto } from '$app/navigation';
-    import { page } from '$app/stores';
+    import { searchQuery } from '$lib/stores/recetteStore';
+    import { ingredientSearchQuery } from '$lib/stores/ingredientStore';
+    import { writable } from 'svelte/store';
     import debounce from 'lodash/debounce';
     import '../../styles/SearchBar.scss';
 
-    // Initialiser searchQuery avec la valeur de l'URL si elle existe
-    $: searchQuery = $page.url.searchParams.get('q') || '';
+    export let defaultSearchType: 'recettes' | 'ingredients' = 'recettes';
+    const searchType = writable(defaultSearchType);
 
-    const handleSearch = debounce(async () => {
-        if (browser) {
-            if (searchQuery.length > 0) {
-                await goto(`/search?q=${encodeURIComponent(searchQuery)}`);
-            } else {
-                await goto('/');
-            }
-        }
+    const handleSearch = debounce(() => {
+        // La recherche est automatiquement gérée par le store
     }, 300);
-
-    $: if (searchQuery !== null) handleSearch();
 </script>
 
 <div class="search-bar">
-    <input type="text" bind:value={searchQuery} placeholder="Rechercher une recette..." class="search-bar__input" />
+    {#if $searchType === 'recettes'}
+        <input
+            type="text"
+            bind:value={$searchQuery}
+            on:input={handleSearch}
+            placeholder="Rechercher une recette..."
+            class="search-bar__input"
+        />
+    {:else}
+        <input
+            type="text"
+            bind:value={$ingredientSearchQuery}
+            on:input={handleSearch}
+            placeholder="Rechercher un ingrédient..."
+            class="search-bar__input"
+        />
+    {/if}
+
     <svg
         class="search-bar__icon"
         xmlns="http://www.w3.org/2000/svg"

@@ -10,7 +10,7 @@
     </div>
 
     <div class="nav-center">
-        <SearchBar />
+        <SearchBar defaultSearchType="recettes" />
     </div>
 
     <div class="nav-right">

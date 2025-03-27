@@ -44,20 +44,6 @@ export class RecetteService {
             return [];
         }
     }
-
-    // Rechercher des recettes par nom
-    static async searchRecettes(fetch: typeof window.fetch, query: string): Promise<Recette[]> {
-        try {
-            const response = await fetch(`${API_URL}/recettes?nom=${encodeURIComponent(query)}`);
-            if (!response.ok) {
-                throw new Error('Erreur lors de la recherche des recettes');
-            }
-            return await response.json();
-        } catch (error) {
-            console.error('Erreur dans searchRecettes:', error);
-            throw error;
-        }
-    }
 }
 
 // Fonction utilitaire pour la navigation
