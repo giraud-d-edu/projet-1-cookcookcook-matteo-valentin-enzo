@@ -75,45 +75,39 @@
 @media (max-width: $breakpoint-md) {
     .navbar {
         height: auto;
-        padding: $spacing-md;
+        padding: $spacing-sm;
         flex-direction: column;
-        gap: $spacing-md;
+        gap: $spacing-sm;
 
-        .nav-left {
+        .nav-left,
+        .nav-center,
+        .nav-right {
             width: 100%;
             text-align: center;
         }
 
-        .nav-center {
-            width: 100%;
-            margin: $spacing-md 0;
-        }
-
         .nav-right {
-            width: 100%;
-
             ul {
                 justify-content: center;
-                gap: $spacing-md;
+                gap: $spacing-sm;
                 flex-wrap: wrap;
             }
 
             li a {
                 display: block;
                 text-align: center;
-                padding: $spacing-sm $spacing-md;
+                padding: $spacing-xs $spacing-sm;
             }
         }
     }
 }
 
-// Ajout d'un padding-top au body pour compenser la navbar fixe
 :global(body) {
     padding-top: 70px;
 }
 
 @media (max-width: $breakpoint-md) {
     :global(body) {
-        padding-top: 180px;
+        padding-top: 150px;
     }
 }

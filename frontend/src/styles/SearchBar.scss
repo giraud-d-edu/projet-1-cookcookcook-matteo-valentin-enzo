@@ -55,13 +55,13 @@
     .search-bar {
         &__input {
             font-size: $font-size-xs;
-            padding: $spacing-sm $spacing-md $spacing-sm ($spacing-lg + 20px);
+            padding: $spacing-sm $spacing-md $spacing-sm ($spacing-md + 20px);
         }
 
         &__icon {
             width: 16px;
             height: 16px;
-            left: $spacing-sm;
+            left: $spacing-xs;
         }
     }
 }
