@@ -61,10 +61,6 @@ export const getIngredientByNom = async (nom: string): Promise<Ingredient[]> => 
     ];
 
     const dbo = await ingredientsCollection.aggregate(pipeline).toArray();
-
-    if (!dbo || dbo.length === 0) {
-        throw new NotFoundException('Ingredient not found');
-    }
     return dbo.map((dbo: IngredientDbo) => fromIngredientDboToIngredient(dbo));
 };
 
