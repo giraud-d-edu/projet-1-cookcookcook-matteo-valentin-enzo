@@ -44,6 +44,17 @@ export class RecetteService {
             return [];
         }
     }
+
+    // Supprimer une recette par son ID
+    static async deleteRecette(fetch: typeof window.fetch, id: string): Promise<void> {
+        const response = await fetch(`${API_URL}/recettes/${id}`, {
+            method: 'DELETE',
+        });
+
+        if (!response.ok) {
+            throw new Error('Erreur lors de la suppression de la recette');
+        }
+    }
 }
 
 // Fonction utilitaire pour la navigation
