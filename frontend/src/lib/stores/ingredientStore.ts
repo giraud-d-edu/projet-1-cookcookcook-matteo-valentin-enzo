@@ -16,13 +16,10 @@ export async function loadIngredients(fetch: typeof window.fetch) {
     ingredients.set(data);
 }
 export async function addIngredient(ingredient: string): Promise<Response> {
-    console.log('ON ENTRE DANS ADD INGREDIENT Store');
     return IngredientService.addIngredient(ingredient);
 }
 
 export async function getIngredient(name: string): Promise<Ingredient> {
-    console.log('ON ENTRE DANS GET INGREDIENT Store');
-
     return IngredientService.getIngredientName(name).then((ingredients) => ingredients[0]);
 }
 
