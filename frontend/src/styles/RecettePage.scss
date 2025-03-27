@@ -1,3 +1,4 @@
+@use "sass:color";
 @use "./_variables" as *;
 
 .recette-page {
@@ -5,27 +6,55 @@
     margin: 100px auto 40px;
     padding: 0 $spacing-lg;
 
-    .bouton-retour {
+    .header-actions {
         position: fixed;
         top: 110px;
-        left: 20px;
-        padding: $spacing-sm $spacing-lg;
-        background-color: $background-color;
-        border: 1px solid $border-color;
-        border-radius: $border-radius-full;
-        cursor: pointer;
-        transition: $transition-fast;
+        left: 0;
+        right: 0;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0 $spacing-lg;
         display: flex;
+        justify-content: space-between;
         align-items: center;
-        gap: $spacing-sm;
-        font-weight: 500;
-        color: $text-color;
-        box-shadow: 0 2px 4px rgba($shadow-color, 0.1);
+        z-index: 10;
 
-        &:hover {
-            background-color: $hover-color;
+        .bouton-retour {
+            padding: $spacing-sm $spacing-lg;
+            background-color: $background-color;
+            border: 1px solid $border-color;
+            border-radius: $border-radius-full;
+            cursor: pointer;
+            transition: $transition-fast;
+            display: flex;
+            align-items: center;
+            gap: $spacing-sm;
+            font-weight: 500;
+            color: $text-color;
+            box-shadow: 0 2px 4px rgba($shadow-color, 0.1);
+
+            &:hover {
+                background-color: $hover-color;
+                color: $background-color;
+                transform: translateX(-2px);
+            }
+        }
+
+        .bouton-supprimer {
+            padding: $spacing-sm $spacing-lg;
+            background-color: $error-color;
             color: $background-color;
-            transform: translateX(-2px);
+            border: none;
+            border-radius: $border-radius-full;
+            cursor: pointer;
+            transition: $transition-fast;
+            font-weight: 500;
+            box-shadow: 0 2px 4px rgba($shadow-color, 0.1);
+
+            &:hover {
+                background-color: color.adjust($error-color, $lightness: -10%);
+                transform: translateX(2px);
+            }
         }
     }
 
@@ -197,9 +226,9 @@
         margin-top: 80px;
         padding: 0 $spacing-md;
 
-        .bouton-retour {
+        .header-actions {
             top: 80px;
-            left: $spacing-md;
+            padding: 0 $spacing-md;
         }
 
         .recette-header {

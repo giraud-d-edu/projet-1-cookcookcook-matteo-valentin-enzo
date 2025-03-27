@@ -27,6 +27,15 @@ function createRecetteStore() {
             }
         },
         reset: () => set({ recette: null, error: null, loading: false }),
+        deleteRecette: async (fetch: typeof window.fetch, id: string) => {
+            try {
+                await RecetteService.deleteRecette(fetch, id);
+                return true;
+            } catch (e) {
+                set({ recette: null, error: (e as Error).message, loading: false });
+                return false;
+            }
+        },
     };
 }
 

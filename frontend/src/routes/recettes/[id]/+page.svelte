@@ -3,6 +3,7 @@
     import { onMount } from 'svelte';
     import { recetteStore } from '$lib/stores/recetteStore';
     import { retourPage } from '$lib/services/recetteService';
+    import { goto } from '$app/navigation';
     import '../../../styles/RecettePage.scss';
 
     const id = $page.params.id;
@@ -12,11 +13,25 @@
         return () => recetteStore.reset();
     });
 
+    async function handleDelete() {
+        if (confirm('Êtes-vous sûr de vouloir supprimer cette recette ?')) {
+            const success = await recetteStore.deleteRecette(fetch, id);
+            if (success) {
+                goto('/');
+            }
+        }
+    }
+
     $: ({ recette, error, loading } = $recetteStore);
 </script>
 
 <main class="recette-page">
-    <button class="bouton-retour" on:click={retourPage}> ← Retour </button>
+    <div class="header-actions">
+        <button class="bouton-retour" on:click={retourPage}> ← Retour </button>
+        {#if recette}
+            <button class="bouton-supprimer" on:click={handleDelete}> Supprimer </button>
+        {/if}
+    </div>
 
     {#if loading}
         <div class="loading">
@@ -67,3 +82,9 @@
         </div>
     {/if}
 </main>
+
+<style lang="scss">
+    .recette-page {
+        position: relative;
+    }
+</style>
