@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import Card from '$lib/components/Card.svelte';
     import { filteredRecettes } from '$lib/stores/recetteStore';
     import { convertTimeToString } from '$lib/utils/timeConverter';

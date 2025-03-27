@@ -3,15 +3,47 @@
     export let description = 'Description par défaut';
     export let image = '';
     export let tempsPreparation = 'Temps de préparation inconnu';
+    import { onMount } from 'svelte';
     import '../../styles/Card.scss';
+
+    let imgElement: HTMLImageElement;
+    let isVisible = false;
+
+    onMount(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    isVisible = true;
+                    observer.unobserve(entry.target);
+                }
+            },
+            {
+                rootMargin: '50px',
+            },
+        );
+
+        if (imgElement) {
+            observer.observe(imgElement);
+        }
+
+        return () => observer.disconnect();
+    });
 </script>
 
 <div class="card">
     <div class="card__header">
         {#if image}
-            <img src={image} alt={nom} />
+            <img
+                bind:this={imgElement}
+                src={isVisible ? image : ''}
+                alt={nom}
+                loading="lazy"
+                width="300"
+                height="200"
+                style="background: #f0f0f0;"
+            />
         {:else}
-            <img src="/default-recipe.jpg" alt="Image par défaut" />
+            <img src="/default-recipe.jpg" alt="Recette par défaut" loading="lazy" width="300" height="200" />
         {/if}
     </div>
     <div class="card__body">

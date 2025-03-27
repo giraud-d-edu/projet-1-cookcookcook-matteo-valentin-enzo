@@ -77,6 +77,18 @@ respectifs.
 
 Les contributions sont les bienvenues ! N'hésitez pas à ouvrir une issue ou une pull request.
 
+## Lighthouse Metrics
+
+Notre application a été évaluée avec Lighthouse et a obtenu les scores suivants :
+
+-   **Performance**: 89/100
+-   **Accessibilité**: 95/100
+-   **Meilleures Pratiques**: 100/100
+-   **SEO**: 100/100
+
+Ces scores démontrent notre engagement à fournir une application web performante, accessible et optimisée pour les
+moteurs de recherche.
+
 ## Licence
 
 Ce projet est sous licence MIT. Voir le fichier [LICENSE](./LICENSE) pour plus de détails.
