@@ -7,6 +7,11 @@ export class IngredientService {
         return response.json();
     }
 
+    static async getIngredientById(fetch: typeof window.fetch, id: string): Promise<Ingredient> {
+        const response = await fetch(`${config.API_URL}/ingredients/${id}`);
+        return response.json();
+    }
+
     static async getIngredientsByName(fetch: typeof window.fetch, name: string): Promise<Ingredient[]> {
         const response = await fetch(`${config.API_URL}/ingredients/nom/${name}`);
         return response.json();
@@ -25,7 +30,7 @@ export class IngredientService {
 
     static async updateIngredient(
         fetch: typeof window.fetch,
-        id: number,
+        id: string,
         ingredient: Partial<Ingredient>,
     ): Promise<Ingredient> {
         const response = await fetch(`${config.API_URL}/ingredients/${id}`, {
@@ -38,7 +43,7 @@ export class IngredientService {
         return response.json();
     }
 
-    static async deleteIngredient(fetch: typeof window.fetch, id: number): Promise<void> {
+    static async deleteIngredientById(fetch: typeof window.fetch, id: string): Promise<void> {
         await fetch(`${config.API_URL}/ingredients/${id}`, {
             method: 'DELETE',
         });
