@@ -1,6 +1,6 @@
-import { getIngredients } from "$lib/services/ingredientService";
-import type { Ingredient } from "$lib/types/ingredients";
-import { writable } from "svelte/store";
+import { getIngredients } from '$lib/services/ingredientService';
+import type { Ingredient } from '$lib/types/ingredients';
+import { writable } from 'svelte/store';
 
 const initialIngredient: Ingredient[] = await getIngredients();
 
