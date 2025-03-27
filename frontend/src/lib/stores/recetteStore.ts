@@ -36,6 +36,16 @@ function createRecetteStore() {
                 return false;
             }
         },
+        updateRecette: async (fetch: typeof window.fetch, id: string, recette: Recette) => {
+            try {
+                await RecetteService.updateRecette(fetch, id, recette);
+                set({ recette, error: null, loading: false });
+                return true;
+            } catch (e) {
+                set({ recette: null, error: (e as Error).message, loading: false });
+                return false;
+            }
+        },
     };
 }
 
