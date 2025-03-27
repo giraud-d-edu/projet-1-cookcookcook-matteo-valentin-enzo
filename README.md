@@ -5,11 +5,11 @@
 CookCookCook est une application web de gestion de recettes de cuisine permettant aux utilisateurs de découvrir, créer
 et modifier leurs recettes préférées.
 
-## Équipe
+## Équipe- MVE
 
--   Matteo
--   Valentin
--   Enzo
+-   [Matteo PEREIRA](https://github.com/Aairuxul) - @Aairuxul
+-   [Valentin RUSSEIL](https://github.com/ValentinRusseil) - @ValentinRusseil
+-   [Enzo MORIN](https://github.com/Zowx) - @Zowx
 
 ## Structure du Projet
 
