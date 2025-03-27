@@ -1,5 +1,5 @@
 <script>
-    import Card from '$lib/components/card.svelte';
+    import Card from '$lib/components/Card.svelte';
     import { filteredRecettes } from '$lib/stores/recetteStore';
     import { timeToStringConverter } from '$lib/utils/timeConverter';
     import '../styles/Page.scss';
