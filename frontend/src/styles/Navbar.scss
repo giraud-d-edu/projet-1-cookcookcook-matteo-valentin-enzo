@@ -1,4 +1,5 @@
-@import "./_variables";
+@use "./_variables" as *;
+@use "sass:color";
 
 .navbar {
     position: fixed;
@@ -25,7 +26,7 @@
             transition: $transition-fast;
 
             &:hover {
-                color: darken($primary-color, 10%);
+                color: color.adjust($primary-color, $lightness: -10%);
             }
         }
     }

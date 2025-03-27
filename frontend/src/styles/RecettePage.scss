@@ -1,4 +1,4 @@
-@import "./_variables";
+@use "./_variables" as *;
 
 .recette-page {
     max-width: 800px;
