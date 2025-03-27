@@ -12,7 +12,7 @@ export interface Recette {
     origine: string;
 }
 
-export interface RecetteAdd {
+export interface CreateRecetteDto {
     nom: string;
     description: string;
     instructions: string;
