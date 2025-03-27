@@ -1,118 +1,94 @@
-# CookCookCook - Frontend
+# CookCookCook Frontend 🎨
 
-Le frontend de CookCookCook est une application web moderne construite avec SvelteKit, offrant une interface utilisateur intuitive pour la gestion et le partage de recettes de cuisine.
+## Technologies Principales
 
-## 🚀 Fonctionnalités
+- **SvelteKit**: Framework fullstack pour la construction d'applications web
+- **TypeScript**: Langage de programmation typé pour une meilleure maintenabilité
+- **Vite**: Outil de build moderne pour un développement rapide
+- **ESLint**: Linting du code
+- **Prettier**: Formatage du code
 
-- Interface utilisateur moderne et responsive
-- Gestion des recettes (création, modification, suppression)
-- Système de recherche de recettes
-- Système d'authentification
-- Interface utilisateur intuitive et conviviale
-- Design moderne avec Tailwind CSS
-
-## 🛠️ Technologies Utilisées
-
-- SvelteKit
-- Tailwind CSS
-- TypeScript
-- Vite
-
-## 📋 Prérequis
-
-- Node.js (version 16 ou supérieure)
-- npm ou pnpm ou yarn
-
-## 🚀 Installation
-
-1. Clonez le repository :
-
-```bash
-git clone [URL_DU_REPO]
-cd frontend
-```
-
-2. Installez les dépendances :
-
-```bash
-npm install
-# ou
-pnpm install
-# ou
-yarn install
-```
-
-3. Créez un fichier `.env` à la racine du projet frontend avec les variables d'environnement nécessaires :
-
-```env
-VITE_API_URL=http://localhost:3000
-```
-
-## 🛠️ Développement
-
-Pour lancer le serveur de développement :
-
-```bash
-npm run dev
-# ou
-pnpm dev
-# ou
-yarn dev
-```
-
-L'application sera accessible à l'adresse `http://localhost:5173`
-
-Pour ouvrir automatiquement l'application dans votre navigateur :
-
-```bash
-npm run dev -- --open
-```
-
-## 🏗️ Build
-
-Pour créer une version de production :
-
-```bash
-npm run build
-# ou
-pnpm build
-# ou
-yarn build
-```
-
-Pour prévisualiser la version de production :
-
-```bash
-npm run preview
-# ou
-pnpm preview
-# ou
-yarn preview
-```
-
-## 📁 Structure du Projet
+## Structure du Projet
 
 ```
 frontend/
-├── src/
-│   ├── lib/           # Composants et utilitaires réutilisables
-│   ├── routes/        # Pages et routes de l'application
-│   └── app.html       # Template HTML principal
-├── static/           # Fichiers statiques
-├── tests/            # Tests unitaires et d'intégration
-└── package.json      # Dépendances et scripts
+├── src/                    # Code source principal
+│   ├── routes/            # Pages et routes de l'application
+│   ├── lib/               # Composants, utilitaires et logique réutilisable
+│   ├── styles/            # Styles globaux et variables CSS
+│   └── app.html           # Template HTML principal
+├── static/                # Fichiers statiques (images, fonts, etc.)
+├── vite.config.ts         # Configuration de Vite
+└── svelte.config.js       # Configuration de SvelteKit
 ```
 
-## 🤝 Contribution
+## Installation
 
-Les contributions sont les bienvenues ! N'hésitez pas à :
+1. Installer les dépendances
 
-1. Fork le projet
-2. Créer une branche pour votre fonctionnalité (`git checkout -b feature/AmazingFeature`)
-3. Commit vos changements (`git commit -m 'Add some AmazingFeature'`)
-4. Push vers la branche (`git push origin feature/AmazingFeature`)
-5. Ouvrir une Pull Request
+```bash
+npm install
+```
 
-## 📝 Licence
+2. Configurer les variables d'environnement
 
-Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus de détails.
+```bash
+cp .env.example .env
+```
+
+Modifier les variables dans le fichier `.env` selon votre environnement.
+
+3. Démarrer le serveur de développement
+
+```bash
+npm run dev
+```
+
+L'application sera accessible à l'adresse : `http://localhost:5173`
+
+## Scripts Disponibles
+
+- `npm run dev` : Lance le serveur de développement
+- `npm run build` : Compile l'application pour la production
+- `npm run preview` : Prévisualise la version de production
+- `npm run lint` : Vérifie le code avec ESLint et Prettier
+
+## Organisation du Code
+
+### Routes (`src/routes/`)
+
+- Contient toutes les pages de l'application
+- Utilise le système de routage basé sur les fichiers de SvelteKit
+- Chaque fichier `+page.svelte` représente une route
+
+### Bibliothèque (`src/lib/`)
+
+- Composants réutilisables
+- Utilitaires et helpers
+- Stores Svelte pour la gestion d'état
+- Types TypeScript partagés
+
+### Styles (`src/styles/`)
+
+- Styles globaux
+- Variables CSS
+- Thèmes et configurations de style
+
+## Configuration
+
+- TypeScript configuré en mode strict
+- ESLint et Prettier pour la cohérence du code
+- Variables d'environnement gérées via fichiers `.env`
+
+Pour plus de détails sur l'architecture du projet, consultez le fichier [ARCHITECTURE.md](./ARCHITECTURE.md).
+
+## Évolution Future
+
+- Implémentation de tests unitaires et d'intégration
+- Amélioration de la documentation des composants
+- Optimisation des performances
+- Ajout de nouvelles fonctionnalités selon les besoins
+
+## Licence
+
+Ce projet est sous licence MIT. Voir le fichier [LICENSE](../LICENSE) pour plus de détails.

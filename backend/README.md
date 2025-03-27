@@ -1,92 +1,153 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/5DxnKIye)
+# CookCookCook Backend 🔧
 
-# CookCookCook Project
+## Technologies Principales
 
-## Overview
+-   **Deno**: Runtime moderne pour JavaScript et TypeScript
+-   **Oak**: Framework web pour Deno (similaire à Express.js)
+-   **MongoDB**: Base de données NoSQL
+-   **Zod**: Validation des données avec TypeScript
+-   **TypeScript**: Support natif avec Deno
 
-CookCookCook is a API to manage and share recipes. It provides functionalities
-to add, view, and manage ingredients and recipes through a RESTful API.
+## Structure du Projet
 
-## Features
+```
+backend/
+├── controllers/        # Contrôleurs pour la logique métier
+├── middleware/        # Middlewares personnalisés
+├── repositories/      # Couche d'accès aux données
+├── services/         # Services métier
+├── utils/            # Utilitaires et helpers
+├── deps.ts           # Gestion des dépendances
+├── server.ts         # Point d'entrée de l'application
+├── .env.exemple      # Template des variables d'environnement
+├── deno.json        # Configuration de Deno
+├── postman_collection.json  # Collection Postman pour tester l'API
+└── data-mongodb-*.json     # Données d'exemple pour MongoDB
+```
 
--   **Ingredient Management**: Add, update, and delete ingredients.
--   **Recipe Management**: Create, update, and delete recipes.
--   **Database Integration**: Uses MongoDB for data storage.
+## Prérequis
 
-## Technologies Used
+-   [Deno](https://deno.land/#installation) (version recommandée : 2.2.5)
+-   MongoDB (version recommandée : ≥ 5.0)
+-   Un éditeur compatible avec Deno/TypeScript
 
--   **Deno**: A modern runtime for JavaScript and TypeScript.
--   **Oak**: A middleware framework for Deno's HTTP server, inspired by Koa.
--   **MongoDB**: A NoSQL database for storing application data.
--   **Zod**: A TypeScript-first schema declaration and validation library.
+## Installation
 
-## Project Structure
+1. Installer Deno
 
--   `server.ts`: Main server file that sets up the application and routes.
--   `deps.ts`: Manages external dependencies.
--   `controllers/`: Contains the controllers for handling HTTP requests.
--   `repositories/`: Manages database connections and operations.
--   `services/`: Contains business logic for the application.
--   `utils/`: Utility functions and custom exceptions.
+```bash
+# macOS ou Linux
+curl -fsSL https://deno.land/x/install/install.sh | sh
 
-## Setup and Installation
+# Windows (PowerShell)
+irm https://deno.land/install.ps1 | iex
+```
 
-1. **Clone the repository**:
+2. Configurer les variables d'environnement
 
-    ```bash
-    git clone <repository-url>
-    cd <repository-directory>
-    ```
+```bash
+cp .env.exemple .env
+```
 
-2. **Install Deno**: Follow the instructions on
-   [deno.land](https://deno.land/#installation).
+Modifier les variables dans le fichier `.env` selon votre environnement :
 
-3. **Set up environment variables**: Copy `.env.exemple` to `.env` and fill in
-   the necessary details.
+```env
+MONGO_URL=mongodb://localhost:27017
+DB_NAME=cook-db
+PORT=8000
+```
 
-4. **Create MongoDb enviroments on MongoDb local**:
+3. Démarrer le serveur
 
-    - For datatabase, create with this name: `cook-db`
-    - For recettes collection, create with this name: `recettes`
-    - For ingredients collection, create with this name: `ingredients`
+```bash
+# Mode développement
+deno task dev
 
-5. **Run the application**:
+# Mode production
+deno task run
+```
 
-    ```bash
-    deno run --allow-net --allow-read --allow-env --watch server.ts
-    ```
+Le serveur sera accessible à l'adresse : `http://localhost:8000`
 
-    or
+## Base de Données
 
-    ```bash
+### Collections MongoDB
 
-    ```
+-   `recettes` : Stockage des recettes
+-   `ingredients` : Stockage des ingrédients
 
-6. **Access the application**: Open your browser and go to
-   `http://localhost:8000`.
+### Import des données d'exemple
+
+```bash
+# Import des ingrédients
+mongoimport --db cook-db --collection ingredients --file data-mongodb-ingredient.json --jsonArray
+
+# Import des recettes
+mongoimport --db cook-db --collection recettes --file data-mongodb-recettes.json --jsonArray
+```
 
 ## API Endpoints
 
--   **Ingredients**:
+### Ingrédients
 
-    -   `GET /ingredients`: List all ingredients.
-    -   `GET /ingredients/nom/:nom`: Retrieve ingredients by name.
-    -   `POST /ingredients`: Add a new ingredient.
-    -   `PUT /ingredients/:id`: Update an ingredient.
-    -   `DELETE /ingredients/:id`: Delete an ingredient.
+-   `POST /ingredients` : Création d'un ingrédient
+-   `GET /ingredients` : Liste des ingrédients
+-   `GET /ingredients/nom/:nom` : Recherche d'ingrédients par nom
+-   `PUT /ingredients/:id` : Modification d'un ingrédient
+-   `DELETE /ingredients/:id` : Suppression d'un ingrédient
 
--   **Recipes**:
-    -   `GET /recettes`: List all recipes.
-    -   `GET /recettes/nom/:nom`: Retrieve recipes by name.
-    -   `GET /recettes/categories/:categorie`: Retrieve recipes by category (e.g.,
-        entrée, plat, dessert, autre).
-    -   `POST /recettes`: Add a new recipe.
-    -   `PUT /recettes/:id`: Update a recipe.
-    -   `DELETE /recettes/:id`: Delete a recipe.
+### Recettes
 
-## License
+-   `GET /recettes` : Liste des recettes
+-   `GET /recettes/nom/:nom` : Recherche de recettes par nom
+-   `GET /recettes/categories/:categorie` : Filtrage par catégorie (entrée, plat, dessert, autre)
+-   `POST /recettes` : Création d'une recette
+-   `PUT /recettes/:id` : Modification d'une recette
+-   `DELETE /recettes/:id` : Suppression d'une recette
 
-This project is licensed under the MIT License.
+## Tests et Documentation
+
+### Collection Postman
+
+Une collection Postman (`postman_collection.json`) est fournie pour tester l'API. Pour l'utiliser :
+
+1. Importer le fichier dans Postman
+2. Configurer l'environnement avec la bonne URL de base
+3. Tester les différents endpoints
+
+### Validation des Données
+
+-   Utilisation de Zod pour la validation des schémas
+-   Vérification stricte des types TypeScript
+-   Gestion des erreurs avec des exceptions personnalisées
+
+## Sécurité
+
+-   Validation des entrées avec Zod
+-   Protection CORS configurée
+-   Gestion sécurisée des erreurs
+-   Logs des requêtes et des erreurs
+
+## Développement
+
+### Scripts Disponibles
+
+-   `deno task dev` : Lance le serveur en mode développement avec rechargement automatique
+-   `deno task run` : Lance le serveur en mode production
+-   `deno task format` : Formate le code selon les conventions
+-   `deno lint` : Vérifie le code avec le linter
+-   `deno test` : Lance les tests (à implémenter)
+
+### Bonnes Pratiques
+
+-   Utilisation des types stricts TypeScript
+-   Documentation du code avec JSDoc
+-   Gestion des erreurs centralisée
+-   Architecture en couches (Controller -> Service -> Repository)
+
+## Licence
+
+Ce projet est sous licence MIT. Voir le fichier [LICENSE](../LICENSE) pour plus de détails.
 
 ## Additional Resources
 
