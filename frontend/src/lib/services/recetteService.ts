@@ -1,7 +1,6 @@
 import type { Recette } from '$lib/types/recette';
 import { error } from '@sveltejs/kit';
 
-<<<<<<< HEAD
 const API_URL = 'http://localhost:8000';
 const DEFAULT_IMAGE = `https://picsum.photos/300/200?random=1`;
 
@@ -64,20 +63,6 @@ export class RecetteService {
 }
 
 // Fonction utilitaire pour la navigation
-=======
-const API_URL = import.meta.env.VITE_API_URL;
-
-export async function getRecette(fetch: typeof window.fetch, id: string): Promise<Recette> {
-	const response = await fetch(`${API_URL}/recettes/${id}`);
-
-	if (!response.ok) {
-		throw error(404, 'Recette non trouvée');
-	}
-
-	return await response.json();
-}
-
->>>>>>> origin
 export function retourPage(): void {
 	history.back();
 }

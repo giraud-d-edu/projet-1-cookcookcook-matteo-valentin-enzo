@@ -1,13 +1,6 @@
-<<<<<<< HEAD
 import type { Recette, RecetteAdd } from '$lib/types/recette';
 import { writable } from 'svelte/store';
-
 import { RecetteService } from '$lib/services/recetteService';
-=======
-import { writable } from 'svelte/store';
-import type { Recette } from '$lib/types/recette';
-import { getRecette } from '$lib/services/recetteService';
->>>>>>> origin
 
 interface RecetteState {
 	recette: Recette | null;
@@ -27,11 +20,7 @@ function createRecetteStore() {
 		loadRecette: async (fetch: typeof window.fetch, id: string) => {
 			update((state) => ({ ...state, loading: true }));
 			try {
-<<<<<<< HEAD
 				const recette = await RecetteService.getRecette(fetch, id);
-=======
-				const recette = await getRecette(fetch, id);
->>>>>>> origin
 				set({ recette, error: null, loading: false });
 			} catch (e) {
 				set({ recette: null, error: (e as Error).message, loading: false });
@@ -42,7 +31,6 @@ function createRecetteStore() {
 }
 
 export const recetteStore = createRecetteStore();
-<<<<<<< HEAD
 
 export const recettes = writable<Recette[]>([]);
 
@@ -66,5 +54,3 @@ export async function loadRecettes(fetch: typeof window.fetch) {
 	const data = await RecetteService.getRecettes(fetch);
 	recettes.set(data);
 }
-=======
->>>>>>> origin

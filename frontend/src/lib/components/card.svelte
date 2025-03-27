@@ -37,8 +37,4 @@
   h2 {
     margin-top: 0;
   }
-  
-  .actions {
-    margin-top: 1em;
-  }
 </style>
