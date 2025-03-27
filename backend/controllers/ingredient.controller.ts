@@ -20,7 +20,9 @@ router
 async function getAllIngredientsController(ctx: Context) {
     const nom = ctx.request.url.searchParams.get('nom');
     if (nom) {
-        ctx.response.body = fromIngredientToDto(await ingredientService.getIngredientByNomService(nom));
+        ctx.response.body = (await ingredientService.getIngredientByNomService(nom)).map((ingredient) =>
+            fromIngredientToDto(ingredient),
+        );
     } else {
         ctx.response.body = (await ingredientService.getAllIngredientsService()).map((ingredient) =>
             fromIngredientToDto(ingredient),

@@ -19,13 +19,53 @@ export const getIngredientById = async (id: string): Promise<Ingredient> => {
     return fromIngredientDboToIngredient(dbo);
 };
 
-export const getIngredientByNom = async (nom: string): Promise<Ingredient> => {
+export const getIngredientByNom = async (nom: string): Promise<Ingredient[]> => {
     const ingredientsCollection = getIngredientsCollection();
-    const dbo = await ingredientsCollection.findOne({ nom: { $regex: new RegExp(`^${nom}$`, 'i') } });
-    if (!dbo) {
+    
+    // On crée une regex simple qui recherche le terme n'importe où dans le nom
+    const regex = new RegExp(nom.split(' ').join('.*'), 'i');
+    
+    // Définition des remplacements à effectuer
+    const replacements = [
+        { find: "é", replacement: "e" },
+        { find: "è", replacement: "e" },
+        { find: "à", replacement: "a" },
+        { find: " ", replacement: "" }
+    ];
+    
+    // Construction du pipeline d'agrégation
+    const pipeline = [
+        {
+            $addFields: {
+                normalizedNom: {
+                    $toLower: "$nom"
+                }
+            }
+        },
+        ...replacements.map(rep => ({
+            $addFields: {
+                normalizedNom: {
+                    $replaceAll: {
+                        input: "$normalizedNom",
+                        find: rep.find,
+                        replacement: rep.replacement
+                    }
+                }
+            }
+        })),
+        {
+            $match: {
+                normalizedNom: { $regex: regex }
+            }
+        }
+    ];
+    
+    const dbo = await ingredientsCollection.aggregate(pipeline).toArray();
+    
+    if (!dbo || dbo.length === 0) {
         throw new NotFoundException('Ingredient not found');
     }
-    return fromIngredientDboToIngredient(dbo);
+    return dbo.map((dbo: IngredientDbo) => fromIngredientDboToIngredient(dbo));
 };
 
 export const createIngredient = async (ingredientCandidate: IngredientCandidate): Promise<Ingredient> => {

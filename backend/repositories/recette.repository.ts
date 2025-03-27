@@ -21,10 +21,47 @@ export const getRecetteById = async (id: string): Promise<Recette> => {
 
 export const getRecetteByNom = async (nom: string): Promise<Recette[]> => {
     const recettesCollection = getRecettesCollection();
-    const dbo = await recettesCollection.find({ nom: { $regex: new RegExp(nom.normalize('NFD').replace(/[\u0300-\u036f]/g, ''), 'i') } }).toArray();
-    if (!dbo) {
-        throw new NotFoundException('Ingredient not found with this nom: ' + nom);
-    }
+    
+    // On crée une regex simple qui recherche le terme n'importe où dans le nom
+    const regex = new RegExp(nom.split(' ').join('.*'), 'i');
+    
+    // Définition des remplacements à effectuer
+    const replacements = [
+        { find: "é", replacement: "e" },
+        { find: "è", replacement: "e" },
+        { find: "à", replacement: "a" },
+        { find: " ", replacement: "" }
+    ];
+    
+    // Construction du pipeline d'agrégation
+    const pipeline = [
+        {
+            $addFields: {
+                normalizedNom: {
+                    $toLower: "$nom"
+                }
+            }
+        },
+        ...replacements.map(rep => ({
+            $addFields: {
+                normalizedNom: {
+                    $replaceAll: {
+                        input: "$normalizedNom",
+                        find: rep.find,
+                        replacement: rep.replacement
+                    }
+                }
+            }
+        })),
+        {
+            $match: {
+                normalizedNom: { $regex: regex }
+            }
+        }
+    ];
+    
+    const dbo = await recettesCollection.aggregate(pipeline).toArray();
+
     return dbo.map((dbo: RecetteDbo) => fromRecetteDboToRecette(dbo));
 };
 
@@ -42,7 +79,6 @@ export const createRecette = async (recetteCandidate: RecetteCandidate): Promise
         ...recetteCandidate,
         ingredients: recetteCandidate.ingredients.map((candidate) => ({
             ...candidate,
-            // id: new ObjectId().toString(),
         })),
     });
 
