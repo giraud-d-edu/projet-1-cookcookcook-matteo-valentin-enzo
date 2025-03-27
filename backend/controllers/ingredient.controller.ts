@@ -20,35 +20,13 @@ router
 async function getAllIngredientsController(ctx: Context) {
     const nom = ctx.request.url.searchParams.get('nom');
     if (nom) {
-        try {
-            ctx.response.body = fromIngredientToDto(await ingredientService.getIngredientByNomService(nom));
-        } catch (error) {
-            if (error instanceof NotFoundException) {
-                ctx.response.status = 200;
-                ctx.response.body = [];
-            } else {
-                console.error('Error getting ingredient by nom:', error);
-                ctx.response.status = 500;
-                ctx.response.body = { error: 'Internal server error' };
-            }
-        }
+        ctx.response.body = (await ingredientService.getIngredientByNomService(nom)).map((ingredient) =>
+            fromIngredientToDto(ingredient),
+        );
     } else {
-        try {
-            ctx.response.body = (await ingredientService.getAllIngredientsService()).map((ingredient) =>
-                fromIngredientToDto(ingredient),
-            );
-        } catch (error) {
-            if (error instanceof NotFoundException) {
-                ctx.response.status = 200;
-                ctx.response.body = [];
-            } else {
-                console.error('Error getting ingredients:', error);
-                ctx.response.status = 500;
-                ctx.response.body = {
-                    error: 'Internal server error. No ingredients found',
-                };
-            }
-        }
+        ctx.response.body = (await ingredientService.getAllIngredientsService()).map((ingredient) =>
+            fromIngredientToDto(ingredient),
+        );
     }
 }
 
@@ -59,76 +37,48 @@ async function getIngredientByIdController(ctx: RouterContext<'/ingredients/:id'
         ctx.response.body = { error: 'Missing ingredient ID' };
         return;
     }
-
-    try {
-        ctx.response.body = fromIngredientToDto(await ingredientService.getIngredientByIdService(idParam));
-    } catch (error) {
-        if (error instanceof NotFoundException) {
-            ctx.response.status = 200;
-            ctx.response.body = [];
-        } else {
-            console.error('Error getting ingredient by ID:', error);
-            ctx.response.status = 500;
-            ctx.response.body = { error: 'Internal server error' };
-        }
-    }
+    ctx.response.body = fromIngredientToDto(await ingredientService.getIngredientByIdService(idParam));
 }
 
 async function createIngredientController(ctx: Context) {
-    try {
-        const body = await ctx.request.body({ type: 'json' }).value;
+    const body = await ctx.request.body({ type: 'json' }).value;
 
-        const validationResult = ingredientCandidateDtoSchema.safeParse(body);
-        if (!validationResult.success) {
-            ctx.response.status = 400;
-            ctx.response.body = {
-                error: "Invalid input",
-                details: validationResult.error.format(),
-            };
-            return;
-        }
-        const ingredientCandidate = fromIngredientCandidateDtoToIngredientCandidate(validationResult.data);
-        ctx.response.status = 201;
-        ctx.response.body = fromIngredientToDto(await ingredientService.createIngredientService(ingredientCandidate));
-    } catch (e) {
-        console.error('Error creating ingredient:', e);
-        ctx.response.status = 500;
-        ctx.response.body = { error: 'Internal server error' };
+    const validationResult = ingredientCandidateDtoSchema.safeParse(body);
+    if (!validationResult.success) {
+        ctx.response.status = 400;
+        ctx.response.body = {
+            error: "Invalid input",
+            details: validationResult.error.format(),
+        };
+        return;
     }
+
+    const ingredientCandidate = fromIngredientCandidateDtoToIngredientCandidate(validationResult.data);
+    ctx.response.status = 201;
+    ctx.response.body = fromIngredientToDto(await ingredientService.createIngredientService(ingredientCandidate));
 }
 
 async function updateIngredientController(ctx: RouterContext<'/ingredients/:id'>) {
-    try {
-        const body = await ctx.request.body({ type: 'json' }).value;
-        const id = ctx.params.id;
+    const body = await ctx.request.body({ type: 'json' }).value;
+    const id = ctx.params.id;
 
-        const validationResult = ingredientCandidateDtoSchema.safeParse(body);
-        if (!validationResult.success) {
-            ctx.response.status = 400;
-            ctx.response.body = {
-                error: "Invalid input",
-                details: validationResult.error.format(),
-            };
-            return;
-        }
-
-        const ingredientCandidate = fromIngredientCandidateDtoToIngredientCandidate(validationResult.data);
-        const ingredient: Ingredient = fromDtoToIngredient({ ...ingredientCandidate, id });
-        ctx.response.status = 200;
+    const validationResult = ingredientCandidateDtoSchema.safeParse(body);
+    if (!validationResult.success) {
+        ctx.response.status = 400;
         ctx.response.body = {
-            message: 'Ingredient updated successfully',
-            body: fromIngredientToDto(await ingredientService.updateIngredientService(ingredient)),
+            error: "Invalid input",
+            details: validationResult.error.format(),
         };
-    } catch (error) {
-        if (error instanceof NotFoundException) {
-            ctx.response.status = 404;
-            ctx.response.body = { error: 'Ingredient not found' };
-        } else {
-            console.error('Error updating ingredient:', error);
-            ctx.response.status = 500;
-            ctx.response.body = { error: 'Internal server error' };
-        }
+        return;
     }
+
+    const ingredientCandidate = fromIngredientCandidateDtoToIngredientCandidate(validationResult.data);
+    const ingredient: Ingredient = fromDtoToIngredient({ ...ingredientCandidate, id });
+    ctx.response.status = 200;
+    ctx.response.body = {
+        message: 'Ingredient updated successfully',
+        body: fromIngredientToDto(await ingredientService.updateIngredientService(ingredient)),
+    };
 }
 
 async function deleteIngredientController(ctx: RouterContext<'/ingredients/:id'>) {
@@ -139,20 +89,9 @@ async function deleteIngredientController(ctx: RouterContext<'/ingredients/:id'>
         return;
     }
 
-    try {
-        await ingredientService.deleteIngredientService(idParam);
-        ctx.response.status = 204;
-        ctx.response.body = null;
-    } catch (error) {
-        if (error instanceof NotFoundException) {
-            ctx.response.status = 404;
-            ctx.response.body = { error: 'Ingredient not found' };
-        } else {
-            console.error('Error deleting ingredient:', error);
-            ctx.response.status = 500;
-            ctx.response.body = { error: 'Internal server error' };
-        }
-    }
+    await ingredientService.deleteIngredientService(idParam);
+    ctx.response.status = 204;
+    ctx.response.body = null;
 }
 
 export default router;

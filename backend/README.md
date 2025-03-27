@@ -51,7 +51,11 @@ recipes through a RESTful API.
 5. **Run the application**:
 
     ```bash
-    deno run --allow-net --allow-read --allow-env server.ts
+    deno run --allow-net --allow-read --allow-env --watch server.ts
+    ```
+    or
+    ```bash
+    
     ```
 
 6. **Access the application**: Open your browser and go to `http://localhost:8000`.
