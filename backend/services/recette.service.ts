@@ -1,6 +1,6 @@
 import * as recetteRepository from '../repositories/recette.repository.ts';
 import { Recette, RecetteCandidate, RecetteCategorie } from './models/recette.model.ts';
-import { NotFoundException, BadRequestException } from '../deps.ts';
+import { BadRequestException, NotFoundException } from '../deps.ts';
 
 export const getAllRecettesService = async (): Promise<Recette[]> => {
     return await recetteRepository.getAllRecettes();
@@ -14,11 +14,11 @@ export const getRecetteByNomService = async (nom: string): Promise<Recette[]> =>
     return await recetteRepository.getRecetteByNom(nom);
 };
 
-export const getRecetteByCategorieService = async (
-    categorie: string,
-): Promise<Recette[]> => {
+export const getRecetteByCategorieService = async (categorie: string): Promise<Recette[]> => {
     if (!Object.values(RecetteCategorie).includes(categorie as RecetteCategorie)) {
-        throw new BadRequestException(`Catégorie invalide. Les catégories valides sont : ${Object.values(RecetteCategorie).join(', ')}`);
+        throw new BadRequestException(
+            `Catégorie invalide. Les catégories valides sont : ${Object.values(RecetteCategorie).join(', ')}`,
+        );
     }
     const categorieEnum = categorie as RecetteCategorie;
     return await recetteRepository.getRecetteByCategorie(categorieEnum);

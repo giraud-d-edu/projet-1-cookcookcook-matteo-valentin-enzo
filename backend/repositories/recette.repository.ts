@@ -1,7 +1,7 @@
 import { Recette, RecetteCandidate } from '../services/models/recette.model.ts';
 import { getRecettesCollection } from './mongo.ts';
-import { ObjectId, NotFoundException, InternalServerErrorException } from '../deps.ts';
-import { RecetteDbo, fromRecetteDboToRecette } from './dbos/recette.dbo.ts';
+import { InternalServerErrorException, NotFoundException, ObjectId } from '../deps.ts';
+import { fromRecetteDboToRecette, RecetteDbo } from './dbos/recette.dbo.ts';
 
 export const getAllRecettes = async (): Promise<Recette[]> => {
     const recettesCollection = getRecettesCollection();
@@ -21,45 +21,45 @@ export const getRecetteById = async (id: string): Promise<Recette> => {
 
 export const getRecetteByNom = async (nom: string): Promise<Recette[]> => {
     const recettesCollection = getRecettesCollection();
-    
+
     // On crée une regex simple qui recherche le terme n'importe où dans le nom
     const regex = new RegExp(nom.split(' ').join('.*'), 'i');
-    
+
     // Définition des remplacements à effectuer
     const replacements = [
-        { find: "é", replacement: "e" },
-        { find: "è", replacement: "e" },
-        { find: "à", replacement: "a" },
-        { find: " ", replacement: "" }
+        { find: 'é', replacement: 'e' },
+        { find: 'è', replacement: 'e' },
+        { find: 'à', replacement: 'a' },
+        { find: ' ', replacement: '' },
     ];
-    
+
     // Construction du pipeline d'agrégation
     const pipeline = [
         {
             $addFields: {
                 normalizedNom: {
-                    $toLower: "$nom"
-                }
-            }
+                    $toLower: '$nom',
+                },
+            },
         },
-        ...replacements.map(rep => ({
+        ...replacements.map((rep) => ({
             $addFields: {
                 normalizedNom: {
                     $replaceAll: {
-                        input: "$normalizedNom",
+                        input: '$normalizedNom',
                         find: rep.find,
-                        replacement: rep.replacement
-                    }
-                }
-            }
+                        replacement: rep.replacement,
+                    },
+                },
+            },
         })),
         {
             $match: {
-                normalizedNom: { $regex: regex }
-            }
-        }
+                normalizedNom: { $regex: regex },
+            },
+        },
     ];
-    
+
     const dbo = await recettesCollection.aggregate(pipeline).toArray();
 
     return dbo.map((dbo: RecetteDbo) => fromRecetteDboToRecette(dbo));
@@ -79,6 +79,7 @@ export const createRecette = async (recetteCandidate: RecetteCandidate): Promise
         ...recetteCandidate,
         ingredients: recetteCandidate.ingredients.map((candidate) => ({
             ...candidate,
+            id: new ObjectId().toString(),
         })),
     });
 
@@ -103,6 +104,6 @@ export const deleteRecette = async (id: string): Promise<void> => {
         const objectId = new ObjectId(id);
         await recettesCollection.deleteOne({ _id: objectId });
     } catch (error) {
-        throw new InternalServerErrorException('An error occurred while deleting the recette');
+        throw new InternalServerErrorException('An error occurred while deleting the recette \n' + error);
     }
 };

@@ -1,4 +1,4 @@
-import { Context, NotFoundException, Router, RouterContext } from '../deps.ts';
+import { Context, Router, RouterContext } from '../deps.ts';
 import * as ingredientService from '../services/ingredient.service.ts';
 import {
     fromDtoToIngredient,
@@ -47,7 +47,7 @@ async function createIngredientController(ctx: Context) {
     if (!validationResult.success) {
         ctx.response.status = 400;
         ctx.response.body = {
-            error: "Invalid input",
+            error: 'Invalid input',
             details: validationResult.error.format(),
         };
         return;
@@ -66,14 +66,17 @@ async function updateIngredientController(ctx: RouterContext<'/ingredients/:id'>
     if (!validationResult.success) {
         ctx.response.status = 400;
         ctx.response.body = {
-            error: "Invalid input",
+            error: 'Invalid input',
             details: validationResult.error.format(),
         };
         return;
     }
 
     const ingredientCandidate = fromIngredientCandidateDtoToIngredientCandidate(validationResult.data);
-    const ingredient: Ingredient = fromDtoToIngredient({ ...ingredientCandidate, id });
+    const ingredient: Ingredient = fromDtoToIngredient({
+        ...ingredientCandidate,
+        id,
+    });
     ctx.response.status = 200;
     ctx.response.body = {
         message: 'Ingredient updated successfully',

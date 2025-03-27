@@ -4,7 +4,7 @@ export enum RecetteCategorie {
     ENTREE = 'entrée',
     PLAT = 'plat',
     DESSERT = 'dessert',
-    AUTRE = 'autre'
+    AUTRE = 'autre',
 }
 
 export interface Recette {
@@ -12,7 +12,7 @@ export interface Recette {
     nom: string;
     description: string;
     instructions: string;
-    categorie: RecetteCategorie
+    categorie: RecetteCategorie;
     tempsPreparation: number;
     origine: string;
     ingredients: Ingredient[];

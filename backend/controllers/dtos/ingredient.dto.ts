@@ -28,8 +28,10 @@ export function fromDtoToIngredient(dto: IngredientDto): Ingredient {
     };
 }
 
-export function fromIngredientCandidateDtoToIngredientCandidate(dto: IngredientCandidateDto): IngredientCandidate {
+export function fromIngredientCandidateDtoToIngredientCandidate(
+    dtoCandidate: IngredientCandidateDto,
+): IngredientCandidate {
     return {
-        ...dto,
+        ...dtoCandidate,
     };
 }

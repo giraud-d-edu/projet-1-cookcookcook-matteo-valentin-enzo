@@ -4,8 +4,8 @@
 
 ## Overview
 
-CookCookCook is a API to manage and share recipes. It provides functionalities to add, view, and manage ingredients and
-recipes through a RESTful API.
+CookCookCook is a API to manage and share recipes. It provides functionalities
+to add, view, and manage ingredients and recipes through a RESTful API.
 
 ## Features
 
@@ -38,9 +38,11 @@ recipes through a RESTful API.
     cd <repository-directory>
     ```
 
-2. **Install Deno**: Follow the instructions on [deno.land](https://deno.land/#installation).
+2. **Install Deno**: Follow the instructions on
+   [deno.land](https://deno.land/#installation).
 
-3. **Set up environment variables**: Copy `.env.exemple` to `.env` and fill in the necessary details.
+3. **Set up environment variables**: Copy `.env.exemple` to `.env` and fill in
+   the necessary details.
 
 4. **Create MongoDb enviroments on MongoDb local**:
 
@@ -53,12 +55,15 @@ recipes through a RESTful API.
     ```bash
     deno run --allow-net --allow-read --allow-env --watch server.ts
     ```
+
     or
+
     ```bash
-    
+
     ```
 
-6. **Access the application**: Open your browser and go to `http://localhost:8000`.
+6. **Access the application**: Open your browser and go to
+   `http://localhost:8000`.
 
 ## API Endpoints
 
@@ -73,7 +78,8 @@ recipes through a RESTful API.
 -   **Recipes**:
     -   `GET /recettes`: List all recipes.
     -   `GET /recettes/nom/:nom`: Retrieve recipes by name.
-    -   `GET /recettes/categories/:categorie`: Retrieve recipes by category (e.g., entrée, plat, dessert, autre).
+    -   `GET /recettes/categories/:categorie`: Retrieve recipes by category (e.g.,
+        entrée, plat, dessert, autre).
     -   `POST /recettes`: Add a new recipe.
     -   `PUT /recettes/:id`: Update a recipe.
     -   `DELETE /recettes/:id`: Delete a recipe.
@@ -86,10 +92,12 @@ This project is licensed under the MIT License.
 
 ### Postman Collection
 
-A Postman collection (`postman_collection.json`) is included in the repository to help test the API endpoints. You can
-import this collection into Postman to quickly start making requests to your local server.
+A Postman collection (`postman_collection.json`) is included in the repository
+to help test the API endpoints. You can import this collection into Postman to
+quickly start making requests to your local server.
 
 ### Sample Database
 
-A sample MongoDB database structure (`data-mongodb.json`) is provided to help you understand the data schema and get
-started with some initial data. You can import this file into your MongoDB instance using:
+A sample MongoDB database structure (`data-mongodb.json`) is provided to help
+you understand the data schema and get started with some initial data. You can
+import this file into your MongoDB instance using:

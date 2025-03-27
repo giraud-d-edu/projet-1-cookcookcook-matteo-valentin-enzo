@@ -1,12 +1,12 @@
-import { Router, Context, RouterContext } from '../deps.ts';
+import { Context, Router, RouterContext } from '../deps.ts';
 import * as recetteService from '../services/recette.service.ts';
 import {
-    fromRecetteToDto,
-    fromRecetteCandidateDtoToRecetteCandidate,
     fromDtoToRecette,
+    fromRecetteCandidateDtoToRecetteCandidate,
+    fromRecetteToDto,
     recetteCandidateDtoSchema,
 } from './dtos/recette.dto.ts';
-import { Recette } from '../services/models/recette.model.ts';
+import { Recette, RecetteCategorie } from '../services/models/recette.model.ts';
 
 const router = new Router();
 
@@ -55,10 +55,13 @@ async function createRecetteController(ctx: Context) {
         };
         return;
     }
-    const recetteCandidate = fromRecetteCandidateDtoToRecetteCandidate(validationResult.data);
+
+    const recetteCandidate = fromRecetteCandidateDtoToRecetteCandidate({
+        ...validationResult.data,
+        categorie: validationResult.data.categorie as RecetteCategorie,
+    });
     ctx.response.status = 201;
     ctx.response.body = fromRecetteToDto(await recetteService.createRecetteService(recetteCandidate));
-
 }
 
 async function updateRecetteController(ctx: RouterContext<'/recettes/:id'>) {
@@ -72,9 +75,13 @@ async function updateRecetteController(ctx: RouterContext<'/recettes/:id'>) {
             error: 'Invalid input',
             details: validationResult.error.format(),
         };
+        return;
     }
 
-    const recetteCandidate = fromRecetteCandidateDtoToRecetteCandidate(validationResult.data);
+    const recetteCandidate = fromRecetteCandidateDtoToRecetteCandidate({
+        ...validationResult.data,
+        categorie: validationResult.data.categorie as RecetteCategorie,
+    });
     const recette: Recette = fromDtoToRecette({ ...recetteCandidate, id });
     ctx.response.status = 200;
     ctx.response.body = {

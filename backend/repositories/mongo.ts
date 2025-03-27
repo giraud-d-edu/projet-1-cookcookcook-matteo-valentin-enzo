@@ -1,4 +1,4 @@
-import { MongoClient, Database, config } from '../deps.ts';
+import { config, Database, MongoClient } from '../deps.ts';
 import { IngredientDbo } from './dbos/ingredient.dbo.ts';
 import { RecetteDbo } from './dbos/recette.dbo.ts';
 

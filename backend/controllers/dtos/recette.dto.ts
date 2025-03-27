@@ -1,7 +1,7 @@
-import { IngredientDto, ingredientDtoSchema, ingredientCandidateDtoSchema } from './ingredient.dto.ts';
-import { Recette, RecetteCandidate } from '../../services/models/recette.model.ts';
+import { IngredientCandidateDto, ingredientCandidateDtoSchema } from './ingredient.dto.ts';
+import { Recette, RecetteCandidate, RecetteCategorie } from '../../services/models/recette.model.ts';
 import { z } from '../../deps.ts';
-
+import { ObjectId } from 'https://deno.land/x/mongo@v0.34.0/mod.ts';
 export const recetteDtoSchema = z.object({
     id: z.string(),
     nom: z.string().min(5).max(100),
@@ -10,7 +10,7 @@ export const recetteDtoSchema = z.object({
     categorie: z.enum(['entrée', 'plat', 'dessert', 'autre']),
     tempsPreparation: z.number().positive(),
     origine: z.string().min(1).max(50),
-    ingredients: z.array(ingredientDtoSchema),
+    ingredients: z.array(ingredientCandidateDtoSchema),
 });
 
 export type RecetteDto = z.infer<typeof recetteDtoSchema>;
@@ -30,10 +30,10 @@ export interface RecetteCandidateDto {
     nom: string;
     description: string;
     instructions: string;
-    categorie: 'entrée' | 'plat' | 'dessert' | 'autre';
+    categorie: RecetteCategorie;
     tempsPreparation: number;
     origine: string;
-    ingredients: IngredientDto[];
+    ingredients: IngredientCandidateDto[];
 }
 
 export function fromRecetteToDto(recette: Recette): RecetteDto {
@@ -45,6 +45,11 @@ export function fromRecetteToDto(recette: Recette): RecetteDto {
 export function fromDtoToRecette(recetteDto: RecetteDto): Recette {
     return {
         ...recetteDto,
+        categorie: recetteDto.categorie as RecetteCategorie,
+        ingredients: recetteDto.ingredients.map((ingredient) => ({
+            ...ingredient,
+            id: new ObjectId().toString(),
+        })),
     };
 }
 

@@ -1,6 +1,6 @@
 import { Ingredient, IngredientCandidate } from '../services/models/ingredient.model.ts';
 import { getIngredientsCollection } from './mongo.ts';
-import { NotFoundException, ObjectId, InternalServerErrorException } from '../deps.ts';
+import { InternalServerErrorException, NotFoundException, ObjectId } from '../deps.ts';
 import { fromIngredientDboToIngredient, IngredientDbo } from './dbos/ingredient.dbo.ts';
 
 export const getAllIngredients = async (): Promise<Ingredient[]> => {
@@ -21,47 +21,47 @@ export const getIngredientById = async (id: string): Promise<Ingredient> => {
 
 export const getIngredientByNom = async (nom: string): Promise<Ingredient[]> => {
     const ingredientsCollection = getIngredientsCollection();
-    
+
     // On crée une regex simple qui recherche le terme n'importe où dans le nom
     const regex = new RegExp(nom.split(' ').join('.*'), 'i');
-    
+
     // Définition des remplacements à effectuer
     const replacements = [
-        { find: "é", replacement: "e" },
-        { find: "è", replacement: "e" },
-        { find: "à", replacement: "a" },
-        { find: " ", replacement: "" }
+        { find: 'é', replacement: 'e' },
+        { find: 'è', replacement: 'e' },
+        { find: 'à', replacement: 'a' },
+        { find: ' ', replacement: '' },
     ];
-    
+
     // Construction du pipeline d'agrégation
     const pipeline = [
         {
             $addFields: {
                 normalizedNom: {
-                    $toLower: "$nom"
-                }
-            }
+                    $toLower: '$nom',
+                },
+            },
         },
-        ...replacements.map(rep => ({
+        ...replacements.map((rep) => ({
             $addFields: {
                 normalizedNom: {
                     $replaceAll: {
-                        input: "$normalizedNom",
+                        input: '$normalizedNom',
                         find: rep.find,
-                        replacement: rep.replacement
-                    }
-                }
-            }
+                        replacement: rep.replacement,
+                    },
+                },
+            },
         })),
         {
             $match: {
-                normalizedNom: { $regex: regex }
-            }
-        }
+                normalizedNom: { $regex: regex },
+            },
+        },
     ];
-    
+
     const dbo = await ingredientsCollection.aggregate(pipeline).toArray();
-    
+
     if (!dbo || dbo.length === 0) {
         throw new NotFoundException('Ingredient not found');
     }
@@ -94,6 +94,6 @@ export const deleteIngredient = async (id: string): Promise<void> => {
         const objectId = new ObjectId(id);
         await ingredientsCollection.deleteOne({ _id: objectId });
     } catch (error) {
-        throw new InternalServerErrorException('An error occurred while deleting the ingredient');
+        throw new InternalServerErrorException('An error occurred while deleting the ingredient \n' + error);
     }
 };
