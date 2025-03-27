@@ -1,6 +1,6 @@
 <script lang="ts">
     import { page } from '$app/stores';
-    import SearchBar from './SearchBar.svelte';
+    import SearchBar from './searchBar.svelte';
     import '../../styles/Navbar.scss';
 </script>
 

@@ -1,5 +1,5 @@
 import { getIngredients } from '$lib/services/ingredientService';
-import type { Ingredient } from '$lib/types/ingredients';
+import type { Ingredient } from '$lib/types/ingredient';
 import { writable, derived } from 'svelte/store';
 
 export const ingredients = writable<Ingredient[]>([]);

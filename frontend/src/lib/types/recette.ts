@@ -1,4 +1,4 @@
-import type { Ingredient } from './ingredients';
+import type { Ingredient } from './ingredient';
 
 export interface Recette {
     id: string;

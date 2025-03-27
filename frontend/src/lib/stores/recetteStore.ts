@@ -54,20 +54,14 @@ export const recetteStore = createRecetteStore();
 export const recettes = writable<Recette[]>([]);
 export const searchQuery = writable<string>('');
 
-export async function recetteAdd(recette: RecetteAdd): Promise<Response> {
-    const response = await fetch('http://localhost:8000/recettes', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(recette),
-    });
-
-    if (!response.ok) {
+export async function recetteAdd(recette: RecetteAdd): Promise<boolean> {
+    try {
+        await RecetteService.addRecette(fetch, recette);
+        await loadRecettes(fetch);
+        return true;
+    } catch (e) {
         throw new Error("Erreur lors de l'ajout de la recette");
     }
-
-    return response;
 }
 
 export async function loadRecettes(fetch: typeof window.fetch) {

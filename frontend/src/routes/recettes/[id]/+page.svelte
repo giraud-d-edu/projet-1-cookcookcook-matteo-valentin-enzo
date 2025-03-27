@@ -71,7 +71,7 @@
                 <div class="edit-form">
                     <header class="recette-header">
                         <input type="text" bind:value={editedRecette.nom} class="edit-input title" />
-                        <textarea bind:value={editedRecette.description} class="edit-input description" />
+                        <textarea bind:value={editedRecette.description} class="edit-input description"></textarea>
                     </header>
 
                     <div class="meta-info">
@@ -98,7 +98,8 @@
 
                     <div class="instructions">
                         <h2>Instructions</h2>
-                        <textarea bind:value={editedRecette.instructions} class="edit-input instructions" rows="10" />
+                        <textarea bind:value={editedRecette.instructions} class="edit-input instructions" rows="10"
+                        ></textarea>
                     </div>
 
                     <div class="edit-actions">
