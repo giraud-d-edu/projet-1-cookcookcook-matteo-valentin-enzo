@@ -15,8 +15,8 @@
 
     <div class="nav-right">
         <ul>
-            <li class:active={$page.url.pathname === '/categories'}>
-                <a href="/categories">Catégories</a>
+            <li class:active={$page.url.pathname === '/ingredients'}>
+                <a href="/ingredients">Ingrédients</a>
             </li>
             <li class:active={$page.url.pathname === '/recettes/add'}>
                 <a href="/recettes/add">Ajouter une recette</a>
