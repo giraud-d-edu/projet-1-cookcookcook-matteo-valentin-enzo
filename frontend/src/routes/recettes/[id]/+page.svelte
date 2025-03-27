@@ -6,6 +6,28 @@
     import { goto } from '$app/navigation';
     import '../../../styles/RecettePage.scss';
 
+    let categories = [
+        'Entrée',
+        'Plat',
+        'Dessert',
+        'Autre'
+    ];
+
+    let origines = [
+        'France',
+        'Italie',
+        'Espagne',
+        'Allemagne',
+        'Angleterre',
+        'Portugal',
+        'Mexique',
+        'Brésil',
+        'Chine',
+        'Japon',
+        'Inde',
+        'Autre'
+    ];
+
     const id = $page.params.id;
     let isEditing = false;
     let editedRecette: any = null;
@@ -22,7 +44,11 @@
 
     async function saveChanges() {
         if (confirm('Voulez-vous enregistrer les modifications ?')) {
-            const success = await recetteStore.updateRecette(fetch, id, editedRecette);
+            const recette = {
+                ...editedRecette,
+                categorie: editedRecette.categorie.toLowerCase(),
+            };
+            const success = await recetteStore.updateRecette(fetch, id, recette);
             if (success) {
                 isEditing = false;
             }
@@ -41,6 +67,14 @@
                 goto('/');
             }
         }
+    }
+
+    function addIngredient() {
+        editedRecette.ingredients = [...editedRecette.ingredients, { nom: '' }];
+    }
+
+    function removeIngredient(index: number) {
+        editedRecette.ingredients = editedRecette.ingredients.filter((_, i) => i !== index);
     }
 
     $: ({ recette, error, loading } = $recetteStore);
@@ -77,23 +111,38 @@
                     <div class="meta-info">
                         <div>
                             <strong>Catégorie:</strong>
-                            <input type="text" bind:value={editedRecette.categorie} class="edit-input" />
+                            <select bind:value={editedRecette.categorie} class="edit-input">
+                                <option value={editedRecette.categorie} disabled selected hidden>{editedRecette.categorie.charAt(0).toUpperCase() + editedRecette.categorie.slice(1)}</option>
+                                {#each categories as categorie}
+                                    <option value={categorie}>{categorie}</option>
+                                {/each}
+                            </select>
                         </div>
                         <div>
                             <strong>Origine:</strong>
-                            <input type="text" bind:value={editedRecette.origine} class="edit-input" />
+                            <select bind:value={editedRecette.origine} class="edit-input">
+                                {#each origines as origine}
+                                    <option value={origine}>{origine}</option>
+                                {/each}
+                            </select>
                         </div>
                         <div>
-                            <strong>Temps de préparation:</strong>
-                            <input type="number" bind:value={editedRecette.tempsPreparation} class="edit-input" /> minutes
+                            <strong>Temps de préparation en minutes</strong>
+                            <input type="number" bind:value={editedRecette.tempsPreparation} class="edit-input" />
                         </div>
                     </div>
 
                     <div class="ingredients">
                         <h2>Ingrédients</h2>
                         {#each editedRecette.ingredients as ingredient, i}
-                            <input type="text" bind:value={ingredient.nom} class="edit-input" />
+                            <div class="ingredient-row">
+                                <input type="text" bind:value={ingredient.nom} class="edit-input" />
+                                <button type="button" class="remove-ingredient-btn" on:click={() => removeIngredient(i)}>×</button>
+                            </div>
                         {/each}
+                        <button type="button" class="add-ingredient-btn" on:click={addIngredient}>
+                            + Ajouter un ingrédient
+                        </button>
                     </div>
 
                     <div class="instructions">
@@ -130,19 +179,14 @@
 
                 <div class="instructions">
                     <h2>Instructions</h2>
-                    {#if recette.instructions.includes('.')}
-                        <div class="etapes">
-                            {#each recette.instructions.split('\n') as etape}
-                                {@const [numero, texte] = etape.split('. ')}
-                                <div class="etape">
-                                    <span class="numero">Étape {numero}</span>
-                                    <p class="texte">{texte}</p>
-                                </div>
-                            {/each}
-                        </div>
-                    {:else}
-                        <p>{recette.instructions}</p>
-                    {/if}
+                    <div class="etapes">
+                        {#each recette.instructions.split('\n').filter(ligne => ligne.trim() !== '') as etape, index}
+                            <div class="etape">
+                                <span class="numero">Étape {index + 1}</span>
+                                <p class="texte">{etape}</p>
+                            </div>
+                        {/each}
+                    </div>
                 </div>
             {/if}
         </div>
