@@ -1,5 +1,5 @@
-@use "./_variables" as *;
-@use "sass:color";
+@use './_variables' as *;
+@use 'sass:color';
 
 // Mixins
 @mixin floating-label {
@@ -56,10 +56,13 @@
         max-width: calc(100% - 2 * $spacing-md);
         overflow: hidden;
         text-overflow: ellipsis;
+        transform: translateY($spacing-lg) translateX($spacing-xs);
+        transition: all 0.3s ease;
     }
 
     input,
-    textarea {
+    textarea,
+    select {
         width: 100%;
         padding: $spacing-md;
         background: rgba(255, 255, 255, 0.9);
@@ -88,10 +91,35 @@
 
         &::placeholder {
             color: transparent;
+            font-style: italic;
+            font-size: $font-size-base;
+            transition: color 0.3s ease;
         }
 
-        &:not(:placeholder-shown) + label {
+        &:focus::placeholder {
+            color: rgba($text-color-light, 0.6);
+        }
+
+        &:not(:placeholder-shown) + label,
+        &:focus + label {
             transform: translateY(-50%) scale(0.85);
+        }
+    }
+
+    select {
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+        background-position: right 0.5rem center;
+        background-repeat: no-repeat;
+        background-size: 1.5em 1.5em;
+        padding-right: 2.5rem;
+
+        &:not([value='']) + label {
+            transform: translateY(-50%) scale(0.85);
+        }
+
+        option[value=''][disabled] {
+            display: none;
         }
     }
 
@@ -135,12 +163,12 @@
         white-space: nowrap;
         text-overflow: ellipsis;
 
-        &[type="submit"] {
+        &[type='submit'] {
             background: linear-gradient(135deg, $primary-color, color.adjust($primary-color, $lightness: 10%));
             color: $background-color;
 
             &:before {
-                content: "";
+                content: '';
                 position: absolute;
                 top: 0;
                 left: -100%;
@@ -164,7 +192,7 @@
             }
         }
 
-        &[type="button"] {
+        &[type='button'] {
             background-color: transparent;
             color: $text-color;
             border: 2px solid $border-color;
@@ -172,7 +200,7 @@
             z-index: 1;
 
             &:before {
-                content: "";
+                content: '';
                 position: absolute;
                 top: 0;
                 left: 0;
@@ -253,4 +281,21 @@
 .form-group {
     animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
     animation-delay: calc(var(--animation-order, 0) * 0.1s);
+}
+
+.instructions-container {
+    width: 100%;
+    position: relative;
+    margin-top: $spacing-lg;
+
+    .instructions-hint {
+        font-size: $font-size-sm;
+        color: $text-color-light;
+        margin-bottom: $spacing-xs;
+        font-style: italic;
+    }
+
+    textarea {
+        margin-top: $spacing-xs;
+    }
 }
