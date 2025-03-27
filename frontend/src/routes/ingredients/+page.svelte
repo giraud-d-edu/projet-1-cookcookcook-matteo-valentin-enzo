@@ -19,15 +19,17 @@
 </div>
 
 <div class="bg-white shadow-md rounded-lg overflow-hidden">
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
         {#each $ingredients as ingredient}
             <a href="/ingredients/{ingredient.id}">
                 <Card
-                nom={ingredient.nom}
-                image={`https://picsum.photos/300/200/?random=${ingredient.id}`}
+                    nom={ingredient.nom}
+                    image={`https://picsum.photos/300/200/?random=${ingredient.id}`}
                 />
             </a>
+            <p>Test</p>
         {/each}
+
     </div>
 </div>
 
