@@ -1,9 +1,17 @@
 import { BadRequestException, Context, Next, NotFoundException, ZodError } from '../deps.ts';
+import { errorLogger } from '../utils/logger.ts';
 
 export const errorMiddleware = async (ctx: Context, next: Next) => {
     try {
         await next();
     } catch (error) {
+        // Journalisation de l'erreur
+        await errorLogger.logError(error instanceof Error ? error : new Error(String(error)), {
+            path: ctx.request.url.pathname,
+            method: ctx.request.method,
+            body: ctx.request.hasBody ? await ctx.request.body().value : undefined,
+        });
+
         if (error instanceof ZodError) {
             ctx.response.body = error.errors.map((err) => ({
                 path: err.path,
