@@ -64,11 +64,9 @@ Pour plus de détails sur chaque partie du projet, consultez les README spécifi
 
 ## Fonctionnalités Principales
 
--   Authentification des utilisateurs
 -   Gestion des recettes (création, modification, suppression)
 -   Recherche de recettes
--   Gestion des ingrédients
--   Catégorisation des recettes
+-   Gestion des ingrédients (création, modification, suppression)
 
 ## Documentation
 
