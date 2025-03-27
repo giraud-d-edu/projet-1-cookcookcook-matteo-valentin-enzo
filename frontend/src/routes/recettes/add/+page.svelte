@@ -3,6 +3,8 @@
     import { addRecette } from '$lib/stores/recetteStore';
     import type { CreateRecetteDto } from '$lib/types/recette';
 
+    let ingredients:string;
+    let ingredientsList: string[];
     let recette: CreateRecetteDto = {
         nom: '',
         description: '',
@@ -13,11 +15,12 @@
         origine: '',
     };
 
-    let ingredients = '';
-
     const handleSubmit = async () => {
-        // recette.ingredients = ingredients.split(',').map((i: string) => i.trim());
-        console.log('Recette envoyée:', recette);
+      recette.categorie = recette.categorie.toLowerCase();
+      recette.instructions = recette.instructions.split('\n').map((step, index) => `${index + 1}. ${step}`).join('\n');
+      ingredientsList = ingredients.split(',');
+      recette.categorie = recette.categorie.toLowerCase();
+      recette.ingredients = ingredientsList.map(ingredient => ({ nom: ingredient.trim() }));
         try {
             const response = await addRecette(recette);
             console.log('API Response:', response);
@@ -29,7 +32,7 @@
 </script>
 
 <h2>Ajouter une recette</h2>
-<form on:submit|preventDefault={handleSubmit} class="recette-form">
+<form on:submit|preventDefault={handleSubmit} class="form-container">
     <Form bind:recette bind:ingredients />
 </form>
 
