@@ -173,7 +173,7 @@ db.recettes.count()    # Devrait afficher le nombre de recettes
 
 Pour plus d'aide, consultez la [documentation officielle de MongoDB](https://docs.mongodb.com/manual/installation/).
 
-## API Endpoints
+## API Endpoint
 
 ### Ingrédients
 
@@ -189,7 +189,7 @@ Pour plus d'aide, consultez la [documentation officielle de MongoDB](https://doc
 -   `GET /recettes` : Liste des recettes
 -   `GET /recettes/:id` : Obtenir une recette par ID
 -   `GET /recettes?nom={nom}` : Recherche de recettes par nom
--   `GET /recettes?categories={categorie}` : Filtrage par catégorie (entrée, plat, dessert, autre)
+-   `GET /recettes?categorie={categorie}` : Filtrage par catégorie (entrée, plat, dessert, autre)
 -   `POST /recettes` : Création d'une recette
 -   `PUT /recettes/:id` : Modification d'une recette
 -   `DELETE /recettes/:id` : Suppression d'une recette
