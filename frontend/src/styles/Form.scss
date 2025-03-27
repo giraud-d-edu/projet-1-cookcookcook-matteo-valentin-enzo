@@ -1,0 +1,60 @@
+@import "./_variables";
+
+.form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: $spacing-lg;
+
+    &__group {
+        margin-bottom: $spacing-lg;
+
+        label {
+            display: block;
+            font-weight: 600;
+            color: $text-color;
+            margin-bottom: $spacing-sm;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: $spacing-md;
+            border: 1px solid $input-border-color;
+            border-radius: $border-radius;
+            font-family: $font-family-base;
+            font-size: $font-size-base;
+            transition: $transition-base;
+
+            &:focus {
+                outline: none;
+                border-color: $hover-color;
+                box-shadow: 0 0 0 3px rgba($hover-color, 0.1);
+            }
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+    }
+
+    &__button {
+        padding: $spacing-md $spacing-lg;
+        background-color: $primary-color;
+        color: $background-color;
+        border: none;
+        border-radius: $border-radius;
+        font-weight: 600;
+        cursor: pointer;
+        transition: $transition-fast;
+
+        &:hover {
+            background-color: darken($primary-color, 10%);
+        }
+
+        &:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba($primary-color, 0.3);
+        }
+    }
+}

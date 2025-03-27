@@ -1,40 +1,36 @@
-<script>
-  export let nom = "nom de la recette";
-  export let description = "Description par défaut";
-  export let image = "";
-  export let tempsPreparation = "Temps de préparation inconnu";
+<script lang="ts">
+    export let nom = 'nom de la recette';
+    export let description = 'Description par défaut';
+    export let image = '';
+    export let tempsPreparation = 'Temps de préparation inconnu';
+    import '../../styles/Card.scss';
 </script>
 
 <div class="card">
-  {#if image}
-    <img src={image} alt={nom} />
-  {/if}
-  <div class="content">
-    <h2>{nom}</h2>
-    <p>{description.length > 85 ? description.slice(0, 85) + "..." : description}</p>
-    <p>{tempsPreparation}</p>
-  </div>
+    <div class="card__header">
+        {#if image}
+            <img src={image} alt={nom} />
+        {:else}
+            <img src="/default-recipe.jpg" alt="Image par défaut" />
+        {/if}
+    </div>
+    <div class="card__body">
+        <h2>{nom}</h2>
+        <p>{description.length > 85 ? description.slice(0, 85) + '...' : description}</p>
+        <p>
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            >
+                <circle cx="12" cy="12" r="10" />
+                <polyline points="12 6 12 12 16 14" />
+            </svg>
+            {tempsPreparation}
+        </p>
+    </div>
 </div>
-
-<style>
-  .card {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    overflow: hidden;
-    margin-bottom: 1em;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  }
-  
-  img {
-    width: 100%;
-    height: auto;
-  }
-  
-  .content {
-    padding: 1em;
-  }
-  
-  h2 {
-    margin-top: 0;
-  }
-</style>

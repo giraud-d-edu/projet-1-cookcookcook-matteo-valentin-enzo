@@ -1,0 +1,25 @@
+// Styles pour la page principale
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1em;
+}
+
+a {
+    text-decoration: none;
+    color: #333;
+
+    &:link,
+    &:visited {
+        color: #333;
+    }
+
+    &:hover {
+        color: #007bff;
+    }
+
+    &:active {
+        color: #0056b3;
+    }
+}
