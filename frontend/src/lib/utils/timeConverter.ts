@@ -1,12 +1,12 @@
-export function timeToStringConverter(time: number): string {
-    const hours = Math.floor(time / 60) + 'h';
-    const minutes = time % 60;
+export const convertTimeToString = (minutes: number): string => {
+    const hours = Math.floor(minutes / 60) + 'h';
+    const remainingMinutes = minutes % 60;
     if (hours === '0h') {
-        return `${minutes} min`;
+        return `${remainingMinutes} min`;
     }
-    if (minutes === 0) {
+    if (remainingMinutes === 0) {
         return hours;
     } else {
-        return `${hours}${minutes}`;
+        return `${hours}${remainingMinutes}`;
     }
-}
+};
