@@ -8,6 +8,7 @@
 
     let imgElement: HTMLImageElement;
     let isVisible = false;
+    let imageError = false;
 
     onMount(() => {
         const observer = new IntersectionObserver(
@@ -28,41 +29,54 @@
 
         return () => observer.disconnect();
     });
+
+    function handleImageError() {
+        imageError = true;
+    }
 </script>
 
 <div class="card">
     <div class="card__header">
-        {#if image}
+        {#if image && !imageError}
             <img
                 bind:this={imgElement}
                 src={isVisible ? image : ''}
                 alt={nom}
                 loading="lazy"
-                width="300"
-                height="200"
-                style="background: #f0f0f0;"
+                class="card__image"
+                on:error={handleImageError}
             />
         {:else}
-            <img src="/default-recipe.jpg" alt="Recette par défaut" loading="lazy" width="300" height="200" />
+            <img 
+                src="/default-recipe.jpg" 
+                alt="Image par défaut" 
+                loading="lazy"
+                class="card__image"
+            />
         {/if}
     </div>
     <div class="card__body">
         <h2>{nom}</h2>
-        <p>{description.length > 85 ? description.slice(0, 85) + '...' : description}</p>
-        <p>
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-            >
-                <circle cx="12" cy="12" r="10" />
-                <polyline points="12 6 12 12 16 14" />
-            </svg>
-            {tempsPreparation}
-        </p>
+        {#if description}
+            <p>{description.length > 85 ? description.slice(0, 85) + '...' : description}</p>
+        {/if}
+        {#if tempsPreparation !== 'Temps de préparation inconnu'}
+            <p class="temps">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="icon-clock"
+                >
+                    <circle cx="12" cy="12" r="10" />
+                    <polyline points="12 6 12 12 16 14" />
+                </svg>
+                {tempsPreparation}
+            </p>
+        {/if}
     </div>
 </div>
